@@ -212,8 +212,10 @@ github.com/huaweicloud/golangsdk v0.0.0-20210730025156-e4c4c50d1883 h1:4D/N05upt
 github.com/huaweicloud/golangsdk v0.0.0-20210730025156-e4c4c50d1883/go.mod h1:fcOI5u+0f62JtJd7zkCch/Z57BNC6bhqb32TKuiF4r0=
 github.com/huaweicloud/golangsdk v0.0.0-20210802032346-3c4a88adf03a h1:yJda8qxR3mnJydpPlJ4MgYGZD8nO7eDwGSm52lbwSvw=
 github.com/huaweicloud/golangsdk v0.0.0-20210802032346-3c4a88adf03a/go.mod h1:fcOI5u+0f62JtJd7zkCch/Z57BNC6bhqb32TKuiF4r0=
-github.com/huaweicloud/golangsdk v0.0.0-20210811015908-f7ad77891df6 h1:bBWGvYquVhlmsOVU3AY8XMAjUuMg/s36fPOBTjVwCgQ=
-github.com/huaweicloud/golangsdk v0.0.0-20210811015908-f7ad77891df6/go.mod h1:fcOI5u+0f62JtJd7zkCch/Z57BNC6bhqb32TKuiF4r0=
+github.com/huaweicloud/golangsdk v0.0.0-20210809113416-56e12cef30ca h1:HorbTsfgeR6HvpuP09mYylN0K6RUg+0a0iWKSWlVoy8=
+github.com/huaweicloud/golangsdk v0.0.0-20210809113416-56e12cef30ca/go.mod h1:fcOI5u+0f62JtJd7zkCch/Z57BNC6bhqb32TKuiF4r0=
+github.com/huaweicloud/golangsdk v0.0.0-20210811121541-655bb6de1fbf h1:W05929W9Ve4msqtydRr1D33FE70O/YI+PaLRQtYv3mg=
+github.com/huaweicloud/golangsdk v0.0.0-20210811121541-655bb6de1fbf/go.mod h1:fcOI5u+0f62JtJd7zkCch/Z57BNC6bhqb32TKuiF4r0=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/imdario/mergo v0.3.9 h1:UauaLniWCFHWd+Jp9oCEkTBj8VO/9DKg3PV3VCNMDIg=
 github.com/imdario/mergo v0.3.9/go.mod h1:2EnlNZ0deacrJVfApfmtdGgDfMuh/nq6Ok1EcJh5FfA=
