@@ -227,3 +227,11 @@ func EncodeBase64String(str string) string {
 	strByte := []byte(str)
 	return base64.StdEncoding.EncodeToString(strByte)
 }
+
+// Method EncodeBase64IfNot is used to encode a string by base64 if it not a base64 string.
+func EncodeBase64IfNot(str string) string {
+	if _, err := base64.StdEncoding.DecodeString(str); err != nil {
+		return base64.StdEncoding.EncodeToString([]byte(str))
+	}
+	return str
+}

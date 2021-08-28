@@ -87,14 +87,15 @@ The following arguments are supported:
 
 * `name` - (Required, String, ForceNew) Cluster name. Changing this parameter will create a new cluster resource.
 
-* `flavor_id` - (Required, String, ForceNew) Cluster specifications. Changing this parameter will create a new cluster resource. Possible values:
+* `flavor_id` - (Required, String, ForceNew) Cluster specifications. Changing this parameter will create
+  a new cluster resource. Possible values:
 
-	+ `cce.s1.small` - small-scale single cluster (up to 50 nodes).
-	+ `cce.s1.medium` - medium-scale single cluster (up to 200 nodes).
-	+ `cce.s2.small` - small-scale HA cluster (up to 50 nodes).
-	+ `cce.s2.medium` - medium-scale HA cluster (up to 200 nodes).
-	+ `cce.s2.large` - large-scale HA cluster (up to 1000 nodes).
-	+ `cce.s2.xlarge` - large-scale HA cluster (up to 2000 nodes).
+  + `cce.s1.small` - small-scale single cluster (up to 50 nodes).
+  + `cce.s1.medium` - medium-scale single cluster (up to 200 nodes).
+  + `cce.s2.small` - small-scale HA cluster (up to 50 nodes).
+  + `cce.s2.medium` - medium-scale HA cluster (up to 200 nodes).
+  + `cce.s2.large` - large-scale HA cluster (up to 1000 nodes).
+  + `cce.s2.xlarge` - large-scale HA cluster (up to 2000 nodes).
 
 * `cluster_version` - (Optional, String, ForceNew) For the cluster version, defaults to the latest supported version.
   Changing this parameter will create a new cluster resource.
@@ -104,21 +105,25 @@ The following arguments are supported:
 
 * `description` - (Optional, String) The Cluster description.
 
-* `vpc_id` - (Required, String, ForceNew) The ID of the VPC used to create the node. Changing this parameter will create a new cluster resource.
-
-* `subnet_id` - (Required, String, ForceNew) The ID of the subnet used to create the node  which should be configured with a *DNS address*.
+* `vpc_id` - (Required, String, ForceNew) The ID of the VPC used to create the node.
   Changing this parameter will create a new cluster resource.
+
+* `subnet_id` - (Required, String, ForceNew) The ID of the subnet used to create the node which should be configured
+  with a *DNS address*. Changing this parameter will create a new cluster resource.
 
 * `container_network_type` - (Required, String, ForceNew) Container network parameters. Possible values:
 
-	+ `overlay_l2` - An overlay_l2 network built for containers by using Open vSwitch(OVS).
-	+ `vpc-router` - An vpc-router network built for containers by using ipvlan and custom VPC routes.
-	+ `eni` - A Yangtse network built for cce turbo cluster. The container network deeply integrates the native ENI capability of VPC,
-	uses the VPC CIDR block to allocate container addresses, and supports direct connections between ELB and containers to provide high performance.
+  + `overlay_l2` - An overlay_l2 network built for containers by using Open vSwitch(OVS).
+  + `vpc-router` - An vpc-router network built for containers by using ipvlan and custom VPC routes.
+  + `eni` - A Yangtse network built for cce turbo cluster. The container network deeply integrates the native ENI
+  capability of VPC, uses the VPC CIDR block to allocate container addresses, and supports direct connections
+  between ELB and containers to provide high performance.
 
-* `container_network_cidr` - (Optional, String, ForceNew) Container network segment. Changing this parameter will create a new cluster resource.
+* `container_network_cidr` - (Optional, String, ForceNew) Container network segment.
+  Changing this parameter will create a new cluster resource.
 
-* `service_network_cidr` - (Optional, String, ForceNew) Service network segment. Changing this parameter will create a new cluster resource.
+* `service_network_cidr` - (Optional, String, ForceNew) Service network segment.
+  Changing this parameter will create a new cluster resource.
 
 * `eni_subnet_id` - (Optional, String, ForceNew) ENI subnet id. Specified when creating a CCE Turbo cluster.
   Changing this parameter will create a new cluster resource.
@@ -129,8 +134,18 @@ The following arguments are supported:
 * `authentication_mode` - (Optional, String, ForceNew) Authentication mode of the cluster, possible values are
   authenticating_proxy and rbac. Defaults to *rbac*. Changing this parameter will create a new cluster resource.
 
-* `authenticating_proxy_ca` - (Optional, String, ForceNew) CA root certificate provided in the authenticating_proxy mode. The CA root certificate
-	is encoded to the Base64 format. Changing this parameter will create a new cluster resource.
+* `authenticating_proxy_ca` - (Optional, String, ForceNew) CA root certificate provided in the authenticating_proxy mode.
+  The input value can be a Base64 encoded string or not. Changing this parameter will create a new cluster resource.
+
+* `authenticating_proxy_cert` - (Optional, String, ForceNew) Client certificate provided in the authenticating_proxy mode.
+  The input value can be a Base64 encoded string or not. Changing this parameter will create a new cluster resource.
+
+* `authenticating_proxy_private_key` - (Optional, String, ForceNew) Private key of the client certificate provided in the
+  authenticating_proxy mode. The input value can be a Base64 encoded string or not.
+  Changing this parameter will create a new cluster resource.
+
+-> **Note:** For more detailed description of authenticating_proxy mode for authentication_mode see
+[Enhanced authentication](https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/guides/cce-cluster-enhanced-authentication).
 
 * `multi_az` - (Optional, Bool, ForceNew) Enable multiple AZs for the cluster, only when using HA flavors.
   Changing this parameter will create a new cluster resource. This parameter and `masters` are alternative
@@ -185,38 +200,42 @@ The following arguments are supported:
   valid values are "true", "try" and "false". Default is false.
 
 * `hibernate` - (Optional, Bool) Specifies whether to hibernate the CCE cluster. Defaults to false.
-  After a cluster is hibernated, resources such as workloads cannot be created or managed in the cluster, and the cluster cannot be deleted.
+  After a cluster is hibernated, resources such as workloads cannot be created or managed in the cluster, and the cluster
+  cannot be deleted.
 
 The `masters` block supports:
 
-* `availability_zone` - (Optional, String, ForceNew) Specifies the availability zone of the master node. Changing this creates a new cluster.
+* `availability_zone` - (Optional, String, ForceNew) Specifies the availability zone of the master node.
+  Changing this creates a new cluster.
 
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-  * `id` -  Id of the cluster resource.
+* `id` -  Id of the cluster resource.
 
-  * `status` -  Cluster status information.
+* `status` -  Cluster status information.
 
-  * `certificate_clusters/name` - The cluster name.
+* `certificate_clusters/name` - The cluster name.
 
-  * `certificate_clusters/server` - The server IP address.
+* `certificate_clusters/server` - The server IP address.
 
-  * `certificate_clusters/certificate_authority_data` - The certificate data.
+* `certificate_clusters/certificate_authority_data` - The certificate data.
 
-  * `certificate_users/name` - The user name.
+* `certificate_users/name` - The user name.
 
-  * `certificate_users/client_certificate_data` - The client certificate data.
+* `certificate_users/client_certificate_data` - The client certificate data.
 
-  * `certificate_users/client_key_data` - The client key data.
+* `certificate_users/client_key_data` - The client key data.
 
-  * `security_group_id` - Security group ID of the cluster.
+* `security_group_id` - Security group ID of the cluster.
 
-  * `kube_config_raw` - Raw Kubernetes config to be used by kubectl and other compatible tools.
+* `kube_config_raw` - Raw Kubernetes config to be used by kubectl and other compatible tools.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 30 minute.
 * `update` - Default is 30 minute.
 * `delete` - Default is 30 minute.
@@ -224,15 +243,18 @@ This resource provides the following timeouts configuration options:
 ## Import
 
  Cluster can be imported using the cluster id, e.g.
- ```
+
+```
  $ terraform import huaweicloud_cce_cluster.cluster_1 4779ab1c-7c1a-44b1-a02e-93dfc361b32d  
 ```
+
 Note that the imported state may not be identical to your resource definition, due to some attrubutes missing from the
 API response, security or some other reason. The missing attributes include:
 `delete_efs`, `delete_eni`, `delete_evs`, `delete_net`, `delete_obs`, `delete_sfs` and `delete_all`.
 It is generally recommended running `terraform plan` after importing an cce cluster. You can then decide if changes
 should be applied to the cluster, or the resource definition should be updated to align with the cluster. Also you can
 ignore changes as below.
+
 ```
 resource "huaweicloud_cce_cluster" "cluster_1" {
     ...
