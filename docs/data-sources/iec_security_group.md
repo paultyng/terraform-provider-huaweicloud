@@ -28,18 +28,17 @@ In addition to all arguments above, the following attributes are exported:
 
 * `id` - A data source ID in UUID format.
 * `description` - The description of the IEC security group.
-* `security_group_rules` - An Array of one or more security group rules.
-  The object is documented below.
+* `security_group_rules` - An Array of one or more security group rules. The object is documented below.
 
 The `security_group_rules` block supports:
 
-  * `id` - The ID of the IEC security group rules.
-  * `security_group_id` - The id of the IEC security group rules.
-  * `description` - The description for the IEC security group rules.
-  * `direction` - The direction of the IEC security group rules.
-  * `ethertype` - The layer 3 protocol type.
-  * `port_range_max` - The higher part of the allowed port range.
-  * `port_range_min` - The lower part of the allowed port range.
-  * `protocol` - The layer 4 protocol type.
-  * `remote_ip_prefix` - The remote CIDR of the IEC security group rules.
-  * `remote_group_id` - The remote group id of the IEC security group rules.
+* `id` - The ID of the IEC security group rules.
+* `security_group_id` - The id of the IEC security group rules.
+* `description` - The description for the IEC security group rules.
+* `direction` - The direction of the IEC security group rules.
+* `ethertype` - The layer 3 protocol type.
+* `port_range_max` - The higher part of the allowed port range.
+* `port_range_min` - The lower part of the allowed port range.
+* `protocol` - The layer 4 protocol type.
+* `remote_ip_prefix` - The remote CIDR of the IEC security group rules.
+* `remote_group_id` - The remote group id of the IEC security group rules.

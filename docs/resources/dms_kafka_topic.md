@@ -22,23 +22,22 @@ resource "huaweicloud_dms_kafka_topic" "topic" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the DMS kafka topic resource.
-    If omitted, the provider-level region will be used. Changing this creates a new resource.
+* `region` - (Optional, String, ForceNew) The region in which to create the DMS kafka topic resource. If omitted, the
+  provider-level region will be used. Changing this creates a new resource.
 
 * `instance_id` - (Required, String, ForceNew) Specifies the ID of the DMS kafka instance to which the topic belongs.
-    Changing this creates a new resource.
+  Changing this creates a new resource.
 
-* `name` - (Required, String, ForceNew) Specifies the name of the topic. The name starts with a letter,
-    consists of 4 to 64 characters, and supports only letters, digits, hyphens (-) and underscores (_).
-    Changing this creates a new resource.
+* `name` - (Required, String, ForceNew) Specifies the name of the topic. The name starts with a letter, consists of 4 to
+  64 characters, and supports only letters, digits, hyphens (-) and underscores (_). Changing this creates a new
+  resource.
 
 * `partitions` - (Required, Int) Specifies the partition number. The value ranges from 1 to 100.
 
 * `replicas` - (Optional, Int, ForceNew) Specifies the replica number. The value ranges from 1 to 3 and defaults to 3.
-    Changing this creates a new resource.
+  Changing this creates a new resource.
 
-* `aging_time` - (Optional, Int) Specifies the aging time in hours.
-    The value ranges from 1 to 168 and defaults to 72.
+* `aging_time` - (Optional, Int) Specifies the aging time in hours. The value ranges from 1 to 168 and defaults to 72.
 
 * `sync_replication` - (Optional, Bool) Whether or not to enable synchronous replication.
 

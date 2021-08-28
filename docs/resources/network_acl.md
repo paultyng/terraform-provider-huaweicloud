@@ -33,8 +33,10 @@ resource "huaweicloud_network_acl_rule" "rule_2" {
 
 resource "huaweicloud_network_acl" "fw_acl" {
   name          = "my-fw-acl"
-  subnets       = [data.huaweicloud_vpc_subnet.subnet.id]
-  inbound_rules = [huaweicloud_network_acl_rule.rule_1.id,
+  subnets       = [
+    data.huaweicloud_vpc_subnet.subnet.id]
+  inbound_rules = [
+    huaweicloud_network_acl_rule.rule_1.id,
     huaweicloud_network_acl_rule.rule_2.id]
 }
 ```
@@ -43,13 +45,14 @@ resource "huaweicloud_network_acl" "fw_acl" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the network acl resource. If omitted, the provider-level region will be used. Changing this creates a new network acl resource.
+* `region` - (Optional, String, ForceNew) The region in which to create the network acl resource. If omitted, the
+  provider-level region will be used. Changing this creates a new network acl resource.
 
 * `name` - (Required, String) Specifies the network ACL name. This parameter can contain a maximum of 64 characters,
-    which may consist of letters, digits, underscores (_), and hyphens (-).
+  which may consist of letters, digits, underscores (_), and hyphens (-).
 
-* `description` - (Optional, String) Specifies the supplementary information about the network ACL.
-    This parameter can contain a maximum of 255 characters and cannot contain angle brackets (< or >).
+* `description` - (Optional, String) Specifies the supplementary information about the network ACL. This parameter can
+  contain a maximum of 255 characters and cannot contain angle brackets (< or >).
 
 * `inbound_rules` - (Optional, List)  A list of the IDs of ingress rules associated with the network ACL.
 
@@ -68,6 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 * `status` - The status of the network ACL.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
 
 * `create` - Default is 10 minute.

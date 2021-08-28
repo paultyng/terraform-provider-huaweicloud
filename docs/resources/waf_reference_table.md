@@ -27,20 +27,19 @@ resource "huaweicloud_waf_reference_table" "ref_table" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the WAF reference table resource.
-  If omitted, the provider-level region will be used. Changing this setting will push a new reference table.
+* `region` - (Optional, String, ForceNew) The region in which to create the WAF reference table resource. If omitted,
+  the provider-level region will be used. Changing this setting will push a new reference table.
 
-* `name` - (Required, String) The name of the reference table. Only letters, digits, and underscores(_) are allowed.
-  The maximum length is 64 characters.
+* `name` - (Required, String) The name of the reference table. Only letters, digits, and underscores(_) are allowed. The
+  maximum length is 64 characters.
 
 * `type` - (Required, String, ForceNew) The type of the reference table, The options are `url`, `user-agent`, `ip`,
   `params`, `cookie`, `referer` and `header`. Changing this setting will push a new reference table.
 
-* `conditions` - (Required, List) The conditions of the reference table. The maximum length is 30.
-  The maximum length of condition is 2048 characters.
+* `conditions` - (Required, List) The conditions of the reference table. The maximum length is 30. The maximum length of
+  condition is 2048 characters.
 
-* `description` - (Optional, String) The description of the reference table.
-  The maximum length is 128 characters.
+* `description` - (Optional, String) The description of the reference table. The maximum length is 128 characters.
 
 ## Attributes Reference
 

@@ -19,8 +19,8 @@ data "huaweicloud_iec_port" "port_1" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the port.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the port. If omitted, the provider-level region will be
+  used.
 
 * `id` - (Optional, String) The ID of the port.
 

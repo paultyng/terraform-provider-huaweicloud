@@ -1,6 +1,7 @@
 ## Example: Basic NAT gateway and dnat rule
 
 This example provisions:
+
 - a ECS instance:
   > It can mount one or more data disks.
   > Using CentOS 7.3 64bit as the operating system image.

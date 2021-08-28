@@ -35,11 +35,12 @@ In addition to all arguments above, the following attributes are exported:
 * `eips` - A list of all the EIPs found. The object is documented below.
 
 The `eips` block supports:
-  * `id` - The ID of elastic IP.
-  * `status` - The status elastic IP.
-  * `ip_version` - The version of elastic IP address.
-  * `public_ip` - The address of elastic IP.
-  * `private_ip` - The address of private IP.
-  * `bandwitch_name` - The name of bandwidth.
-  * `bandwitch_size` - The size of bandwidth.
-  * `bandwitch_share_type` - Whether the bandwidth is shared or exclusive.
+
+* `id` - The ID of elastic IP.
+* `status` - The status elastic IP.
+* `ip_version` - The version of elastic IP address.
+* `public_ip` - The address of elastic IP.
+* `private_ip` - The address of private IP.
+* `bandwitch_name` - The name of bandwidth.
+* `bandwitch_size` - The size of bandwidth.
+* `bandwitch_share_type` - Whether the bandwidth is shared or exclusive.

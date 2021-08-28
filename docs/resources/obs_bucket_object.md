@@ -49,7 +49,8 @@ resource "huaweicloud_obs_bucket_object" "examplebucket_object" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the OBS bucket object resource. If omitted, the provider-level region will be used. Changing this creates a new OBS bucket object resource.
+* `region` - (Optional, String, ForceNew) The region in which to create the OBS bucket object resource. If omitted, the
+  provider-level region will be used. Changing this creates a new OBS bucket object resource.
 
 * `bucket` - (Required, String, ForceNew) The name of the bucket to put the file in.
 
@@ -63,8 +64,8 @@ The following arguments are supported:
 
 * `storage_class` - (Optioanl, String) Specifies the storage class of the object. Defaults to `STANDARD`.
 
-* `content_type` - (Optional, String) A standard MIME type describing the format of the object data, e.g. application/octet-stream.
-  All Valid MIME Types are valid for this input.
+* `content_type` - (Optional, String) A standard MIME type describing the format of the object data, e.g.
+  application/octet-stream. All Valid MIME Types are valid for this input.
 
 * `encryption` - (Optional, Bool) Whether enable server-side encryption of the object in SSE-KMS mode.
 
@@ -73,17 +74,16 @@ The following arguments are supported:
 * `etag` - (Optional, String) Specifies the unique identifier of the object content. It can be used to trigger updates.
   The only meaningful value is `md5(file("path_to_file"))`.
 
-Either `source` or `content` must be provided to specify the bucket content.
-These two arguments are mutually-exclusive.
+Either `source` or `content` must be provided to specify the bucket content. These two arguments are mutually-exclusive.
 
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
 * `id` - the `key` of the resource supplied above.
-* `etag` - the ETag generated for the object (an MD5 sum of the object content).
-  When the object is encrypted on the server side, the ETag value is not the MD5 value of the object,
-  but the unique identifier calculated through the server-side encryption.
+* `etag` - the ETag generated for the object (an MD5 sum of the object content). When the object is encrypted on the
+  server side, the ETag value is not the MD5 value of the object, but the unique identifier calculated through the
+  server-side encryption.
 * `size` - the size of the object in bytes.
 * `version_id` - A unique version ID value for the object, if bucket versioning is enabled.
 

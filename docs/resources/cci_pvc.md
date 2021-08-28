@@ -86,28 +86,26 @@ resource "huaweicloud_cci_pvc" "test" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) Specifies the region in which to create the PVC resource.
-  If omitted, the provider-level region will be used.
-  Changing this will create a new PVC resource.
+* `region` - (Optional, String, ForceNew) Specifies the region in which to create the PVC resource. If omitted, the
+  provider-level region will be used. Changing this will create a new PVC resource.
 
-* `namespace` - (Required, String, ForceNew) Specifies the namespace to logically divide your cloud container instances into different group.
-  Changing this will create a new PVC resource.
+* `namespace` - (Required, String, ForceNew) Specifies the namespace to logically divide your cloud container instances
+  into different group. Changing this will create a new PVC resource.
 
-* `name` - (Required, String, ForceNew) Specifies the unique name of the PVC resource.
-  This parameter can contain a maximum of 63 characters, which may consist of lowercase letters, digits and hyphens,
-  and must start and end with lowercase letters and digits.
-  Changing this will create a new PVC resource.
+* `name` - (Required, String, ForceNew) Specifies the unique name of the PVC resource. This parameter can contain a
+  maximum of 63 characters, which may consist of lowercase letters, digits and hyphens, and must start and end with
+  lowercase letters and digits. Changing this will create a new PVC resource.
 
-* `volume_id` - (Required, String, ForceNew) Specifies the ID of the storage bound to the CCI Namespace.
-  Changing this will create a new PVC resource.
+* `volume_id` - (Required, String, ForceNew) Specifies the ID of the storage bound to the CCI Namespace. Changing this
+  will create a new PVC resource.
 
-* `volume_type` - (Optional, String, ForceNew) Specifies the type of the storage bound to the CCI Namespace.
-  The valid values are *sas*, *ssd*, *sata*, *obs*, *nfs-rw*, *efs-standard* and *efs-performance*, Defalut to *sas*.
-  Changing this will create a new PVC resource.
+* `volume_type` - (Optional, String, ForceNew) Specifies the type of the storage bound to the CCI Namespace. The valid
+  values are *sas*, *ssd*, *sata*, *obs*, *nfs-rw*, *efs-standard* and *efs-performance*, Defalut to *sas*. Changing
+  this will create a new PVC resource.
 
-* `device_mount_path` - (Optional, String, ForceNew) Specifies the share path of the SFS storage bound to the CCI Namespace.
-  Required if `volume_type` is *nfs-rw*, *efs-standard* or *efs-performance*.
-  Changing this will create a new PVC resource.
+* `device_mount_path` - (Optional, String, ForceNew) Specifies the share path of the SFS storage bound to the CCI
+  Namespace. Required if `volume_type` is *nfs-rw*, *efs-standard* or *efs-performance*. Changing this will create a new
+  PVC resource.
 
 ## Attributes Reference
 
@@ -126,6 +124,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Import
 
 PVCs can be imported using the `namespace`, `volume_type` and `id`, e.g.
+
 ```
 $ terraform import huaweicloud_cci_pvc.test <namespace>/<volume_type>/<id>
 ```
@@ -133,5 +132,6 @@ $ terraform import huaweicloud_cci_pvc.test <namespace>/<volume_type>/<id>
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 5 minute.
 * `delete` - Default is 3 minute.

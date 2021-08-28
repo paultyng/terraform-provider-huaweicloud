@@ -4,13 +4,12 @@ subcategory: "Distributed Message Service (DMS)"
 
 # huaweicloud_dms_product
 
-Use this data source to get the ID of an available HuaweiCloud dms product.
-This is an alternative to `huaweicloud_dms_product_v1`
+Use this data source to get the ID of an available HuaweiCloud dms product. This is an alternative
+to `huaweicloud_dms_product_v1`
 
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_dms_product" "product1" {
   engine            = "kafka"
   version           = "1.1.0"
@@ -23,7 +22,8 @@ data "huaweicloud_dms_product" "product1" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the dms products. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the dms products. If omitted, the provider-level region
+  will be used.
 
 * `engine` - (Required, String) Indicates the name of a message engine.
 
@@ -44,7 +44,6 @@ data "huaweicloud_dms_product" "product1" {
 * `io_type` - (Optional, String) Indicates an I/O type.
 
 * `node_num` - (Optional, String) Indicates the number of nodes in a cluster.
-
 
 ## Attributes Reference
 

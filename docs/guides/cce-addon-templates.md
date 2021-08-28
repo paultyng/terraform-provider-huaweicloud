@@ -4,10 +4,10 @@ page_title: "CCE Addon Templates"
 
 # CCE Addon Templates
 
-Addon support configuration input depending on addon type and version. This page contains description of addon arguments.
-
-You can get up to date reference of addon arguments for your cluster using data source
-[`huaweicloud_cce_addon_template`](https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/data-sources/cce_addon_template).
+Addon support configuration input depending on addon type and version. This page contains description of addon
+arguments. You can get up to date reference of addon arguments for your cluster using data source
+[`huaweicloud_cce_addon_template`](https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs/data-sources/cce_addon_template)
+.
 
 Following addon templates exist in the addon template list:
 

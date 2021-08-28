@@ -6,8 +6,7 @@ subcategory: "Identity and Access Management (IAM)"
 
 Manages a permanent Access Key resource within HuaweiCloud IAM service.
 
--> **Note:** You _must_ have admin privileges in your HuaweiCloud cloud to use
-this resource.
+-> **NOTE:** You _must_ have admin privileges in your HuaweiCloud cloud to use this resource.
 
 ## Example Usage
 
@@ -32,8 +31,8 @@ The following arguments are supported:
 
 * `description` - (Optional, String) Specifies the description of the access key.
 
-* `status` - (Optional, String) Specifies the status of the access key. It must be *active* or *inactive*.
-  Default value is *active*.
+* `status` - (Optional, String) Specifies the status of the access key. It must be *active* or *inactive*. Default value
+  is *active*.
 
 * `secret_file` - (Optional, String, ForceNew) Specifies the file name that can save access key and access secret key.
   Defaults to *./credentials-{{user name}}.csv*. Changing this creates a new resource.
@@ -48,7 +47,7 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - The access key ID.
 * `secret` - The access secret key. Setting the value only when writing to `secret_file` failed.
 * `key_fingerprint` - The fingerprint of the PGP key used to encrypt the secret
-* `encrypted_secret` - The encrypted secret, base64 encoded. The encrypted secret may be decrypted using the command line,
-  for example: `terraform output encrypted_secret | base64 --decode | keybase pgp decrypt`.
+* `encrypted_secret` - The encrypted secret, base64 encoded. The encrypted secret may be decrypted using the command
+  line, for example: `terraform output encrypted_secret | base64 --decode | keybase pgp decrypt`.
 * `user_name` - The name of IAM user.
 * `create_time` - The time when the access key was created.

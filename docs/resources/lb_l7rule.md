@@ -4,8 +4,7 @@ subcategory: "Elastic Load Balance (ELB)"
 
 # huaweicloud_lb_l7rule
 
-Manages an ELB L7 Rule resource within HuaweiCloud.
-This is an alternative to `huaweicloud_lb_l7rule_v2`
+Manages an ELB L7 Rule resource within HuaweiCloud. This is an alternative to `huaweicloud_lb_l7rule_v2`
 
 ## Example Usage
 
@@ -50,28 +49,24 @@ resource "huaweicloud_lb_l7rule" "l7rule_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the L7 Rule resource.
-    If omitted, the provider-level region will be used.
-    Changing this creates a new L7 Rule.
+* `region` - (Optional, String, ForceNew) The region in which to create the L7 Rule resource. If omitted, the
+  provider-level region will be used. Changing this creates a new L7 Rule.
 
 * `description` - (Optional, String) Human-readable description for the L7 Rule.
 
-* `type` - (Required, String, ForceNew) The L7 Rule type - can either be HOST_NAME or PATH. Changing this creates a new L7 Rule.
+* `type` - (Required, String, ForceNew) The L7 Rule type - can either be HOST_NAME or PATH. Changing this creates a new
+  L7 Rule.
 
-* `compare_type` - (Required, String) The comparison type for the L7 rule - can either be
-    STARTS_WITH, EQUAL_TO or REGEX
+* `compare_type` - (Required, String) The comparison type for the L7 rule - can either be STARTS_WITH, EQUAL_TO or REGEX
 
-* `l7policy_id` - (Required, String, ForceNew) The ID of the L7 Policy to query. Changing this creates a new
-    L7 Rule.
+* `l7policy_id` - (Required, String, ForceNew) The ID of the L7 Policy to query. Changing this creates a new L7 Rule.
 
-* `value` - (Required, String) The value to use for the comparison. For example, the file type to
-    compare.
+* `value` - (Required, String) The value to use for the comparison. For example, the file type to compare.
 
 * `key` - (Optional, String, ForceNew) The key to use for the comparison. For example, the name of the cookie to
-    evaluate. Valid when `type` is set to COOKIE or HEADER. Changing this creates a new L7 Rule.
+  evaluate. Valid when `type` is set to COOKIE or HEADER. Changing this creates a new L7 Rule.
 
-* `admin_state_up` - (Optional, Bool) The administrative state of the L7 Rule.
-    The value can only be true (UP).
+* `admin_state_up` - (Optional, Bool) The administrative state of the L7 Rule. The value can only be true (UP).
 
 ## Attributes Reference
 
@@ -82,15 +77,16 @@ In addition to all arguments above, the following attributes are exported:
 * `listener_id` - The ID of the Listener owning this resource.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 
 ## Import
 
-Load Balancer L7 Rule can be imported using the L7 Policy ID and L7 Rule ID
-separated by a slash, e.g.:
+Load Balancer L7 Rule can be imported using the L7 Policy ID and L7 Rule ID separated by a slash, e.g.:
 
 ```
 $ terraform import huaweicloud_lb_l7rule.l7rule_1 e0bd694a-abbe-450e-b329-0931fd1cc5eb/4086b0c9-b18c-4d1c-b6b8-4c56c3ad2a9e

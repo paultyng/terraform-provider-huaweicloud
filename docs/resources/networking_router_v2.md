@@ -6,7 +6,7 @@ subcategory: "Deprecated"
 
 Manages a V2 router resource within HuaweiCloud.
 
-!> **Warning:** It has been deprecated, use `huaweicloud_vpc` instead.
+!> **WARNING:** It has been deprecated, use `huaweicloud_vpc` instead.
 
 ## Example Usage
 
@@ -22,35 +22,30 @@ resource "huaweicloud_networking_router_v2" "router_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the V2 networking client.
-    A networking client is needed to create a router. If omitted, the
-    `region` argument of the provider is used. Changing this creates a new
-    router.
+* `region` - (Optional, String, ForceNew) The region in which to create the V2 networking client. A networking client is
+  needed to create a router. If omitted, the
+  `region` argument of the provider is used. Changing this creates a new router.
 
-* `name` - (Optional, String) A unique name for the router. Changing this
-    updates the `name` of an existing router.
+* `name` - (Optional, String) A unique name for the router. Changing this updates the `name` of an existing router.
 
 * `admin_state_up` - (Optional, Bool) Administrative up/down status for the router
-    (must be "true" or "false" if provided). Changing this updates the
-    `admin_state_up` of an existing router.
+  (must be "true" or "false" if provided). Changing this updates the
+  `admin_state_up` of an existing router.
 
-* `distributed` - (Optional, Bool, ForceNew) Indicates whether or not to create a
-    distributed router. The default policy setting in Neutron restricts
-    usage of this property to administrative users only.
+* `distributed` - (Optional, Bool, ForceNew) Indicates whether or not to create a distributed router. The default policy
+  setting in Neutron restricts usage of this property to administrative users only.
 
-* `external_network_id` - (Optional, String) The network UUID of an external gateway
-    for the router. A router with an external gateway is required if any
-    compute instances or load balancers will be using floating IPs. Changing
-    this updates the external gateway of the router.
+* `external_network_id` - (Optional, String) The network UUID of an external gateway for the router. A router with an
+  external gateway is required if any compute instances or load balancers will be using floating IPs. Changing this
+  updates the external gateway of the router.
 
 * `enable_snat` - (Optional, Bool) Enable Source NAT for the router. Valid values are
-    "true" or "false". An `external_network_id` has to be set in order to
-    set this property. Changing this updates the `enable_snat` of the router.
+  "true" or "false". An `external_network_id` has to be set in order to set this property. Changing this updates
+  the `enable_snat` of the router.
 
-* `external_fixed_ip` - (Optional, List) An external fixed IP for the router. This
-    can be repeated. The structure is described below. An `external_network_id`
-    has to be set in order to set this property. Changing this updates the
-    external fixed IPs of the router.
+* `external_fixed_ip` - (Optional, List) An external fixed IP for the router. This can be repeated. The structure is
+  described below. An `external_network_id`
+  has to be set in order to set this property. Changing this updates the external fixed IPs of the router.
 
 * `value_specs` - (Optional, Map, ForceNew) Map of additional driver-specific options.
 
@@ -67,7 +62,9 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - ID of the router.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

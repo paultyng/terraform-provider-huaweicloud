@@ -20,8 +20,8 @@ resource "huaweicloud_iec_eip" "eip_test" {
 
 The following arguments are supported:
 
-* `site_id` - (Required, String, ForceNew) Specifies the ID of IEC sevice site.
-    Changing this parameter creates a new resource.
+* `site_id` - (Required, String, ForceNew) Specifies the ID of IEC sevice site. Changing this parameter creates a new
+  resource.
 
 * `port_id` - (Optional, String) Specifies the port ID which this eip will associate with.
 
@@ -42,6 +42,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 3 minute.
 

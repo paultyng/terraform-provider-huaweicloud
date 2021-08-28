@@ -4,8 +4,7 @@ subcategory: "Elastic Load Balance (ELB)"
 
 # huaweicloud_lb_l7policy
 
-Manages an ELB L7 Policy resource within HuaweiCloud.
-This is an alternative to `huaweicloud_lb_l7policy_v2`
+Manages an ELB L7 Policy resource within HuaweiCloud. This is an alternative to `huaweicloud_lb_l7policy_v2`
 
 ## Example Usage
 
@@ -43,30 +42,29 @@ resource "huaweicloud_lb_l7policy" "l7policy_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the L7 Policy resource.
-    If omitted, the provider-level region will be used.
-    Changing this creates a new L7 Policy.
+* `region` - (Optional, String, ForceNew) The region in which to create the L7 Policy resource. If omitted, the
+  provider-level region will be used. Changing this creates a new L7 Policy.
 
-* `name` - (Optional, String) Human-readable name for the L7 Policy. Does not have
-    to be unique.
+* `name` - (Optional, String) Human-readable name for the L7 Policy. Does not have to be unique.
 
 * `description` - (Optional, String) Human-readable description for the L7 Policy.
 
-* `action` - (Required, String, ForceNew) The L7 Policy action - can either be REDIRECT\_TO\_POOL,
-    or REDIRECT\_TO\_LISTENER. Changing this creates a new L7 Policy.
+* `action` - (Required, String, ForceNew) The L7 Policy action - can either be REDIRECT\_TO\_POOL, or
+  REDIRECT\_TO\_LISTENER. Changing this creates a new L7 Policy.
 
-* `listener_id` - (Required, String, ForceNew) The Listener on which the L7 Policy will be associated with.
-    Changing this creates a new L7 Policy.
+* `listener_id` - (Required, String, ForceNew) The Listener on which the L7 Policy will be associated with. Changing
+  this creates a new L7 Policy.
 
-* `position` - (Optional, Int, ForceNew) The position of this policy on the listener. Positions start at 1. Changing this creates a new L7 Policy.
+* `position` - (Optional, Int, ForceNew) The position of this policy on the listener. Positions start at 1. Changing
+  this creates a new L7 Policy.
 
-* `redirect_pool_id` - (Optional, String) Requests matching this policy will be redirected to the
-    pool with this ID. Only valid if action is REDIRECT\_TO\_POOL.
+* `redirect_pool_id` - (Optional, String) Requests matching this policy will be redirected to the pool with this ID.
+  Only valid if action is REDIRECT\_TO\_POOL.
 
-* `redirect_listener_id` - (Optional, String) Requests matching this policy will be redirected to the listener with this ID. Only valid if action is REDIRECT\_TO\_LISTENER.
+* `redirect_listener_id` - (Optional, String) Requests matching this policy will be redirected to the listener with this
+  ID. Only valid if action is REDIRECT\_TO\_LISTENER.
 
-* `admin_state_up` - (Optional, Bool) The administrative state of the L7 Policy.
-    This value can only be true (UP).
+* `admin_state_up` - (Optional, Bool) The administrative state of the L7 Policy. This value can only be true (UP).
 
 ## Attributes Reference
 
@@ -75,7 +73,9 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - The unique ID for the L7 {olicy.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

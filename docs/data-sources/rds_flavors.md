@@ -4,8 +4,7 @@ subcategory: "Relational Database Service (RDS)"
 
 # huaweicloud_rds_flavors
 
-Use this data source to get available HuaweiCloud rds flavors.
-This is an alternative to `huaweicloud_rds_flavors_v3`
+Use this data source to get available HuaweiCloud rds flavors. This is an alternative to `huaweicloud_rds_flavors_v3`
 
 ## Example Usage
 
@@ -19,7 +18,8 @@ data "huaweicloud_rds_flavors" "flavor" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the RDS flavors. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the RDS flavors. If omitted, the provider-level region
+  will be used.
 
 * `db_type` - (Required, String) Specifies the DB engine. Value: MySQL, PostgreSQL, SQLServer.
 
@@ -40,8 +40,7 @@ In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a data source ID in UUID format.
 
-* `flavors` -
-  Indicates the flavors information. Structure is documented below.
+* `flavors` - Indicates the flavors information. Structure is documented below.
 
 The `flavors` block contains:
 

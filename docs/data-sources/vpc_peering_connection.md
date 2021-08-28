@@ -4,8 +4,8 @@ subcategory: "Virtual Private Cloud (VPC)"
 
 # huaweicloud_vpc_peering_connection
 
-The VPC Peering Connection data source provides details about a specific VPC peering connection.
-This is an alternative to `huaweicloud_vpc_peering_connection_v2`
+The VPC Peering Connection data source provides details about a specific VPC peering connection. This is an alternative
+to `huaweicloud_vpc_peering_connection_v2`
 
 ## Example Usage
 
@@ -33,10 +33,11 @@ resource "huaweicloud_vpc_route" "vpc_route" {
 
 ## Argument Reference
 
-The arguments of this data source act as filters for querying the available VPC peering connection.
-The given filters must match exactly one VPC peering connection whose data will be exported as attributes.
+The arguments of this data source act as filters for querying the available VPC peering connection. The given filters
+must match exactly one VPC peering connection whose data will be exported as attributes.
 
-* `region` - (Optional, String) The region in which to obtain the VPC Peering Connection. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the VPC Peering Connection. If omitted, the provider-level
+  region will be used.
 
 * `id` - (Optional, String) The ID of the specific VPC Peering Connection to retrieve.
 
@@ -46,6 +47,7 @@ The given filters must match exactly one VPC peering connection whose data will 
 
 * `peer_vpc_id` - (Optional, String) The ID of the accepter/peer VPC of the specific VPC Peering Connection to retrieve.
 
-* `peer_tenant_id` - (Optional, String) The Tenant ID of the accepter/peer VPC of the specific VPC Peering Connection to retrieve.
+* `peer_tenant_id` - (Optional, String) The Tenant ID of the accepter/peer VPC of the specific VPC Peering Connection to
+  retrieve.
 
 * `name` - (Optional, String) The name of the specific VPC Peering Connection to retrieve.

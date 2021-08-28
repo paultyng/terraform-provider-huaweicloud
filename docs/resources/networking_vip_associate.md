@@ -4,8 +4,7 @@ subcategory: "Virtual Private Cloud (VPC)"
 
 # huaweicloud_networking_vip_associate
 
-Manages a Vip associate resource within HuaweiCloud.
-This is an alternative to `huaweicloud_networking_vip_associate_v2`
+Manages a Vip associate resource within HuaweiCloud. This is an alternative to `huaweicloud_networking_vip_associate_v2`
 
 ## Example Usage
 
@@ -20,7 +19,9 @@ resource "huaweicloud_networking_vip" "myvip" {
 
 resource "huaweicloud_networking_vip_associate" "vip_associated" {
   vip_id   = huaweicloud_networking_vip.myvip.id
-  port_ids = [var.port_1, var.port_2]
+  port_ids = [
+    var.port_1,
+    var.port_2]
 }
 ```
 
@@ -28,8 +29,8 @@ resource "huaweicloud_networking_vip_associate" "vip_associated" {
 
 The following arguments are supported:
 
-* `region` - (Optional, ForceNew) The region in which to create the vip associate resource.
-    If omitted, the provider-level region will be used.
+* `region` - (Optional, ForceNew) The region in which to create the vip associate resource. If omitted, the
+  provider-level region will be used.
 
 * `vip_id` - (Required, ForceNew) The ID of vip to attach the ports to.
 

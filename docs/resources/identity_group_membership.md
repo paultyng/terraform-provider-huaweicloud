@@ -4,10 +4,10 @@ subcategory: "Identity and Access Management (IAM)"
 
 # huaweicloud_identity_group_membership
 
-Manages a User Group Membership resource within HuaweiCloud IAM service. This is an alternative to `huaweicloud_identity_group_membership_v3`
+Manages a User Group Membership resource within HuaweiCloud IAM service. This is an alternative
+to `huaweicloud_identity_group_membership_v3`
 
-Note: You _must_ have admin privileges in your HuaweiCloud cloud to use
-this resource.
+Note: You _must_ have admin privileges in your HuaweiCloud cloud to use this resource.
 
 ## Example Usage
 
@@ -31,7 +31,8 @@ resource "huaweicloud_identity_user" "user_2" {
 
 resource "huaweicloud_identity_group_membership" "membership_1" {
   group = huaweicloud_identity_group.group_1.id
-  users = [huaweicloud_identity_user.user_1.id
+  users = [
+    huaweicloud_identity_user.user_1.id
     huaweicloud_identity_user.user_2.id
   ]
 }

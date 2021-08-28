@@ -17,21 +17,20 @@ data "huaweicloud_iec_images" "iec_image" {
 ## Argument Reference
 
 The following arguments are supported:
-* `region` - (Optional, String) The region in which to obtain the images.
-    If omitted, the provider-level region will be used.
 
-* `name` -  (Optional, String) Specifies the image Name, which can be queried
-    with a regular expression.
+* `region` - (Optional, String) The region in which to obtain the images. If omitted, the provider-level region will be
+  used.
+
+* `name` - (Optional, String) Specifies the image Name, which can be queried with a regular expression.
 
 * `os_type` - (Optional, String) Specifies the os type of the iec image.
-    "Linux", "Windows" and "Other" are supported.
+  "Linux", "Windows" and "Other" are supported.
 
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-* `images` - An array of one or more image.
-    The images object structure is documented below.
+* `images` - An array of one or more image. The images object structure is documented below.
 
 The `images` block supports:
 

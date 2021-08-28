@@ -4,8 +4,7 @@ subcategory: "Virtual Private Cloud (VPC)"
 
 # huaweicloud_networking_secgroup
 
-Manages a Security Group resource within HuaweiCloud.
-This is an alternative to `huaweicloud_networking_secgroup_v2`
+Manages a Security Group resource within HuaweiCloud. This is an alternative to `huaweicloud_networking_secgroup_v2`
 
 ## Example Usage
 
@@ -20,8 +19,8 @@ resource "huaweicloud_networking_secgroup" "secgroup" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the security group resource.
-  If omitted, the provider-level region will be used. Changing this creates a new security group resource.
+* `region` - (Optional, String, ForceNew) The region in which to create the security group resource. If omitted, the
+  provider-level region will be used. Changing this creates a new security group resource.
 
 * `name` - (Required, String) Specifies a unique name for the security group.
 
@@ -33,13 +32,14 @@ The following arguments are supported:
 * `delete_default_rules` - (Optional, Bool, ForceNew) Specifies whether or not to delete the default security rules.
   This is `false` by default.
 
--> **Note:** The default security rules are described in [HuaweiCloud](https://support.huaweicloud.com/intl/en-us/usermanual-vpc/SecurityGroup_0003.html).
-  See the below section for more information.
+-> **NOTE:** The default security rules are described
+in [HuaweiCloud](https://support.huaweicloud.com/intl/en-us/usermanual-vpc/SecurityGroup_0003.html). See the below
+section for more information.
 
 ## Default Security Group Rules
 
-In most cases, HuaweiCloud will create some security group rules for each new security group.
-These security group rules will not be managed by Terraform, so if you prefer to have *all*
+In most cases, HuaweiCloud will create some security group rules for each new security group. These security group rules
+will not be managed by Terraform, so if you prefer to have *all*
 aspects of your infrastructure managed by Terraform, set `delete_default_rules` to `true`
 and then create separate security group rules such as the following:
 
@@ -74,7 +74,9 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - The resource ID in UUID format.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `delete` - Default is 10 minute.
 
 ## Import

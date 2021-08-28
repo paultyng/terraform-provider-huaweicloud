@@ -4,8 +4,7 @@ subcategory: "Scalable File Service (SFS)"
 
 # huaweicloud_sfs_file_sharing
 
-Provides information about an Shared File System (SFS).
-This is an alternative to `huaweicloud_sfs_file_sharing_v2`
+Provides information about an Shared File System (SFS). This is an alternative to `huaweicloud_sfs_file_sharing_v2`
 
 ## Example Usage
 
@@ -20,6 +19,7 @@ data "huaweicloud_sfs_file_sharing" "shared_file" {
 ```
 
 ## Argument Reference
+
 The following arguments are supported:
 
 * `name` - (Optional, String) The name of the shared file system.
@@ -28,16 +28,16 @@ The following arguments are supported:
 
 * `status` - (Optional, String) The status of the shared file system.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
 * `availability_zone` - The availability zone name.
 
-* `size` - 	The size (GB) of the shared file system.
+* `size` - The size (GB) of the shared file system.
 
-* `share_type` - The storage service type for the shared file system, such as high-performance storage (composed of SSDs) or large-capacity storage (composed of SATA disks).
+* `share_type` - The storage service type for the shared file system, such as high-performance storage (composed of
+  SSDs) or large-capacity storage (composed of SATA disks).
 
 * `status` - The status of the shared file system.
 
@@ -67,4 +67,5 @@ In addition to all arguments above, the following attributes are exported:
 
 * `share_instance_id` - The access that the back end grants or denies.
 
-* `preferred` - Identifies which mount locations are most efficient and are used preferentially when multiple mount locations exist.
+* `preferred` - Identifies which mount locations are most efficient and are used preferentially when multiple mount
+  locations exist.

@@ -34,8 +34,8 @@ data "huaweicloud_fgs_dependencies" "test" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) Specifies the region in which to obtain the dependent packages.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) Specifies the region in which to obtain the dependent packages. If omitted, the
+  provider-level region will be used.
 
 * `type` - (Optional, String) Specifies the dependent package type to match. Valid values: **public** and **private**.
 

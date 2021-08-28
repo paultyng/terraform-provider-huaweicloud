@@ -23,16 +23,16 @@ resource "huaweicloud_waf_rule_blacklist" "rule_1" {
 ## Argument Reference
 
 The following arguments are supported:
+
 * `region` - (Optional, String, ForceNew) The region in which to create the WAF blacklist and whitelist rule resource.
   If omitted, the provider-level region will be used. Changing this setting will push a new certificate.
-  
-* `policy_id` - (Required, String, ForceNew) Specifies the WAF policy ID. Changing this creates a new rule.
-  Please make sure that the region which the policy belongs to be consistent with the `region`.
+
+* `policy_id` - (Required, String, ForceNew) Specifies the WAF policy ID. Changing this creates a new rule. Please make
+  sure that the region which the policy belongs to be consistent with the `region`.
 
 * `ip_address` - (Required, String) Specifies the IP address or range. For example, 192.168.0.125 or 192.168.0.0/24.
 
-* `action` - (Optional, Int) Specifies the protective action. Defaults is `0`.
-  The value can be:
+* `action` - (Optional, Int) Specifies the protective action. Defaults is `0`. The value can be:
   + `0`: block the request.
   + `1`: allow the request.
   + `2`: log the request only.

@@ -18,9 +18,8 @@ data "huaweicloud_iec_keypair" "kp_1" {
 
 The following arguments are supported:
 
-* `name` - (Required, String) Specifies a unique name for the keypair.
-    This parameter can contain a maximum of 64 characters, which may consist of
-    letters, digits, underscores (_), and hyphens (-).
+* `name` - (Required, String) Specifies a unique name for the keypair. This parameter can contain a maximum of 64
+  characters, which may consist of letters, digits, underscores (_), and hyphens (-).
 
 ## Attributes Reference
 
@@ -30,5 +29,4 @@ In addition to all arguments above, the following attributes are exported:
 
 * `public_key` - The pregenerated OpenSSH-formatted public key.
 
-* `fingerprint` - The finger of iec keypair. The value contains a encoding
-    type(SHA256) and a string of 43 characters.
+* `fingerprint` - The finger of iec keypair. The value contains a encoding type(SHA256) and a string of 43 characters.

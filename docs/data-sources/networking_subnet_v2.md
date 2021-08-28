@@ -6,7 +6,7 @@ subcategory: "Deprecated"
 
 Use this data source to get the ID of an available HuaweiCloud subnet.
 
-!> **Warning:** It has been deprecated, use `huaweicloud_vpc_subnet` instead.
+!> **WARNING:** It has been deprecated, use `huaweicloud_vpc_subnet` instead.
 
 ## Example Usage
 
@@ -18,8 +18,8 @@ data "huaweicloud_networking_subnet_v2" "subnet_1" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the V2 Neutron client.
-  A Neutron client is needed to retrieve subnet ids. If omitted, the
+* `region` - (Optional, String) The region in which to obtain the V2 Neutron client. A Neutron client is needed to
+  retrieve subnet ids. If omitted, the
   `region` argument of the provider is used.
 
 * `name` - (Optional, String) The name of the subnet.

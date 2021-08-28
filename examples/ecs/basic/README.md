@@ -1,3 +1,3 @@
-## Example: Basic ECS Instance
+##  Example: Basic ECS Instance
 
 This example provisions a basic ecs instance.

@@ -42,24 +42,20 @@ resource "huaweicloud_apig_instance" "test" {
 The following arguments are supported:
 
 * `region` - (Optional, String, ForceNew) Specifies the region in which to create the APIG dedicated instance resource.
-  If omitted, the provider-level region will be used.
-  Changing this will create a new APIG dedicated instance resource.
+  If omitted, the provider-level region will be used. Changing this will create a new APIG dedicated instance resource.
 
-* `name` - (Required, String) Specifies the name of the API dedicated instance.
-  The API group name consists of 3 to 64 characters, starting with a letter.
-  Only letters, digits, and underscores (_) are allowed.
+* `name` - (Required, String) Specifies the name of the API dedicated instance. The API group name consists of 3 to 64
+  characters, starting with a letter. Only letters, digits, and underscores (_) are allowed.
 
-* `edition` - (Required, String, ForceNew) Specifies the edition of the APIG dedicated instance.
-  The supported editions are as follows:
-  BASIC, PROFESSIONAL, ENTERPRISE, PLATINUM.
-  Changing this will create a new APIG dedicated instance resource.
+* `edition` - (Required, String, ForceNew) Specifies the edition of the APIG dedicated instance. The supported editions
+  are as follows: BASIC, PROFESSIONAL, ENTERPRISE, PLATINUM. Changing this will create a new APIG dedicated instance
+  resource.
 
 * `vpc_id` - (Required, String, ForceNew) Specifies an ID of the VPC used to create the APIG dedicated instance.
   Changing this will create a new APIG dedicated instance resource.
 
 * `subnet_id` - (Required, String, ForceNew) Specifies an ID of the VPC subnet used to create the APIG dedicated
-  instance.
-  Changing this will create a new APIG dedicated instance resource.
+  instance. Changing this will create a new APIG dedicated instance resource.
 
 * `security_group_id` - (Required, String) Specifies an ID of the security group to which the APIG dedicated instance
   belongs to.
@@ -68,18 +64,17 @@ The following arguments are supported:
   instance. Please following [reference](https://developer.huaweicloud.com/intl/en-us/endpoint?APIG) for list elements.
   Changing this will create a new APIG dedicated instance resource.
 
-* `description` - (Optional, String) Specifies the description about the APIG dedicated instance.
-  The description contain a maximum of 255 characters and the angle brackets (< and >) are not allowed.
+* `description` - (Optional, String) Specifies the description about the APIG dedicated instance. The description
+  contain a maximum of 255 characters and the angle brackets (< and >) are not allowed.
 
-* `enterprise_project_id` - (Optional, String, ForceNew) Specifies an enterprise project ID.
-  This parameter is required for enterprise users.
-  Changing this will create a new APIG dedicated instance resource.
+* `enterprise_project_id` - (Optional, String, ForceNew) Specifies an enterprise project ID. This parameter is required
+  for enterprise users. Changing this will create a new APIG dedicated instance resource.
 
 * `maintain_begin` - (Optional, String) Specifies a start time of the maintenance time window in the format 'xx:00:00'.
   The value of xx can be 02, 06, 10, 14, 18 or 22.
 
-* `bandwidth_size` - (Optional, Int) Specifies the egress bandwidth size of the APIG dedicated instance.
-  The range of valid value is from 1 to 2000.
+* `bandwidth_size` - (Optional, Int) Specifies the egress bandwidth size of the APIG dedicated instance. The range of
+  valid value is from 1 to 2000.
 
 * `eip_id` - (Optional, String) Specifies the eip ID associated with the APIG dedicated instance.
 
@@ -99,6 +94,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 40 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.
@@ -106,6 +102,7 @@ This resource provides the following timeouts configuration options:
 ## Import
 
 APIG Dedicated Instances can be imported by their `id`, e.g.
+
 ```
 $ terraform import huaweicloud_apig_instance.test de379eed30aa4d31a84f426ea3c7ef4e
 ```

@@ -20,9 +20,8 @@ resource "huaweicloud_waf_policy" "policy_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the WAF policy resource.
-  If omitted, the provider-level region will be used.
-  Changing this setting will push a new certificate.
+* `region` - (Optional, String, ForceNew) The region in which to create the WAF policy resource. If omitted, the
+  provider-level region will be used. Changing this setting will push a new certificate.
 
 * `name` - (Required, String) Specifies the policy name. The maximum length is 256 characters. Only digits, letters,
   underscores(_), and hyphens(-) are allowed.
@@ -45,9 +44,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `full_detection` - The detection mode in Precise Protection.
   + `true`: full detection, Full detection finishes all threat detections before blocking requests that meet Precise
-    Protection specified conditions.
-  + `false`: instant detection. Instant detection immediately ends threat detection after blocking a request that meets
-    Precise Protection specified conditions.
+      Protection specified conditions.
+  + `false`: instant detection. Instant detection immediately ends threat detection after blocking a request that
+      meets Precise Protection specified conditions.
 
 * `options` - The protection switches. The options object structure is documented below.
 

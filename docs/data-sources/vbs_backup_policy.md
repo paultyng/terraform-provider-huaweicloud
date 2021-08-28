@@ -4,15 +4,14 @@ subcategory: "Deprecated"
 
 # huaweicloud\_vbs\_backup\_policy
 
-!> **Warning:** It has been deprecated.
+!> **WARNING:** It has been deprecated.
 
-The VBS Backup Policy data source provides details about a specific VBS backup policy.
-This is an alternative to `huaweicloud_vbs_backup_policy_v2`
+The VBS Backup Policy data source provides details about a specific VBS backup policy. This is an alternative
+to `huaweicloud_vbs_backup_policy_v2`
 
 ## Example Usage
 
  ```hcl
-
 variable "policy_name" {}
 variable "policy_id" {}
 
@@ -24,10 +23,11 @@ data "huaweicloud_vbs_backup_policy" "policies" {
 
 ## Argument Reference
 
-The arguments of this data source act as filters for querying the available VBS backup policy.
-The given filters must match exactly one VBS backup policy whose data will be exported as attributes.
+The arguments of this data source act as filters for querying the available VBS backup policy. The given filters must
+match exactly one VBS backup policy whose data will be exported as attributes.
 
-* `region` - (Optional, String) The region in which to obtain the VBS backup policy. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the VBS backup policy. If omitted, the provider-level
+  region will be used.
 
 * `id` - (Optional, String) The ID of the specific VBS backup policy to retrieve.
 
@@ -41,7 +41,8 @@ The `filter_tags` block supports:
 
 * `key` - (Required, String) Specifies the tag key. Tag keys must be unique.
 
-* `values` - (Required, List) Specifies the List of tag values. This list can have a maximum of 10 values and all be unique.
+* `values` - (Required, List) Specifies the List of tag values. This list can have a maximum of 10 values and all be
+  unique.
 
 ## Attributes Reference
 

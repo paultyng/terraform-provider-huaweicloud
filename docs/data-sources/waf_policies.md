@@ -47,9 +47,9 @@ The `policies` block supports:
 
 * `full_detection` - The detection mode in Precise Protection.
   + `true`: full detection. Full detection finishes all threat detections before blocking requests that meet Precise
-    Protection specified conditions.
+      Protection specified conditions.
   + `false`: instant detection. Instant detection immediately ends threat detection after blocking a request that
-    meets Precise Protection specified conditions.
+      meets Precise Protection specified conditions.
 
 * `options` - The protection switches. The options object structure is documented below.
 

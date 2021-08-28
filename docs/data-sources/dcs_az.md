@@ -16,7 +16,8 @@ data "huaweicloud_dcs_az" "az1" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the dcs az. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the dcs az. If omitted, the provider-level region will be
+  used.
 
 * `code` - (Required, String) Specifies the code of an AZ, e.g. "cn-north-1a".
 

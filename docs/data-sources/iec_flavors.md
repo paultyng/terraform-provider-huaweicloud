@@ -14,7 +14,7 @@ variable "flavor_name" {
 }
 
 data "huaweicloud_iec_flavors" "iec_flavor_test" {
-  name   = var.flavor_name
+  name = var.flavor_name
 }
 ```
 
@@ -22,10 +22,10 @@ data "huaweicloud_iec_flavors" "iec_flavor_test" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the flavors. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the flavors. If omitted, the provider-level region will be
+  used.
 
-* `name` -  (Optional, String) Specifies the flavor name, which can be queried
-    with a regular expression.
+* `name` - (Optional, String) Specifies the flavor name, which can be queried with a regular expression.
 
 * `site_ids` - (Optional, String) Specifies the list of edge service site.
 
@@ -41,8 +41,7 @@ The following arguments are supported:
 
 In addition to all arguments above, the following attributes are exported:
 
-* `flavors` - An array of one or more flavors.
-    The flavors object structure is documented below.
+* `flavors` - An array of one or more flavors. The flavors object structure is documented below.
 
 The `flavors` block supports:
 

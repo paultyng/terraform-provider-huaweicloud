@@ -6,7 +6,7 @@ subcategory: "Deprecated"
 
 Manages a V2 router interface resource within HuaweiCloud.
 
-!> **Warning:** It has been deprecated, use `huaweicloud_vpc` instead.
+!> **WARNING:** It has been deprecated, use `huaweicloud_vpc` instead.
 
 ## Example Usage
 
@@ -37,19 +37,18 @@ resource "huaweicloud_networking_router_interface_v2" "router_interface_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the V2 networking client.
-    A networking client is needed to create a router. If omitted, the
-    `region` argument of the provider is used. Changing this creates a new
-    router interface.
+* `region` - (Optional, String, ForceNew) The region in which to create the V2 networking client. A networking client is
+  needed to create a router. If omitted, the
+  `region` argument of the provider is used. Changing this creates a new router interface.
 
-* `router_id` - (Required, String, ForceNew) ID of the router this interface belongs to. Changing
-    this creates a new router interface.
+* `router_id` - (Required, String, ForceNew) ID of the router this interface belongs to. Changing this creates a new
+  router interface.
 
-* `subnet_id` - (Optional, String, ForceNew) ID of the subnet this interface connects to. Changing
-    this creates a new router interface.
+* `subnet_id` - (Optional, String, ForceNew) ID of the subnet this interface connects to. Changing this creates a new
+  router interface.
 
-* `port_id` - (Optional, String, ForceNew) ID of the port this interface connects to. Changing
-    this creates a new router interface.
+* `port_id` - (Optional, String, ForceNew) ID of the port this interface connects to. Changing this creates a new router
+  interface.
 
 ## Attributes Reference
 
@@ -58,7 +57,9 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - Specifies a resource ID in UUID format.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

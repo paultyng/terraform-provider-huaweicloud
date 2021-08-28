@@ -6,7 +6,6 @@ subcategory: "Web Application Firewall (WAF)"
 
 Get the certificate in the WAF, including the one pushed from SCM.
 
-
 ## Example Usage
 
 ```hcl
@@ -29,22 +28,22 @@ resource "huaweicloud_waf_domain" "domain_1" {
   }
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the WAF. If omitted, the provider-level region will be used.
- 
+* `region` - (Optional, String) The region in which to obtain the WAF. If omitted, the provider-level region will be
+  used.
+
 * `name` - (Required, String) The name of certificate. The value is case sensitive and supports fuzzy matching.
-  
+
   -> **NOTE:** The certificate name is not unique. Only returns the last created one when matched multiple certificates.
 
-* `expire_status` - (Optional, Int) The expire status of certificate. Defaults is `0`.
-  The value can be:
+* `expire_status` - (Optional, Int) The expire status of certificate. Defaults is `0`. The value can be:
   + `0`: not expire
   + `1`: has expired
   + `2`: wil expired soon
-  
 
 ## Attributes Reference
 

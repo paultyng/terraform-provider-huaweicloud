@@ -12,17 +12,17 @@ Manages a Dedicated Load Balancer resource within HuaweiCloud.
 
 ```hcl
 resource "huaweicloud_elb_loadbalancer" "basic" {
-  name                  = "basic"
-  description           = "basic example"
-  cross_vpc_backend     = true
+  name              = "basic"
+  description       = "basic example"
+  cross_vpc_backend = true
 
-  vpc_id          = "{{ vpc_id }}"
-  ipv4_subnet_id  = "{{ subnet_id }}"
+  vpc_id         = "{{ vpc_id }}"
+  ipv4_subnet_id = "{{ subnet_id }}"
 
   l4_flavor_id = "{{ l4_flavor_id }}"
   l7_flavor_id = "{{ l7_flavor_id }}"
 
-  availability_zone = [
+  availability_zone     = [
     "cn-north-4a",
     "cn-north-4b",
   ]
@@ -34,25 +34,25 @@ resource "huaweicloud_elb_loadbalancer" "basic" {
 
 ```hcl
 resource "huaweicloud_elb_loadbalancer" "basic" {
-  name                  = "basic"
-  description           = "basic example"
-  cross_vpc_backend     = true
+  name              = "basic"
+  description       = "basic example"
+  cross_vpc_backend = true
 
-  vpc_id          = "{{ vpc_id }}"
-  ipv6_network_id = "{{ ipv6_network_id }}"
+  vpc_id            = "{{ vpc_id }}"
+  ipv6_network_id   = "{{ ipv6_network_id }}"
   ipv6_bandwidth_id = "{{ ipv6_bandwidth_id }}"
-  ipv4_subnet_id  = "{{ subnet_id }}"
+  ipv4_subnet_id    = "{{ subnet_id }}"
 
   l4_flavor_id = "{{ l4_flavor_id }}"
   l7_flavor_id = "{{ l7_flavor_id }}"
 
-  availability_zone = [
+  availability_zone     = [
     "cn-north-4a",
     "cn-north-4b",
   ]
   enterprise_project_id = "{{ eps_id }}"
 
-  ipv4_eip_id            = "{{ eip_id }}"
+  ipv4_eip_id = "{{ eip_id }}"
 }
 ```
 
@@ -60,19 +60,19 @@ resource "huaweicloud_elb_loadbalancer" "basic" {
 
 ```hcl
 resource "huaweicloud_elb_loadbalancer" "basic" {
-  name                  = "basic"
-  description           = "basic example"
-  cross_vpc_backend     = true
+  name              = "basic"
+  description       = "basic example"
+  cross_vpc_backend = true
 
-  vpc_id          = "{{ vpc_id }}"
-  ipv6_network_id = "{{ ipv6_network_id }}"
+  vpc_id            = "{{ vpc_id }}"
+  ipv6_network_id   = "{{ ipv6_network_id }}"
   ipv6_bandwidth_id = "{{ ipv6_bandwidth_id }}"
-  ipv4_subnet_id  = "{{ subnet_id }}"
+  ipv4_subnet_id    = "{{ subnet_id }}"
 
   l4_flavor_id = "{{ l4_flavor_id }}"
   l7_flavor_id = "{{ l7_flavor_id }}"
 
-  availability_zone = [
+  availability_zone     = [
     "cn-north-4a",
     "cn-north-4b",
   ]
@@ -89,20 +89,21 @@ resource "huaweicloud_elb_loadbalancer" "basic" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the loadbalancer resource.
-    If omitted, the provider-level region will be used.
-    Changing this creates a new loadbalancer.
+* `region` - (Optional, String, ForceNew) The region in which to create the loadbalancer resource. If omitted, the
+  provider-level region will be used. Changing this creates a new loadbalancer.
 
-* `availability_zone` - (Required, List, ForceNew) Specifies the list of AZ names.
-  Changing this parameter will create a new resource.
+* `availability_zone` - (Required, List, ForceNew) Specifies the list of AZ names. Changing this parameter will create a
+  new resource.
 
 * `name` - (Required, String) Human-readable name for the loadbalancer.
 
 * `description` - (Optional, String) Human-readable description for the loadbalancer.
 
-* `cross_vpc_backend` - (Optional, Bool) Enable this if you want to associate the IP addresses of backend servers with your load balancer. Can only be true when updating.
+* `cross_vpc_backend` - (Optional, Bool) Enable this if you want to associate the IP addresses of backend servers with
+  your load balancer. Can only be true when updating.
 
-* `vpc_id` - (Optional, String, ForceNew) The vpc on which to create the loadbalancer. Changing this creates a new loadbalancer.
+* `vpc_id` - (Optional, String, ForceNew) The vpc on which to create the loadbalancer. Changing this creates a new
+  loadbalancer.
 
 * `ipv4_subnet_id` - (Optional, String) The subnet on which to allocate the loadbalancer's ipv4 address.
 
@@ -114,12 +115,13 @@ The following arguments are supported:
 
 * `ipv4_eip_id` - (Optional, String, ForceNew) The ID of the EIP. Changing this parameter will create a new resource.
 
--> **Note:** If the ipv4_eip_id parameter is configured, you do not need to configure the bandwidth parameters:
-  `iptype`, `bandwidth_charge_mode`, `bandwidth_size` and `share_type`.
+-> **NOTE:** If the ipv4_eip_id parameter is configured, you do not need to configure the bandwidth parameters:
+`iptype`, `bandwidth_charge_mode`, `bandwidth_size` and `share_type`.
 
 * `iptype` - (Optional, String, ForceNew) Elastic IP type. Changing this parameter will create a new resource.
 
-* `bandwidth_charge_mode` - (Optional, String, ForceNew) Bandwidth billing type. Changing this parameter will create a new resource.
+* `bandwidth_charge_mode` - (Optional, String, ForceNew) Bandwidth billing type. Changing this parameter will create a
+  new resource.
 
 * `sharetype` - (Optional, String, ForceNew) Bandwidth sharing type. Changing this parameter will create a new resource.
 
@@ -131,8 +133,8 @@ The following arguments are supported:
 
 * `tags` - (Optional, Map) The key/value pairs to associate with the loadbalancer.
 
-* `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project id of the loadbalancer.
-  Changing this creates a new loadbalancer.
+* `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project id of the loadbalancer. Changing this
+  creates a new loadbalancer.
 
 ## Attributes Reference
 
@@ -144,7 +146,9 @@ In addition to all arguments above, the following attributes are exported:
 * `ipv6_address` - The ipv6 address of the Load Balancer.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 5 minute.

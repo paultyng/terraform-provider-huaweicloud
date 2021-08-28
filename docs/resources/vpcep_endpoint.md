@@ -24,7 +24,8 @@ resource "huaweicloud_vpcep_endpoint" "myendpoint" {
   network_id       = var.network_id
   enable_dns       = true
   enable_whitelist = true
-  whitelist        = ["192.168.0.0/24"]
+  whitelist        = [
+    "192.168.0.0/24"]
 }
 ```
 
@@ -49,10 +50,10 @@ resource "huaweicloud_vpcep_service" "demo" {
 }
 
 resource "huaweicloud_vpcep_endpoint" "demo" {
-  service_id  = huaweicloud_vpcep_service.demo.id
-  vpc_id      = var.vpc_id
-  network_id  = var.network_id
-  enable_dns  = true
+  service_id = huaweicloud_vpcep_service.demo.id
+  vpc_id     = var.vpc_id
+  network_id = var.network_id
+  enable_dns = true
 }
 ```
 
@@ -60,29 +61,29 @@ resource "huaweicloud_vpcep_endpoint" "demo" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the VPC endpoint.
-    If omitted, the provider-level region will be used. Changing this creates a new VPC endpoint.
+* `region` - (Optional, String, ForceNew) The region in which to create the VPC endpoint. If omitted, the provider-level
+  region will be used. Changing this creates a new VPC endpoint.
 
-* `service_id` (Required, String, ForceNew) - Specifies the ID of the VPC endpoint service.
-    Changing this creates a new VPC endpoint.
+* `service_id` (Required, String, ForceNew) - Specifies the ID of the VPC endpoint service. Changing this creates a new
+  VPC endpoint.
 
-* `vpc_id` (Required, String, ForceNew) - Specifies the ID of the VPC where the VPC endpoint is to be created.
-    Changing this creates a new VPC endpoint.
+* `vpc_id` (Required, String, ForceNew) - Specifies the ID of the VPC where the VPC endpoint is to be created. Changing
+  this creates a new VPC endpoint.
 
 * `network_id` (Required, String, ForceNew) - Specifies the network ID of the subnet in the VPC specified by `vpc_id`.
-    Changing this creates a new VPC endpoint.
+  Changing this creates a new VPC endpoint.
 
-* `ip_address` (Optional, String, ForceNew) - Specifies the IP address for accessing the associated VPC endpoint service.
-    Only IPv4 addresses are supported. Changing this creates a new VPC endpoint.
+* `ip_address` (Optional, String, ForceNew) - Specifies the IP address for accessing the associated VPC endpoint
+  service. Only IPv4 addresses are supported. Changing this creates a new VPC endpoint.
 
-* `enable_dns` (Optional, Bool, ForceNew) - Specifies whether to create a private domain name. The default value is true.
-    Changing this creates a new VPC endpoint.
+* `enable_dns` (Optional, Bool, ForceNew) - Specifies whether to create a private domain name. The default value is
+  true. Changing this creates a new VPC endpoint.
 
-* `enable_whitelist` (Optional, Bool, ForceNew) - Specifies whether to enable access control. The default value is false.
-    Changing this creates a new VPC endpoint.
+* `enable_whitelist` (Optional, Bool, ForceNew) - Specifies whether to enable access control. The default value is
+  false. Changing this creates a new VPC endpoint.
 
-* `whitelist` (Optional, List, ForceNew) - Specifies the list of IP address or CIDR block which can be accessed to the VPC endpoint.
-    Changing this creates a new VPC endpoint.
+* `whitelist` (Optional, List, ForceNew) - Specifies the list of IP address or CIDR block which can be accessed to the
+  VPC endpoint. Changing this creates a new VPC endpoint.
 
 * `tags` - (Optional, Map) The key/value pairs to associate with the VPC endpoint.
 
@@ -100,11 +101,13 @@ In addition to all arguments above, the following attributes are exported:
 
 * `packet_id` - The packet ID of the VPC endpoint.
 
-* `private_domain_name` -  The domain name for accessing the associated VPC endpoint service.
-    This parameter is only available when enable_dns is set to true.
+* `private_domain_name` - The domain name for accessing the associated VPC endpoint service. This parameter is only
+  available when enable_dns is set to true.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

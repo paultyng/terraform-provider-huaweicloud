@@ -27,7 +27,8 @@ resource "huaweicloud_elb_loadbalancer" "lb" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the flavors. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the flavors. If omitted, the provider-level region will be
+  used.
 
 * `type` - (Optional, String) Specifies the flavor type. Valid values are L4 and L7.
 
@@ -38,7 +39,6 @@ resource "huaweicloud_elb_loadbalancer" "lb" {
 * `cps` - (Optional, Int) Specifies the cps in the flavor.
 
 * `qps` - (Optional, Int) Specifies the qps in the L7 flavor.
-
 
 ## Attributes Reference
 

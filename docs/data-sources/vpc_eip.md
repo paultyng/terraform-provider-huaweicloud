@@ -16,14 +16,14 @@ data "huaweicloud_vpc_eip" "by_address" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the EIP. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the EIP. If omitted, the provider-level region will be
+  used.
 
 * `public_ip` - (Optional, String) The public ip address of the EIP.
 
 * `port_id` - (Optional, String) The port id of the EIP.
 
 * `enterprise_project_id` - (Optional, String) The enterprise project id of the EIP.
-
 
 ## Attributes Reference
 

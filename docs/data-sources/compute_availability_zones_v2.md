@@ -6,7 +6,7 @@ subcategory: "Deprecated"
 
 Use this data source to get a list of availability zones from HuaweiCloud
 
-!> **Warning:** It has been deprecated, use `huaweicloud_availability_zones` instead.
+!> **WARNING:** It has been deprecated, use `huaweicloud_availability_zones` instead.
 
 ## Example Usage
 
@@ -17,7 +17,6 @@ data "huaweicloud_compute_availability_zones_v2" "zones" {}
 ## Argument Reference
 
 * `state` - (Optional, String) The `state` of the availability zones to match, default ("available").
-
 
 ## Attributes Reference
 

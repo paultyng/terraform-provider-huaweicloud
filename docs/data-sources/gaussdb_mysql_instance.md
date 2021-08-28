@@ -16,14 +16,14 @@ data "huaweicloud_gaussdb_mysql_instance" "this" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the instance. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the instance. If omitted, the provider-level region will
+  be used.
 
 * `name` - (Optional, String) Specifies the name of the instance.
 
-* `vpc_id` -  (Optional, String) Specifies the VPC ID.
+* `vpc_id` - (Optional, String) Specifies the VPC ID.
 
 * `subnet_id` - (Optional, String) Specifies the network ID of a subnet.
-
 
 ## Attributes Reference
 
@@ -62,7 +62,6 @@ In addition to all arguments above, the following attributes are exported:
 * `private_write_ip` - Indicates the private IP address of the DB instance.
 
 * `nodes` - Indicates the instance nodes information. Structure is documented below.
-
 
 The `datastore` block supports:
 

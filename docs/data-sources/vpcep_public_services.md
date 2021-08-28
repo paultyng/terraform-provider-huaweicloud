@@ -19,11 +19,11 @@ data "huaweicloud_vpcep_public_services" "dns_service" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the public VPC endpoint services.
-    If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the public VPC endpoint services. If omitted, the
+  provider-level region will be used.
 
-* `service_name` - (Optional, String) Specifies the name of the public VPC endpoint service.
-    The value is not case-sensitive and supports fuzzy match.
+* `service_name` - (Optional, String) Specifies the name of the public VPC endpoint service. The value is not
+  case-sensitive and supports fuzzy match.
 
 * `service_id` - (Optional, String) Specifies the unique ID of the public VPC endpoint service.
 

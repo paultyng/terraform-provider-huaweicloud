@@ -4,12 +4,10 @@ subcategory: "Virtual Private Cloud (VPC)"
 
 # huaweicloud_vpc_subnet
 
-Provides details about a specific VPC subnet.
-This is an alternative to `huaweicloud_vpc_subnet_v1`
+Provides details about a specific VPC subnet. This is an alternative to `huaweicloud_vpc_subnet_v1`
 
-This resource can prove useful when a module accepts a subnet id as
-an input variable and needs to, for example, determine the id of the
-VPC that the subnet belongs to.
+This resource can prove useful when a module accepts a subnet id as an input variable and needs to, for example,
+determine the id of the VPC that the subnet belongs to.
 
 ## Example Usage
 
@@ -25,19 +23,18 @@ output "subnet_vpc_id" {
 
 ## Argument Reference
 
-The arguments of this data source act as filters for querying the available
-subnets in the current tenant. The given filters must match exactly one
-subnet whose data will be exported as attributes.
+The arguments of this data source act as filters for querying the available subnets in the current tenant. The given
+filters must match exactly one subnet whose data will be exported as attributes.
 
-* `region` - (Optional, String) Specifies the region in which to obtain the subnet.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) Specifies the region in which to obtain the subnet. If omitted, the provider-level
+  region will be used.
 
 * `id` - (Optional, String) - Specifies a resource ID in UUID format.
 
 * `name` - (Optional, String) Specifies the name of the specific subnet to retrieve.
 
-* `cidr` - (Optional, String) Specifies the network segment of specific subnet to retrieve.
-  The value must be in CIDR format.
+* `cidr` - (Optional, String) Specifies the network segment of specific subnet to retrieve. The value must be in CIDR
+  format.
 
 * `status` - (Optional, String) Specifies the value can be ACTIVE, DOWN, UNKNOWN, or ERROR.
 

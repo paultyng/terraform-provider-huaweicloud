@@ -6,8 +6,7 @@ subcategory: "Identity and Access Management (IAM)"
 
 Manages a **Custom Policy** resource within HuaweiCloud IAM service.
 
-->**Note** You _must_ have admin privileges in your HuaweiCloud cloud to use
-this resource.
+->**Note** You _must_ have admin privileges in your HuaweiCloud cloud to use this resource.
 
 ## Example Usage
 
@@ -53,7 +52,7 @@ The following arguments are supported:
 * `type` - (Required, String) Display mode. Valid options are _AX_: Account level and _XA_: Project level.
 
 * `policy` - (Required, String) Document of the custom policy in JSON format. For more details, please refer to the
-    [offical document](https://support.huaweicloud.com/intl/en-us/usermanual-iam/iam_01_0017.html).
+  [offical document](https://support.huaweicloud.com/intl/en-us/usermanual-iam/iam_01_0017.html).
 
 ## Attributes Reference
 

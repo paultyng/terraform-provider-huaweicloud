@@ -31,33 +31,29 @@ resource "huaweicloud_as_lifecycle_hook" "test" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the AS lifecycle hook.
-  If omitted, the `region` argument of the provider is used.
-  Changing this creates a new AS lifecycle hook.
+* `region` - (Optional, String, ForceNew) The region in which to create the AS lifecycle hook. If omitted, the `region`
+  argument of the provider is used. Changing this creates a new AS lifecycle hook.
 
-* `name` - (Required, String) Specifies the lifecycle hook name.
-  This parameter can contain a maximum of 32 characters, which may consist of letters, digits,
-  underscores (_) and hyphens (-).
+* `name` - (Required, String) Specifies the lifecycle hook name. This parameter can contain a maximum of 32 characters,
+  which may consist of letters, digits, underscores (_) and hyphens (-).
 
-* `type` - (Required, String) Specifies the lifecycle hook type.
-  The valid values are following strings:
+* `type` - (Required, String) Specifies the lifecycle hook type. The valid values are following strings:
   + `ADD`: The hook suspends the instance when the instance is started.
   + `REMOVE`: The hook suspends the instance when the instance is terminated.
 
 * `notification_topic_urn` - (Required, String) Specifies a unique topic in SMN.
 
-* `scaling_group_id` - (Required, String, ForceNew) Specifies the ID of the AS group in UUID format.
-  Changing this creates a new AS lifecycle hook.
+* `scaling_group_id` - (Required, String, ForceNew) Specifies the ID of the AS group in UUID format. Changing this
+  creates a new AS lifecycle hook.
 
-* `default_result` - (Optional, String) Specifies the default lifecycle hook callback operation.
-  This operation is performed when the timeout duration expires.
-  The valid values are *ABANDON* and *CONTINUE*, default to *ABANDON*.
+* `default_result` - (Optional, String) Specifies the default lifecycle hook callback operation. This operation is
+  performed when the timeout duration expires. The valid values are *ABANDON* and *CONTINUE*, default to *ABANDON*.
 
-* `timeout` - (Optional, Int) Specifies the lifecycle hook timeout duration, which ranges from 300 to 86400 in the
-  unit of second, default to 3600.
+* `timeout` - (Optional, Int) Specifies the lifecycle hook timeout duration, which ranges from 300 to 86400 in the unit
+  of second, default to 3600.
 
-* `notification_message` - (Optional, String) Specifies a customized notification.
-  This parameter can contains a maximum of 256 characters, which cannot contain the following characters: <>&'().
+* `notification_message` - (Optional, String) Specifies a customized notification. This parameter can contains a maximum
+  of 256 characters, which cannot contain the following characters: <>&'().
 
 ## Attributes Reference
 

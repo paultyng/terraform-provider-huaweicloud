@@ -4,25 +4,26 @@ subcategory: "Cloud Container Engine (CCE)"
 
 # huaweicloud_cce_node
 
-To get the specified node in a cluster.
-This is an alternative to `huaweicloud_cce_node_v3`
+To get the specified node in a cluster. This is an alternative to `huaweicloud_cce_node_v3`
 
 ## Example Usage
 
 ```hcl
-variable "cluster_id" { }
-variable "node_name" { }
+variable "cluster_id" {}
+variable "node_name" {}
 
 data "huaweicloud_cce_node" "node" {
   cluster_id = var.cluster_id
   name       = var.node_name
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the cce nodes. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the cce nodes. If omitted, the provider-level region will
+  be used.
 
 * `Cluster_id` - (Required, String) The id of container cluster.
 
@@ -31,7 +32,6 @@ The following arguments are supported:
 * `node_id` - (Optional, String) The id of the node.
 
 * `status` - (Optional, String) The state of the node.
-
 
 ## Attributes Reference
 

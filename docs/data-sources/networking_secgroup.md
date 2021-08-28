@@ -16,8 +16,8 @@ data "huaweicloud_networking_secgroup" "secgroup" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) Specifies the region in which to obtain the security group.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) Specifies the region in which to obtain the security group. If omitted, the
+  provider-level region will be used.
 
 * `secgroup_id` - (Optional, String) Specifiest he ID of the security group.
 

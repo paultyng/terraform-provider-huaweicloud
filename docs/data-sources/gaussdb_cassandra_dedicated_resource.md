@@ -16,10 +16,10 @@ data "huaweicloud_gaussdb_cassandra_dedicated_resource" "this" {
 
 ## Argument Reference
 
-* `region` - (Optional, String) The region in which to obtain the dedicated resource. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the dedicated resource. If omitted, the provider-level
+  region will be used.
 
 * `resource_name` - (Optional, String) Specifies the dedicated resource name.
-
 
 ## Attributes Reference
 

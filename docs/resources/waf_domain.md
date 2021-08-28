@@ -31,10 +31,10 @@ EOT
 }
 
 resource "huaweicloud_waf_domain" "domain_1" {
-  domain            = "www.example.com"
-  certificate_id    = huaweicloud_waf_certificate.certificate_1.id
-  certificate_name  = huaweicloud_waf_certificate.certificate_1.name
-  proxy             = true
+  domain           = "www.example.com"
+  certificate_id   = huaweicloud_waf_certificate.certificate_1.id
+  certificate_name = huaweicloud_waf_certificate.certificate_1.name
+  proxy            = true
 
   server {
     client_protocol = "HTTPS"
@@ -49,21 +49,22 @@ resource "huaweicloud_waf_domain" "domain_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the WAF domain resource.
-  If omitted, the provider-level region will be used.
-  Changing this setting will push a new certificate.
-  
-* `domain` - (Required, String, ForceNew) Specifies the domain name to be protected. For example, www.example.com or *.example.com.
-  Changing this creates a new domain.
+* `region` - (Optional, String, ForceNew) The region in which to create the WAF domain resource. If omitted, the
+  provider-level region will be used. Changing this setting will push a new certificate.
+
+* `domain` - (Required, String, ForceNew) Specifies the domain name to be protected. For example, www.example.com or *
+  .example.com. Changing this creates a new domain.
 
 * `server` - (Required, List) Specifies an array of origin web servers. The object structure is documented below.
 
-* `certificate_id` - (Required, String) Specifies the certificate ID. This parameter is mandatory when `client_protocol` is set to HTTPS.
-  
-* `certificate_name` - (Required, String) Specifies the certificate name. This parameter is mandatory when `client_protocol` is set to HTTPS.
+* `certificate_id` - (Required, String) Specifies the certificate ID. This parameter is mandatory when `client_protocol`
+  is set to HTTPS.
 
-* `policy_id` - (Optional, String, ForceNew) Specifies the policy ID associated with the domain.
-  If not specified, a new policy will be created automatically. Changing this create a new domain.
+* `certificate_name` - (Required, String) Specifies the certificate name. This parameter is mandatory
+  when `client_protocol` is set to HTTPS.
+
+* `policy_id` - (Optional, String, ForceNew) Specifies the policy ID associated with the domain. If not specified, a new
+  policy will be created automatically. Changing this create a new domain.
 
 * `keep_proxy` - (Optional, Bool) Specifies whether to retain the policy when deleting a domain name. Defaults to true.
 
@@ -71,14 +72,13 @@ The following arguments are supported:
 
 The `server` block supports:
 
-* `client_protocol` - (Required, String) Protocol type of the client.
-  The options include `HTTP` and `HTTPS`.
+* `client_protocol` - (Required, String) Protocol type of the client. The options include `HTTP` and `HTTPS`.
 
-* `server_protocol` - (Required, String) Protocol used by WAF to forward client requests to the server.
-  The options include `HTTP` and `HTTPS`.
+* `server_protocol` - (Required, String) Protocol used by WAF to forward client requests to the server. The options
+  include `HTTP` and `HTTPS`.
 
-* `address` - (Required, String) IP address or domain name of the web server that the client accesses.
-  For example, 192.168.1.1 or www.a.com.
+* `address` - (Required, String) IP address or domain name of the web server that the client accesses. For example,
+  192.168.1.1 or www.a.com.
 
 * `port` - (Required, Int) Port number used by the web server. The value ranges from 0 to 65535, for example, 8080.
 
@@ -86,11 +86,12 @@ The `server` block supports:
 
 The following attributes are exported:
 
-* `id` -  ID of the domain.
+* `id` - ID of the domain.
 
 * `protect_status` - The WAF mode. -1: bypassed, 0: disabled, 1: enabled.
 
-* `access_status` - Whether a domain name is connected to WAF. 0: The domain name is not connected to WAF, 1: The domain name is connected to WAF.
+* `access_status` - Whether a domain name is connected to WAF. 0: The domain name is not connected to WAF, 1: The domain
+  name is connected to WAF.
 
 * `protocol` - The protocol type of the client. The options are HTTP, HTTPS, and HTTP&HTTPS.
 

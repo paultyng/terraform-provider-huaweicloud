@@ -20,11 +20,11 @@ data "huaweicloud_iec_vpc" "my_vpc" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String) Specifies the region in which to obtain the vpc.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) Specifies the region in which to obtain the vpc. If omitted, the provider-level region
+  will be used.
 
-* `name` - (Optional, String) Specifies the name of the IEC VPC. The name can contain a maximum of 64 characters.
-  Only letters, digits, underscores (_), hyphens (-), and periods (.) are allowed.
+* `name` - (Optional, String) Specifies the name of the IEC VPC. The name can contain a maximum of 64 characters. Only
+  letters, digits, underscores (_), hyphens (-), and periods (.) are allowed.
 
 * `id` - (Optional, String) Specifies the ID of the IEC VPC to retrieve.
 

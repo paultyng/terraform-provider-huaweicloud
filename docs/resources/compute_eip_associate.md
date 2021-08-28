@@ -16,7 +16,8 @@ resource "huaweicloud_compute_instance" "myinstance" {
   image_id          = "ad091b52-742f-469e-8f3c-fd81cadf0743"
   flavor_id         = "s6.small.1"
   key_pair          = "my_key_pair_name"
-  security_groups   = ["default"]
+  security_groups   = [
+    "default"]
   availability_zone = "cn-north-4a"
 
   network {
@@ -50,7 +51,8 @@ resource "huaweicloud_compute_instance" "myinstance" {
   image_id          = "ad091b52-742f-469e-8f3c-fd81cadf0743"
   flavor_id         = "s6.small.1"
   key_pair          = "my_key_pair_name"
-  security_groups   = ["default"]
+  security_groups   = [
+    "default"]
   availability_zone = "cn-north-4a"
 
   network {
@@ -97,11 +99,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
 
-
 ## Import
 
-This resource can be imported by specifying all three arguments, separated
-by a forward slash:
+This resource can be imported by specifying all three arguments, separated by a forward slash:
 
 ```
 $ terraform import huaweicloud_compute_eip_associate.eip_1 <eip>/<instance_id>/<fixed_ip>

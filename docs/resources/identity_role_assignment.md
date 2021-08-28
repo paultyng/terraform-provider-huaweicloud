@@ -4,16 +4,17 @@ subcategory: "Identity and Access Management (IAM)"
 
 # huaweicloud_identity_role_assignment
 
-Manages a Role assignment within group on HuaweiCloud IAM Service. This is an alternative to `huaweicloud_identity_role_assignment_v3`
+Manages a Role assignment within group on HuaweiCloud IAM Service. This is an alternative
+to `huaweicloud_identity_role_assignment_v3`
 
-Note: You _must_ have admin privileges in your HuaweiCloud cloud to use
-this resource.
+Note: You _must_ have admin privileges in your HuaweiCloud cloud to use this resource.
 
 ## Example Usage: Assign Role On Project Level
 
 ```hcl
 data "huaweicloud_identity_role" "role_1" {
-  name = "rds_adm" #RDS Administrator
+  name = "rds_adm"
+  #RDS Administrator
 }
 
 resource "huaweicloud_identity_group" "group_1" {
@@ -31,7 +32,8 @@ resource "huaweicloud_identity_role_assignment" "role_assignment_1" {
 
 ```hcl
 data "huaweicloud_identity_role" "role_1" {
-  name = "secu_admin" #Security Administrator
+  name = "secu_admin"
+  #Security Administrator
 }
 
 resource "huaweicloud_identity_group" "group_1" {
@@ -53,9 +55,11 @@ The following arguments are supported:
 
 * `group_id` - (Required, String, ForceNew) Specifies the group to assign the role to.
 
-* `domain_id` - (Optional, String, ForceNew; Required if `project_id` is empty) Specifies the domain to assign the role in.
+* `domain_id` - (Optional, String, ForceNew; Required if `project_id` is empty) Specifies the domain to assign the role
+  in.
 
-* `project_id` - (Optional, String, ForceNew; Required if `domain_id` is empty) Specifies the project to assign the role in.
+* `project_id` - (Optional, String, ForceNew; Required if `domain_id` is empty) Specifies the project to assign the role
+  in.
 
 ## Attributes Reference
 

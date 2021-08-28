@@ -4,7 +4,7 @@ subcategory: "Deprecated"
 
 # huaweicloud_compute_floatingip_v2
 
-!> **Warning:** It has been deprecated, use `huaweicloud_vpc_eip` instead.
+!> **WARNING:** It has been deprecated, use `huaweicloud_vpc_eip` instead.
 
 Manages a V2 floating IP resource within HuaweiCloud Nova (compute)
 that can be used for compute instances.
@@ -20,14 +20,12 @@ resource "huaweicloud_compute_floatingip_v2" "floatip_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the V2 Compute client.
-    A Compute client is needed to create a floating IP that can be used with
-    a compute instance. If omitted, the `region` argument of the provider
-    is used. Changing this creates a new floating IP (which may or may not
-    have a different address).
+* `region` - (Optional, String, ForceNew) The region in which to create the V2 Compute client. A Compute client is
+  needed to create a floating IP that can be used with a compute instance. If omitted, the `region` argument of the
+  provider is used. Changing this creates a new floating IP (which may or may not have a different address).
 
-* `pool` - (Optional, String, ForceNew) The name of the pool from which to create the floating
-    IP. Only admin_external_net is valid. Changing this creates a new floating IP.
+* `pool` - (Optional, String, ForceNew) The name of the pool from which to create the floating IP. Only
+  admin_external_net is valid. Changing this creates a new floating IP.
 
 ## Attributes Reference
 

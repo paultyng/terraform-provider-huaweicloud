@@ -4,10 +4,9 @@ subcategory: "Deprecated"
 
 # huaweicloud\_antiddos
 
-!> **Warning:** It has been deprecated.
+!> **WARNING:** It has been deprecated.
 
-Query the Anti-DDos resource.
-This is an alternative to `huaweicloud_antiddos_v1`
+Query the Anti-DDos resource. This is an alternative to `huaweicloud_antiddos_v1`
 
 ## Example Usage
 
@@ -17,13 +16,14 @@ variable "eip_id" {}
 data "huaweicloud_antiddos" "antiddos" {
   floating_ip_id = var.eip_id
 }
-
 ```
 
 ## Argument Reference
+
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the Antiddos client. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the Antiddos client. If omitted, the provider-level region
+  will be used.
 
 * `floating_ip_id` - (Optional, String) The Elastic IP ID.
 

@@ -9,20 +9,21 @@ To get the specified node pool in a cluster.
 ## Example Usage
 
 ```hcl
-variable "cluster_id" { }
-variable "node_pool_name" { }
+variable "cluster_id" {}
+variable "node_pool_name" {}
 
 data "huaweicloud_cce_node_pool" "node_pool" {
   cluster_id = var.cluster_id
   name       = var.node_pool_name
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the cce node pools.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the cce node pools. If omitted, the provider-level region
+  will be used.
 
 * `cluster_id` - (Required, String) Specifies the id of container cluster.
 
@@ -31,7 +32,6 @@ The following arguments are supported:
 * `node_pool_id` - (Optional, String) Specifies the id of the node pool.
 
 * `status` - (Optional, String) Specifies the state of the node pool.
-
 
 ## Attributes Reference
 

@@ -4,13 +4,13 @@ subcategory: "Cloud Container Engine (CCE)"
 
 # huaweicloud_cce_cluster
 
-Provides details about all clusters and obtains certificate for accessing cluster information.
-This is an alternative to `huaweicloud_cce_cluster_v3`
+Provides details about all clusters and obtains certificate for accessing cluster information. This is an alternative
+to `huaweicloud_cce_cluster_v3`
 
 ## Example Usage
 
 ```hcl
-variable "cluster_name" { }
+variable "cluster_name" {}
 
 data "huaweicloud_cce_cluster" "cluster" {
   name   = var.cluster_name
@@ -22,9 +22,10 @@ data "huaweicloud_cce_cluster" "cluster" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the cce clusters. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the cce clusters. If omitted, the provider-level region
+  will be used.
 
-* `name` -  (Optional, String)The Name of the cluster resource.
+* `name` - (Optional, String)The Name of the cluster resource.
 
 * `id` - (Optional, String) The ID of container cluster.
 
@@ -41,7 +42,7 @@ In addition to all arguments above, the following attributes are exported:
 * `description` - Cluster description.
 
 * `name` - The name of the cluster in string format.
-  
+
 * `flavor_id` - The cluster specification in string format.
 
 * `cluster_version` - The version of cluster in string format.
@@ -61,7 +62,7 @@ In addition to all arguments above, the following attributes are exported:
 * `masters` - Advanced configuration of master nodes.
 
 * `security_group_id` - Security group ID of the cluster.
-  
+
 * `subnet_id` - The ID of the subnet used to create the node.
 
 * `highway_subnet_id` - The ID of the high speed network used to create bare metal nodes.

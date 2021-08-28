@@ -24,15 +24,13 @@ resource "huaweicloud_elb_monitor" "monitor_1" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the ELB monitor resource.
-    If omitted, the provider-level region will be used.
-    Changing this creates a new monitor.
+* `region` - (Optional, String, ForceNew) The region in which to create the ELB monitor resource. If omitted, the
+  provider-level region will be used. Changing this creates a new monitor.
 
 * `pool_id` - (Required, String, ForceNew) The id of the pool that this monitor will be assigned to.
 
-* `protocol` - (Required, String, ForceNew) The type of probe, which is TCP, HTTP, or HTTPS,
-    that is sent by the load balancer to verify the member state. Changing this
-    creates a new monitor.
+* `protocol` - (Required, String, ForceNew) The type of probe, which is TCP, HTTP, or HTTPS, that is sent by the load
+  balancer to verify the member state. Changing this creates a new monitor.
 
 * `domain_name` - (Optional, String) The Domain Name of the Monitor.
 
@@ -40,16 +38,14 @@ The following arguments are supported:
 
 * `interval` - (Required, Int) The time, in seconds, between sending probes to members.
 
-* `timeout` - (Required, Int) Maximum number of seconds for a monitor to wait for a
-    ping reply before it times out. The value must be less than the delay
-    value.
+* `timeout` - (Required, Int) Maximum number of seconds for a monitor to wait for a ping reply before it times out. The
+  value must be less than the delay value.
 
-* `max_retries` - (Required, Int) Number of permissible ping failures before
-    changing the member's status to INACTIVE. Must be a number between 1
-    and 10.
+* `max_retries` - (Required, Int) Number of permissible ping failures before changing the member's status to INACTIVE.
+  Must be a number between 1 and 10.
 
-* `url_path` - (Optional, String) Required for HTTP(S) types. URI path that will be
-    accessed if monitor type is HTTP or HTTPS.
+* `url_path` - (Optional, String) Required for HTTP(S) types. URI path that will be accessed if monitor type is HTTP or
+  HTTPS.
 
 ## Attributes Reference
 

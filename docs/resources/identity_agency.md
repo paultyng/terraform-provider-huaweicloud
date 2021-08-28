@@ -4,12 +4,12 @@ subcategory: "Identity and Access Management (IAM)"
 
 # huaweicloud_identity_agency
 
-Manages an agency resource within huawei cloud.
-This is an alternative to `huaweicloud_iam_agency_v3`
+Manages an agency resource within huawei cloud. This is an alternative to `huaweicloud_iam_agency_v3`
 
 ## Example Usage
 
 ### Delegate another HUAWEI CLOUD account to perform operations on your resources
+
 ```hcl
 resource "huaweicloud_identity_agency" "agency" {
   name                  = "test_agency"
@@ -18,7 +18,7 @@ resource "huaweicloud_identity_agency" "agency" {
 
   project_role {
     project = "cn-north-1"
-    roles = [
+    roles   = [
       "Tenant Administrator",
     ]
   }
@@ -29,6 +29,7 @@ resource "huaweicloud_identity_agency" "agency" {
 ```
 
 ### Delegate a cloud service to access your resources in other cloud services
+
 ```hcl
 resource "huaweicloud_identity_agency" "agency" {
   name                   = "test_agency"
@@ -37,7 +38,7 @@ resource "huaweicloud_identity_agency" "agency" {
 
   project_role {
     project = "cn-north-1"
-    roles = [
+    roles   = [
       "SFS FullAccess",
     ]
   }
@@ -52,26 +53,25 @@ resource "huaweicloud_identity_agency" "agency" {
 The following arguments are supported:
 
 * `name` - (Required, String, ForceNew) Specifies the name of agency. The name is a string of 1 to 64 characters.
-    Changing this will create a new agency.
+  Changing this will create a new agency.
 
-* `description` - (Optional, String) Specifies the supplementary information about the agency.
-    The value is a string of 0 to 255 characters, excluding these characters: '__@#$%^&*<>\\__'.
+* `description` - (Optional, String) Specifies the supplementary information about the agency. The value is a string of
+  0 to 255 characters, excluding these characters: '__@#$%^&*<>\\__'.
 
-* `delegated_domain_name` - (Optional, String) Specifies the name of delegated user domain.
-    This parameter and `delegated_service_name` are alternative.
+* `delegated_domain_name` - (Optional, String) Specifies the name of delegated user domain. This parameter
+  and `delegated_service_name` are alternative.
 
-* `delegated_service_name` - (Optional, String) Specifies the name of delegated cloud service.
-    The value must start with *op_svc_*, for example, *op_svc_obs*.
-    This parameter and `delegated_domain_name` are alternative.
+* `delegated_service_name` - (Optional, String) Specifies the name of delegated cloud service. The value must start
+  with *op_svc_*, for example, *op_svc_obs*. This parameter and `delegated_domain_name` are alternative.
 
-* `duration` - (Optional, String) Specifies the validity period of an agency.
-    The valid value are *ONEDAY* and *FOREVER*, defaults to *FOREVER*.
+* `duration` - (Optional, String) Specifies the validity period of an agency. The valid value are *ONEDAY* and *FOREVER*
+  , defaults to *FOREVER*.
 
 * `project_role` - (Optional, List) Specifies an array of one or more roles and projects which are used to grant
-    permissions to agency on project. The structure is documented below.
+  permissions to agency on project. The structure is documented below.
 
-* `domain_roles` - (optional, List) Specifies an array of one or more role names which stand for the permissionis to
-    be granted to agency on domain.
+* `domain_roles` - (optional, List) Specifies an array of one or more role names which stand for the permissionis to be
+  granted to agency on domain.
 
 The `project_role` block supports:
 
@@ -80,9 +80,9 @@ The `project_role` block supports:
 * `roles` - (Required, List) Specifies an array of role names.
 
 -> **NOTE**
-  At least one of `project_role` and `domain_roles` must be specified when creating an agency.
-  We can get all **System-Defined Roles** form
-  [HuaweiCloud](https://support.huaweicloud.com/intl/en-us/usermanual-permissions/iam_01_0001.html).
+At least one of `project_role` and `domain_roles` must be specified when creating an agency. We can get all **
+System-Defined Roles** form
+[HuaweiCloud](https://support.huaweicloud.com/intl/en-us/usermanual-permissions/iam_01_0001.html).
 
 ## Attributes Reference
 
@@ -101,7 +101,9 @@ $ terraform import huaweicloud_identity_agency.agency 0b97661f9900f23f4fc2c00971
 ```
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 5 minute.

@@ -74,27 +74,25 @@ EOT
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) The region in which to create the ELB certificate resource.
-    If omitted, the provider-level region will be used.
-    Changing this creates a new certificate.
+* `region` - (Optional, String, ForceNew) The region in which to create the ELB certificate resource. If omitted, the
+  provider-level region will be used. Changing this creates a new certificate.
 
-* `name` - (Optional, String) Human-readable name for the Certificate. Does not have
-    to be unique.
+* `name` - (Optional, String) Human-readable name for the Certificate. Does not have to be unique.
 
 * `description` - (Optional, String) Human-readable description for the Certificate.
 
-* `type` - (Optional, String, ForceNew) Specifies the certificate type. The default value is "server".
-    The value can be one of the following:
+* `type` - (Optional, String, ForceNew) Specifies the certificate type. The default value is "server". The value can be
+  one of the following:
   + server: indicates the server certificate.
   + client: indicates the CA certificate.
 
 * `certificate` - (Required, String) The public encrypted key of the Certificate, PEM format.
 
-* `private_key` - (Optional, String) The private encrypted key of the Certificate, PEM format.
-    This parameter is valid and mandatory only when `type` is set to "server".
+* `private_key` - (Optional, String) The private encrypted key of the Certificate, PEM format. This parameter is valid
+  and mandatory only when `type` is set to "server".
 
-* `domain` - (Optional, String) The domain of the Certificate. The value contains a maximum of 100 characters.
-    This parameter is valid only when `type` is set to "server".
+* `domain` - (Optional, String) The domain of the Certificate. The value contains a maximum of 100 characters. This
+  parameter is valid only when `type` is set to "server".
 
 * `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project id of the certificate.
 
@@ -108,7 +106,9 @@ In addition to all arguments above, the following attributes are exported:
 * `expire_time` - Indicates the expire time.
 
 ## Timeouts
+
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 5 minute.

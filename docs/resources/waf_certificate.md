@@ -34,14 +34,15 @@ EOT
 ## Argument Reference
 
 The following arguments are supported:
-* `region` - (Optional, String, ForceNew) The region in which to create the WAF certificate resource.
-  If omitted, the provider-level region will be used.
-  Changing this setting will push a new certificate.
-  
-* `name` - (Required, String) Specifies the certificate name. The maximum length is 256 characters.
-  Only digits, letters, underscores(`_`), and hyphens(`-`) are allowed.
 
-* `certificate` - (Required, String, ForceNew) Specifies the certificate content. Changing this creates a new certificate.
+* `region` - (Optional, String, ForceNew) The region in which to create the WAF certificate resource. If omitted, the
+  provider-level region will be used. Changing this setting will push a new certificate.
+
+* `name` - (Required, String) Specifies the certificate name. The maximum length is 256 characters. Only digits,
+  letters, underscores(`_`), and hyphens(`-`) are allowed.
+
+* `certificate` - (Required, String, ForceNew) Specifies the certificate content. Changing this creates a new
+  certificate.
 
 * `private_key` - (Required, String, ForceNew) Specifies the private key. Changing this creates a new certificate.
 
@@ -61,8 +62,9 @@ Certificates can be imported using the `id`, e.g.
 terraform import huaweicloud_waf_certificate.certificate_2 3ebd3201238d41f9bfc3623b61435954
 ```
 
-Note that the imported state is not identical to your resource definition, due to security reason.
-The missing attributes include `certificate`, and `private_key`. You can ignore changes as below.
+Note that the imported state is not identical to your resource definition, due to security reason. The missing
+attributes include `certificate`, and `private_key`. You can ignore changes as below.
+
 ```
 resource "huaweicloud_waf_certificate" "certificate_2" {
     ...

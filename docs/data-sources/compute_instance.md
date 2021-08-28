@@ -9,7 +9,7 @@ Use this data source to get the details of a specified compute instance.
 ## Example Usage
 
 ```hcl
-variable "ecs_name" { }
+variable "ecs_name" {}
 
 data "huaweicloud_compute_instance" "demo" {
   name = var.ecs_name
@@ -20,8 +20,8 @@ data "huaweicloud_compute_instance" "demo" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the instance.
-  If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the instance. If omitted, the provider-level region will
+  be used.
 
 * `name` - (Optional, String) Specifies the ECS name, which can be queried with a regular expression.
 
@@ -30,7 +30,6 @@ The following arguments are supported:
 * `flavor_id` - (Optional, String) Specifies the flavor ID.
 
 * `enterprise_project_id` - (Optional, String) Specifies the enterprise project id.
-
 
 ## Attributes Reference
 
@@ -44,14 +43,14 @@ In addition to all arguments above, the following attributes are exported:
 * `key_pair` - The key pair that is used to authenticate the instance.
 * `public_ip` - The EIP address that is associted to the instance.
 * `system_disk_id` - The system disk voume ID.
-* `user_data` -  The user data (information after encoding) configured during instance creation.
+* `user_data` - The user data (information after encoding) configured during instance creation.
 * `security_group_ids` - An array of one or more security group IDs to associate with the instance.
-* `network` - An array of one or more networks to attach to the instance.
-    The network object structure is documented below.
-* `volume_attached` - An array of one or more disks to attach to the instance.
-    The volume_attached object structure is documented below.
-* `scheduler_hints` - The scheduler with hints on how the instance should be launched.
-    The available hints are described below.
+* `network` - An array of one or more networks to attach to the instance. The network object structure is documented
+  below.
+* `volume_attached` - An array of one or more disks to attach to the instance. The volume_attached object structure is
+  documented below.
+* `scheduler_hints` - The scheduler with hints on how the instance should be launched. The available hints are described
+  below.
 * `tags` - The key/value pairs to associate with the instance.
 * `status` - The status of the instance.
 

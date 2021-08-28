@@ -30,22 +30,20 @@ resource "huaweicloud_apig_response" "test" {
 
 The following arguments are supported:
 
-* `region` - (Optional, String, ForceNew) Specifies the region in which to create the API custom response resource.
-  If omitted, the provider-level region will be used.
-  Changing this will create a new API custom response resource.
+* `region` - (Optional, String, ForceNew) Specifies the region in which to create the API custom response resource. If
+  omitted, the provider-level region will be used. Changing this will create a new API custom response resource.
 
 * `group_id` - (Required, String, ForceNew) Specifies the ID of the API group to which the API response belongs to.
   Changing this will create a new API custom response resource.
 
 * `instance_id` - (Required, String, ForceNew) Specifies the ID of the APIG dedicated instance to which the API group
-  where the API custom response belongs.
-  Changing this will create a new API custom response resource.
+  where the API custom response belongs. Changing this will create a new API custom response resource.
 
-* `name` - (Required, String) Specifies the name of the API custom response.
-  The name consists of 1 to 64 characters, and only letters, digits, hyphens(-), and underscores (_) are allowed.
+* `name` - (Required, String) Specifies the name of the API custom response. The name consists of 1 to 64 characters,
+  and only letters, digits, hyphens(-), and underscores (_) are allowed.
 
-* `rule` - (Optional, List) Specifies the API custom response rules definition.
-  The object structure is documented below.
+* `rule` - (Optional, List) Specifies the API custom response rules definition. The object structure is documented
+  below.
 
 The `rule` block supports:
 
@@ -80,8 +78,9 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Import
 
-API Responses can be imported using their `name` and IDs of the APIG dedicated instances and API groups to which
-the API response belongs, separated by a slash, e.g.
+API Responses can be imported using their `name` and IDs of the APIG dedicated instances and API groups to which the API
+response belongs, separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_response.test <instance id>/<group id>/<name>
 ```

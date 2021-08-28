@@ -4,10 +4,10 @@ subcategory: "Deprecated"
 
 # huaweicloud\_vbs\_backup
 
-!> **Warning:** It has been deprecated.
+!> **WARNING:** It has been deprecated.
 
-The VBS Backup data source provides details about a specific VBS Backup.
-This is an alternative to `huaweicloud_vbs_backup`
+The VBS Backup data source provides details about a specific VBS Backup. This is an alternative
+to `huaweicloud_vbs_backup`
 
 ## Example Usage
 
@@ -20,9 +20,11 @@ data "huaweicloud_vbs_backup" "mybackup" {
 ```
 
 ## Argument Reference
+
 The following arguments are supported:
 
-* `region` - (Optional, String) The region in which to obtain the VBS Backup. If omitted, the provider-level region will be used.
+* `region` - (Optional, String) The region in which to obtain the VBS Backup. If omitted, the provider-level region will
+  be used.
 
 * `id` - (Optional, String) The id of the vbs backup.
 
