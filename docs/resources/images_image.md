@@ -8,7 +8,7 @@ Manages an Image resource within HuaweiCloud IMS.
 
 ## Example Usage
 
-###  Creating an image from ECS
+### Creating an image from ECS
 
 ```hcl
 data "huaweicloud_availability_zones" "test" {}
@@ -40,7 +40,7 @@ resource "huaweicloud_images_image" "test" {
 }
 ```
 
-###  Creating an image from OBS bucket
+### Creating an image from OBS bucket
 
 ```hcl
 resource "huaweicloud_images_image" "ims_test_file" {
