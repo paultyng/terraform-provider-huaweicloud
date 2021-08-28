@@ -4,16 +4,17 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/acceptance"
-	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/fmtp"
 )
 
 func TestAccDataSourceWafCertificateV1_basic(t *testing.T) {
-	name := fmt.Sprintf("cert-%s", acctest.RandString(5))
-	dataSourceName := "data.huaweicloud_waf_certificate.cert_1"
+	name := acceptance.RandomAccResourceName()
+	resourceName := "data.huaweicloud_waf_certificate.cert_1"
+
+	rc := acceptance.InitDataSourceCheck(
+		resourceName,
+	)
 
 	resource.Test(t, resource.TestCase{
 		PreCheck:  func() { acceptance.TestAccPreCheck(t) },
@@ -22,27 +23,16 @@ func TestAccDataSourceWafCertificateV1_basic(t *testing.T) {
 			{
 				Config: testAccWafCertificateListV1_conf(name),
 				Check: resource.ComposeTestCheckFunc(
-					testAccCheckWafCertDataSourceID(dataSourceName),
-					resource.TestCheckResourceAttr(dataSourceName, "name", name),
-					resource.TestCheckResourceAttrSet(dataSourceName, "id"),
-					resource.TestCheckResourceAttrSet(dataSourceName, "expiration"),
+					rc.CheckResourceMapAttr(map[string]string{
+						"name":          name,
+						"id":            acceptance.CHECKSET,
+						"expire_status": acceptance.CHECKSET,
+						"expiration":    acceptance.CHECKSET,
+					}),
 				),
 			},
 		},
 	})
-}
-
-func testAccCheckWafCertDataSourceID(r string) resource.TestCheckFunc {
-	return func(s *terraform.State) error {
-		rs, ok := s.RootModule().Resources[r]
-		if !ok {
-			return fmtp.Errorf("Can't find waf data source: %s ", r)
-		}
-		if rs.Primary.ID == "" {
-			return fmtp.Errorf("The Waf Certificate data source ID not set ")
-		}
-		return nil
-	}
 }
 
 func testAccWafCertificateListV1_conf(name string) string {
@@ -50,7 +40,8 @@ func testAccWafCertificateListV1_conf(name string) string {
 %s
 
 data "huaweicloud_waf_certificate" "cert_1" {
-  name = huaweicloud_waf_certificate.certificate_1.name
+  name       = huaweicloud_waf_certificate.certificate_1.name
+  depends_on = [huaweicloud_waf_certificate.certificate_1]
 }
 `, testAccWafCertificateV1_conf(name))
 }
