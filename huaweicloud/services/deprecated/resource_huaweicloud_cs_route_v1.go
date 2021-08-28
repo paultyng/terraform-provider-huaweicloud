@@ -29,7 +29,7 @@ func ResourceCsRouteV1() *schema.Resource {
 		Create:             resourceCsRouteV1Create,
 		Read:               resourceCsRouteV1Read,
 		Delete:             resourceCsRouteV1Delete,
-		DeprecationMessage: "Cloud Stream has been deprecated. Please use the DLI instead",
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Schema: map[string]*schema.Schema{
 			"region": {
 				Type:     schema.TypeString,

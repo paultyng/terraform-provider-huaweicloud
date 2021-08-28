@@ -31,7 +31,7 @@ func ResourceCsClusterV1() *schema.Resource {
 		Read:               resourceCsClusterV1Read,
 		Update:             resourceCsClusterV1Update,
 		Delete:             resourceCsClusterV1Delete,
-		DeprecationMessage: "Cloud Stream has been deprecated. Please use the DLI instead",
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Timeouts: &schema.ResourceTimeout{
 			Create: schema.DefaultTimeout(30 * time.Minute),
 			Delete: schema.DefaultTimeout(30 * time.Minute),

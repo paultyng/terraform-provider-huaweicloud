@@ -30,7 +30,7 @@ func ResourceCsPeeringConnectV1() *schema.Resource {
 		Create:             resourceCsPeeringConnectV1Create,
 		Read:               resourceCsPeeringConnectV1Read,
 		Delete:             resourceCsPeeringConnectV1Delete,
-		DeprecationMessage: "Cloud Stream has been deprecated. Please use the DLI instead",
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Timeouts: &schema.ResourceTimeout{
 			Create: schema.DefaultTimeout(30 * time.Minute),
 			Delete: schema.DefaultTimeout(30 * time.Minute),
