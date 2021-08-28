@@ -159,7 +159,7 @@ The following arguments are supported:
     + The start time and end time of a maintenance time window must indicate the time
       segment of a supported maintenance time window.
     + The end time is four hours later than the start time. For example, if the start time is 22:00:00,
-	    the end time is 02:00:00.
+      the end time is 02:00:00.
     + Parameters `maintain_begin` and `maintain_end` must be set in pairs.
     + If parameter maintain_end is left blank, parameter maintain_begin is also blank. In this case,
       the system automatically allocates the default end time 06:00:00.
@@ -171,7 +171,6 @@ The following arguments are supported:
   Changing this creates a new instance.
 
 * `tags` - (Optional, Map) The key/value pairs to associate with the dcs instance.
-
 
 The `whitelists` block supports:
 

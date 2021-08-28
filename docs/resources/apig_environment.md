@@ -51,6 +51,7 @@ In addition to all arguments above, the following attributes are exported:
 
 Environments can be imported using their `id` and the ID of the APIG instance to which the environment belongs,
 separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_environment.test <instance ID>/<id>
 ```

@@ -31,6 +31,7 @@ resource "huaweicloud_csbs_backup_policy" "backup_policy" {
 }
 
  ```
+
 ## Argument Reference
 The following arguments are supported:
 
@@ -81,14 +82,13 @@ In addition to all arguments above, the following attributes are exported:
 
 * `scheduled_operation` - Backup plan information
 
-    + `id` -  Specifies Scheduling period ID.
+    + `id` - Specifies Scheduling period ID.
 
-    + `trigger_id` -  Specifies Scheduler ID.
+    + `trigger_id` - Specifies Scheduler ID.
 
-    + `trigger_name` -  Specifies Scheduler name.
+    + `trigger_name` - Specifies Scheduler name.
 
-    + `trigger_type` -  Specifies Scheduler type.
-
+    + `trigger_type` - Specifies Scheduler type.
 
 ## Import
 

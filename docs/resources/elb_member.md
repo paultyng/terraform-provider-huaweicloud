@@ -43,7 +43,6 @@ The following arguments are supported:
     example, a member with a weight of 10 receives five times as much traffic
     as a member with a weight of 2.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
@@ -52,6 +51,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

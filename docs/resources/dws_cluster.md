@@ -70,10 +70,7 @@ The following arguments are supported:
     Value 0 indicates the default enterprise project.
     Changing this parameter will create a new resource.
 
-
-- - -
-
-* `availability_zone` - (Optional, String, ForceNew) AZ in a cluster
+- - - * `availability_zone` - (Optional, String, ForceNew) AZ in a cluster
 
 * `port` - (Optional, Int) Service port of a cluster (8000 to 10000). The default value is 8000.
 
@@ -144,6 +141,7 @@ The `public_endpoints` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

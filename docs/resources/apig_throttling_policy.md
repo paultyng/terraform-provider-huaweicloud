@@ -9,6 +9,7 @@ Manages an APIG (API) throttling policy resource within HuaweiCloud.
 ## Example Usage
 
 ### Create a basic throttling policy
+
 ```hcl
 variable "instance_id" {}
 variable "policy_name" {}
@@ -29,6 +30,7 @@ resource "huaweicloud_apig_throttling_policy" "test" {
 ```
 
 ### Create a throttling policy with a special throttle
+
 ```hcl
 variable "instance_id" {}
 variable "policy_name" {}
@@ -137,6 +139,7 @@ In addition to all arguments above, the following attributes are exported:
 
 API Throttling Policies of APIG can be imported using their `name` and the ID of the APIG instances to which the
 environment belongs, separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_throttling_policy.test <instance ID>/<name>
 ```

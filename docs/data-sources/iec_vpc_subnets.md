@@ -36,6 +36,7 @@ In addition to all arguments above, the following attributes are exported:
 * `subnets` - A list of all the subnets found. The object is documented below.
 
 The `subnets` block supports:
+
   * `id` - Indicates the ID of the subnet.
   * `name` - Indicates the name of the subnet.
   * `cidr` - Indicates the cidr block of the subnet.

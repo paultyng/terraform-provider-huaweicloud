@@ -47,6 +47,7 @@ If you create a VPC peering connection with another VPC of your own, the connect
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

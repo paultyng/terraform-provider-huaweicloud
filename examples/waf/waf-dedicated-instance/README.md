@@ -4,7 +4,6 @@ This example first creates a WAF dedicated instance, and then creates a policy. 
 Subnet, and security group. In this example, we all create them. You can replace them with resources already created in 
 Huawei Cloud.
 
-
 To run, configure your Huaweicloud provider as described in the
 [document](https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs).
 
@@ -15,7 +14,7 @@ to create a key-pair.
 
 ## Usage
 
-```
+```shell
 terraform init
 terraform plan
 terraform apply

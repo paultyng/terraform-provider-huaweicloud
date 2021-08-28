@@ -11,7 +11,6 @@ This is an alternative to `huaweicloud_kms_key_v1`
 ## Example Usage
 
 ```hcl
-
 resource "huaweicloud_kms_key" "key1" {
   key_alias       = "key_1"
   pending_days    = "7"
@@ -22,7 +21,6 @@ data "huaweicloud_kms_data_key" "kms_datakey1" {
   key_id         = huaweicloud_kms_key.key1.id
   datakey_length = "512"
 }
-
 ```
 
 ## Argument Reference
@@ -39,7 +37,6 @@ data "huaweicloud_kms_data_key" "kms_datakey1" {
 
 * `datakey_length` - (Required, String) Number of bits in the length of a DEK (data encryption keys).
     The maximum number is 512. Changing this gets the new data encryption key.
-
 
 ## Attributes Reference
 

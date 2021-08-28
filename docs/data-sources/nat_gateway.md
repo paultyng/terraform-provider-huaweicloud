@@ -6,7 +6,6 @@ subcategory: "NAT Gateway (NAT)"
 
 Use this data source to get the information of an available HuaweiCloud NAT gateway.
 
-
 ## Example Usage
 
 ```hcl

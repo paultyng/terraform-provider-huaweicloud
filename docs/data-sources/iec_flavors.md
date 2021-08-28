@@ -24,7 +24,7 @@ The following arguments are supported:
 
 * `region` - (Optional, String) The region in which to obtain the flavors. If omitted, the provider-level region will be used.
 
-* `name` -  (Optional, String) Specifies the flavor name, which can be queried
+* `name` - (Optional, String) Specifies the flavor name, which can be queried
     with a regular expression.
 
 * `site_ids` - (Optional, String) Specifies the list of edge service site.

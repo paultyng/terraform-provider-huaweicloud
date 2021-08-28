@@ -10,6 +10,7 @@ This is an alternative to `huaweicloud_nat_dnat_rule_v2`
 ## Example Usage
 
 ### DNAT rule in VPC scenario
+
 ```hcl
 resource "huaweicloud_compute_instance" "instance_1" {
   ...
@@ -26,6 +27,7 @@ resource "huaweicloud_nat_dnat_rule" "dnat_1" {
 ```
 
 ### DNAT rule in Direct Connect scenario
+
 ```hcl
 resource "huaweicloud_nat_dnat_rule" "dnat_2" {
   nat_gateway_id        = var.natgw_id

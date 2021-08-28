@@ -86,9 +86,9 @@ In addition to all arguments above, the following attributes are exported:
    or "saving".
 * `update_at` - The date the image was last updated.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 30 minute.
 
 ## Import

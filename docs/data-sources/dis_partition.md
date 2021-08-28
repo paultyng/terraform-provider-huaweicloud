@@ -12,7 +12,6 @@ This is an alternative to `huaweicloud_dis_partition_v2`
 ### list all the partitions of a stream
 
 ```hcl
-
 data "huaweicloud_dis_partition" "partition" {
   stream_name = "{{ stream_name }}"
 }
@@ -32,7 +31,7 @@ In addition to all arguments above, the following attributes are exported:
 
 The `partitions` block contains:
 
-* `id` -  The ID of the partition.
+* `id` - The ID of the partition.
 
 * `status` - The status of the partition.
 

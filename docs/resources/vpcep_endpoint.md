@@ -100,11 +100,12 @@ In addition to all arguments above, the following attributes are exported:
 
 * `packet_id` - The packet ID of the VPC endpoint.
 
-* `private_domain_name` -  The domain name for accessing the associated VPC endpoint service.
+* `private_domain_name` - The domain name for accessing the associated VPC endpoint service.
     This parameter is only available when enable_dns is set to true.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

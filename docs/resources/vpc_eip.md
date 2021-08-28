@@ -86,7 +86,6 @@ The `publicip` block supports:
 * `port_id` - (Optional, String) The port id which this eip will associate with. If the value
     is "" or this not specified, the eip will be in unbind state.
 
-
 The `bandwidth` block supports:
 
 * `share_type` - (Required, String, ForceNew) Whether the bandwidth is dedicated or shared.
@@ -117,6 +116,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

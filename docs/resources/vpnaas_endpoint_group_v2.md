@@ -32,7 +32,7 @@ The following arguments are supported:
 * `description` - (Optional) The human-readable description for the group.
     Changing this updates the description of the existing group.
 
-* `type` -  (Optional) The type of the endpoints in the group. A valid value is subnet, cidr, network, router, or vlan.
+* `type` - (Optional) The type of the endpoints in the group. A valid value is subnet, cidr, network, router, or vlan.
     Changing this creates a new group.
 
 * `endpoints` - (Optional) List of endpoints of the same type, for the endpoint group. The values will depend on the type.
@@ -48,6 +48,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

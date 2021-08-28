@@ -61,12 +61,13 @@ The following arguments are supported:
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  The PTR record ID, which is in {region}:{floatingip_id} format.
+* `id` - The PTR record ID, which is in {region}:{floatingip_id} format.
 
 * `address` - The address of the FloatingIP/EIP.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

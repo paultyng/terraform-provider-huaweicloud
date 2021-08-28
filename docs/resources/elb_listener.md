@@ -76,16 +76,16 @@ The following arguments are supported:
 
 * `tls_ciphers_policy` - (Optional, String) Specifies the TLS cipher policy
     for the listener. Valid options are: tls-1-0-inherit, tls-1-0, tls-1-1, tls-1-2,
-	tls-1-2-strict, tls-1-2-fs, tls-1-0-with-1-3, and tls-1-2-fs-with-1-3.
-	This parameter is valid when protocol is set to *HTTPS*.
+  tls-1-2-strict, tls-1-2-fs, tls-1-0-with-1-3, and tls-1-2-fs-with-1-3.
+  This parameter is valid when protocol is set to *HTTPS*.
 
 * `idle_timeout` - (Optional, Int) Specifies the idle timeout for the listener. Value range: 0 to 4000.
 
 * `request_timeout` - (Optional, Int) Specifies the request timeout for the listener. Value range: 1 to 300.
-	This parameter is valid when protocol is set to *HTTP* or *HTTPS*.
+  This parameter is valid when protocol is set to *HTTP* or *HTTPS*.
 
 * `response_timeout` - (Optional, Int) Specifies the response timeout for the listener. Value range: 1 to 300.
-	This parameter is valid when protocol is set to *HTTP* or *HTTPS*.
+  This parameter is valid when protocol is set to *HTTP* or *HTTPS*.
 
 * `tags` - (Optional, Map) The key/value pairs to associate with the listener.
 
@@ -97,6 +97,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

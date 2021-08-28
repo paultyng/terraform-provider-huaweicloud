@@ -155,7 +155,6 @@ provider "huaweicloud" {
 }
 ```
 
-
 ## Testing and Development
 
 In order to run the Acceptance Tests for development, the following environment
@@ -166,7 +165,6 @@ variables must also be set:
 * `HW_ACCESS_KEY` - The access key of the HuaweiCloud to use.
 
 * `HW_SECRET_KEY` - The secret key of the HuaweiCloud to use.
-
 
 You should be able to use any HuaweiCloud environment to develop on as long as the
 above environment variables are set.

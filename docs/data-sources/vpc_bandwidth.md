@@ -29,12 +29,11 @@ bandwidth in the current tenant. The following arguments are supported:
 
 * `enterprise_project_id` - (Optional, String) The enterprise project id of the Shared Bandwidth to retrieve.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the Shared Bandwidth.
+* `id` - ID of the Shared Bandwidth.
 
 * `share_type` - Indicates whether the bandwidth is shared or dedicated.
 

@@ -80,9 +80,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `available_capacity` - The available capacity of the SFS Turbo file system in the unit of GB.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

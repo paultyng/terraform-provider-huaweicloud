@@ -16,6 +16,7 @@ data "huaweicloud_lb_certificate" "test" {
   type = "server"
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
@@ -33,7 +34,6 @@ The following arguments are supported:
   
   -> **NOTE:** The certificate name is not unique.
   Only returns the last created one when matched multiple certificates.
-
 
 ## Attributes Reference
 

@@ -45,12 +45,13 @@ The following arguments are supported:
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the IEC VPC.
+* `id` - ID of the IEC VPC.
 * `subent_num` - Indicates the number of subents.
 
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 3 minute.
 

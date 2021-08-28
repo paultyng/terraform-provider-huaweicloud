@@ -28,7 +28,7 @@ The following arguments are supported:
 In addition to all arguments above, the following attributes are exported:
 
 * `id` - the `key` of the resource supplied above.
-* `bucket` -  the name of the bucket to put the file in.
+* `bucket` - the name of the bucket to put the file in.
 * `key` - the name of the object once it is in the bucket.
 * `etag` - the ETag generated for the object (an MD5 sum of the object content).
   When the object is encrypted on the server side, the ETag value is not the MD5 value of the object,

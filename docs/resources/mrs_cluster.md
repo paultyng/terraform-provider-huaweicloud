@@ -66,7 +66,7 @@ The following arguments are supported:
 * `master_node_size` - (Required, String, ForceNew) Best match based on several years of commissioning
     experience. MRS supports specifications of hosts, and host specifications are
     determined by CPUs, memory, and disks space. MRS supports instance specifications
-	detailed in [MRS specifications](https://support.huaweicloud.com/en-us/api-mrs/mrs_01_9006.html)
+  detailed in [MRS specifications](https://support.huaweicloud.com/en-us/api-mrs/mrs_01_9006.html)
 
 * `core_node_num` - (Required, Int, ForceNew) Number of Core nodes. Value range: 1 to 500.
 
@@ -145,8 +145,8 @@ The `component_list` block supports:
   + MRS 1.9.2 supports: Presto, Hadoop, Spark, HBase, OpenTSDB, Hive, Hue, Loader, Tez, Flink, Alluxio, Ranger, Flume, Kafka, KafkaManager, and Storm;
   + MRS 1.8.10 supports: Presto, Hadoop, Spark, HBase, OpenTSDB, Hive, Hue, Loader, Flink, Flume, Kafka, KafkaManager, and Storm;
 
-
 The `add_jobs` block supports:
+
 * `job_type` - (Required, Int, ForceNew) Job type code. 1: MapReduce; 2: Spark; 3: Hive Script; 4: HiveQL
     (not supported currently); 5: DistCp, importing and exporting data (not supported
     currently); 6: Spark Script; 7: Spark SQL, submitting Spark SQL statements
@@ -236,6 +236,7 @@ In addition to all arguments above, the following attributes are exported:
 * `remark` - Remarks of a cluster.
 
 The `component_list` attributes supports:
+
 * `component_id` - Indicates the component ID.
 * `component_name` - Indicates the component name.
 * `component_version` - Indicates the component version.
@@ -243,6 +244,7 @@ The `component_list` attributes supports:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 60 minute.
 * `delete` - Default is 10 minute.
 

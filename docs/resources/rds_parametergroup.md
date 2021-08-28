@@ -22,7 +22,6 @@ resource "huaweicloud_rds_parametergroup" "pg_1" {
     version = "5.6"
   }
 }
-
 ```
 
 ## Argument Reference
@@ -43,29 +42,29 @@ The `datastore` block supports:
 
 * `version` - (Required, String) Specifies the database version.
 
-	+ MySQL databases support MySQL 5.6 and 5.7. Example value: 5.7.
-	+ PostgreSQL databases support PostgreSQL 9.5 and 9.6. Example value: 9.5.
-	+ Microsoft SQL Server databases support 2014 SE, 2016 SE, and 2016 EE. Example value: 2014_SE.
-
+  + MySQL databases support MySQL 5.6 and 5.7. Example value: 5.7.
+  + PostgreSQL databases support PostgreSQL 9.5 and 9.6. Example value: 9.5.
+  + Microsoft SQL Server databases support 2014 SE, 2016 SE, and 2016 EE. Example value: 2014_SE.
 
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the parameter group.
+* `id` - ID of the parameter group.
 
 * `configuration_parameters` - Indicates the parameter configuration defined by users based on the default parameters groups.
 
-	+ `name` - Indicates the parameter name.
-	+ `value` - Indicates the parameter value.
-	+ `restart_required` - Indicates whether a restart is required.
-	+ `readonly` - Indicates whether the parameter is read-only.
-	+ `value_range` - Indicates the parameter value range.
-	+ `type` - Indicates the parameter type.
-	+ `description` - Indicates the parameter description.
+  + `name` - Indicates the parameter name.
+  + `value` - Indicates the parameter value.
+  + `restart_required` - Indicates whether a restart is required.
+  + `readonly` - Indicates whether the parameter is read-only.
+  + `value_range` - Indicates the parameter value range.
+  + `type` - Indicates the parameter type.
+  + `description` - Indicates the parameter description.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

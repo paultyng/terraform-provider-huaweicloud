@@ -10,7 +10,6 @@ This is an alternative to `huaweicloud_kms_key_v1`
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_kms_key" "key_1" {
   key_alias        = "test_key"
   key_description  = "test key description"
@@ -43,7 +42,6 @@ data "huaweicloud_kms_key" "key_1" {
 * `domain_id` - (Optional, String)  - ID of a user domain for the key. Changing this gets a new key.
 
 * `enterprise_project_id` - (Optional, String) The enterprise project id of the kms key.
-
 
 ## Attributes Reference
 

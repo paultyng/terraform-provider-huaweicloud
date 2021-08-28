@@ -14,7 +14,7 @@ to create a key-pair.
 
 ## Usage
 
-```
+```shell
 terraform init
 terraform plan
 terraform apply

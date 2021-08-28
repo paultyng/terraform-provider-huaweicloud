@@ -24,8 +24,8 @@ resource "huaweicloud_identity_project" "project_1" {
 The following arguments are supported:
 
 * `name` - (Required, String) Specifies the name of the project. it must start with
-    an existing _region_ and be less than or equal to 64 characters.
-    Example: cn-north-1_project1.
+  an existing _region_ and be less than or equal to 64 characters.
+  Example: cn-north-1_project1.
 
 * `description` - (Optional, String) Specifies the description of the project.
 

@@ -30,13 +30,12 @@ resource "huaweicloud_dms_group" "group_1" {
 The following arguments are supported:
 
 * `name` - (Required, String, ForceNew) Indicates the unique name of a group. A string of 1 to 64
-    characters that contain a-z, A-Z, 0-9, hyphens (-), and underscores (_).
-    The name cannot be modified once specified.
+   characters that contain a-z, A-Z, 0-9, hyphens (-), and underscores (_).
+   The name cannot be modified once specified.
 
 * `queue_id` - (Required, String, ForceNew) Indicates the ID of a specified queue.
 
 * `region` - (Optional, String, ForceNew) The region in which to create the DMS group resource. If omitted, the provider-level region will be used. Changing this creates a new DMS group resource.
-
 
 ## Attributes Reference
 

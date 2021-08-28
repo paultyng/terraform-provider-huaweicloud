@@ -39,7 +39,6 @@ resource "huaweicloud_elb_loadbalancer" "lb" {
 
 * `qps` - (Optional, Int) Specifies the qps in the L7 flavor.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

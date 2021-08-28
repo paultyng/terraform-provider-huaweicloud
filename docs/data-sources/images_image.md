@@ -42,7 +42,6 @@ data "huaweicloud_images_image" "ubuntu" {
 * `visibility` - (Optional, String) The visibility of the image. Must be one of
    "public", "private", "community", or "shared". Defaults to `private`.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

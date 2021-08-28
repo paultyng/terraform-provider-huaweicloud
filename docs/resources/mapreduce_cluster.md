@@ -9,6 +9,7 @@ Manages a cluster resource within HuaweiCloud MRS.
 ## Example Usage
 
 ### Create an analysis cluster
+
 ```hcl
 data "huaweicloud_availability_zones" "test" {}
 
@@ -64,6 +65,7 @@ resource "huaweicloud_mapreduce_cluster" "test" {
 ```
 
 ### Create a stream cluster
+
 ```hcl
 data "huaweicloud_availability_zones" "test" {}
 
@@ -110,6 +112,7 @@ resource "huaweicloud_mapreduce_cluster" "test" {
 ```
 
 ### Create a hybrid cluster
+
 ```hcl
 data "huaweicloud_availability_zones" "test" {}
 
@@ -325,6 +328,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 60 minute.
 * `update` - Default is 180 minute.
 * `delete` - Default is 40 minute.
@@ -332,15 +336,18 @@ This resource provides the following timeouts configuration options:
 ## Import
 
 Clusters can be imported by their `id`. For example,
+
 ```
 terraform import huaweicloud_mapreduce_cluster.test b11b407c-e604-4e8d-8bc4-92398320b847
 ```
+
 Note that the imported state may not be identical to your resource definition, due to some attrubutes missing from the
 API response, security or some other reason. The missing attributes include:
 `manager_admin_pass`, `node_admin_pass` and `eip_id`.
 It is generally recommended running `terraform plan` after importing a cluster.
 You can then decide if changes should be applied to the cluster, or the resource definition
 should be updated to align with the cluster. Also you can ignore changes as below.
+
 ```
 resource "huaweicloud_mapreduce_cluster" "test" {
     ...

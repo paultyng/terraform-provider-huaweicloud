@@ -10,14 +10,12 @@ CTS Tracker data source allows access of Cloud Tracker.
 
 ## Example Usage
 
-
 ```hcl
 variable "bucket_name" {}
 
 data "huaweicloud_cts_tracker" "tracker_v1" {
   bucket_name = var.bucket_name
 }
-
 ```
 
 ## Argument Reference
@@ -32,7 +30,6 @@ The following arguments are supported:
 * `file_prefix_name` - (Optional, String) The prefix of a log that needs to be stored in an OBS bucket. 
 
 * `status` - (Optional, String) Status of a tracker.
-
 
 ## Attributes Reference
 
@@ -49,5 +46,4 @@ In addition to all arguments above, the following attributes are exported:
 * `is_send_all_key_operation` - Specifies Typical or All operations for Trigger Condition.
 
 * `need_notify_user_list` - The users using the login function.
-
 

@@ -91,6 +91,7 @@ In addition to all arguments above, the following attributes are exported:
 
 Custom Authorizers of the APIG can be imported using their `name` and the ID of the APIG instance to which the group belongs,
 separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_custom_authorizer.test <instance id>/<name>
 ```

@@ -22,12 +22,11 @@ The following arguments are supported:
 
 * `name` - (Required, String, ForceNew) Specifies the name of the organization. The organization name must be globally unique.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the organization.
+* `id` - ID of the organization.
 
 * `creator` - The creator user name of the organization.
 
@@ -35,9 +34,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `login_server` - The URL that can be used to log into the container registry.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

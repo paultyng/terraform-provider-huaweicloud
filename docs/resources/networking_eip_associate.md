@@ -47,7 +47,6 @@ In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
 
-
 ## Import
 
 EIP associations can be imported using the `id` of the EIP, e.g.

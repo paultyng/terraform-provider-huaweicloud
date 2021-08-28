@@ -82,6 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 API Responses can be imported using their `name` and IDs of the APIG dedicated instances and API groups to which
 the API response belongs, separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_response.test <instance id>/<group id>/<name>
 ```

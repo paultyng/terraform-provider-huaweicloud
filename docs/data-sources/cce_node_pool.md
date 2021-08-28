@@ -17,6 +17,7 @@ data "huaweicloud_cce_node_pool" "node_pool" {
   name       = var.node_pool_name
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
@@ -31,7 +32,6 @@ The following arguments are supported:
 * `node_pool_id` - (Optional, String) Specifies the id of the node pool.
 
 * `status` - (Optional, String) Specifies the state of the node pool.
-
 
 ## Attributes Reference
 

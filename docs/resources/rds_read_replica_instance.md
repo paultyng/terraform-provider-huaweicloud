@@ -9,6 +9,7 @@ Manage RDS Read Replica Instance resource.
 ## Example Usage
 
 ### Create a Rds read replica instance
+
 ```hcl
 resource "huaweicloud_networking_secgroup" "secgroup" {
   name          = "test_sg_for_rds"
@@ -92,7 +93,7 @@ The `volume` block supports:
 
   Changing this parameter will create a new resource.
 
-* `disk_encryption_id` -  (Optional, String, ForceNew) Specifies the key ID for disk encryption.
+* `disk_encryption_id` - (Optional, String, ForceNew) Specifies the key ID for disk encryption.
   Changing this parameter will create a new resource.
 
 ## Attributes Reference
@@ -127,6 +128,7 @@ The `db` block supports:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 30 minute.
 * `delete` - Default is 30 minute.
 

@@ -52,7 +52,6 @@ The following arguments are supported:
 
 * `enabled` - (Optional, Bool) Enabled status for the network ACL rule. Defaults to true.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

@@ -8,7 +8,6 @@ Add a node from an existing ecs server to a CCE cluster.
 ## Basic Usage
 
 ```hcl
-
 resource "huaweicloud_cce_node_attach" "test" {
   cluster_id = var.cluster_id
   server_id  = var.server_id
@@ -20,7 +19,6 @@ resource "huaweicloud_cce_node_attach" "test" {
     key = "value"
   }
 }
-
 ```
 
 ## Argument Reference
@@ -55,9 +53,11 @@ The following arguments are supported:
 
 * `lvm_config` - (Optional, String, ForceNew) Specifies the docker data disk configurations.
   The following is an example:
+
 ```hcl
   lvm_config = "dockerThinpool=vgpaas/90%VG;kubernetesLV=vgpaas/10%VG"
 ```
+
   Changing this parameter will create a new resource.
 
 * `preinstall` - (Optional, String, ForceNew) Specifies the script required before installation.
@@ -70,13 +70,12 @@ The following arguments are supported:
 
 * `tags` - (Optional, Map) Specifies the tags of a VM node, key/value pair format.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
-* `status` -  Node status information.
+* `status` - Node status information.
 * `private_ip` - Private IP of the CCE node.
 * `public_ip` - Public IP of the CCE node.
 * `flavor_id` - The flavor id of the CCE node.
@@ -89,5 +88,6 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 20 minute.
 * `delete` - Default is 20 minute.

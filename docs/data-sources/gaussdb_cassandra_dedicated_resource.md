@@ -20,7 +20,6 @@ data "huaweicloud_gaussdb_cassandra_dedicated_resource" "this" {
 
 * `resource_name` - (Optional, String) Specifies the dedicated resource name.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

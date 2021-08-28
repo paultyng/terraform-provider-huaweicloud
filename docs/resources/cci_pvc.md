@@ -126,6 +126,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Import
 
 PVCs can be imported using the `namespace`, `volume_type` and `id`, e.g.
+
 ```
 $ terraform import huaweicloud_cci_pvc.test <namespace>/<volume_type>/<id>
 ```
@@ -133,5 +134,6 @@ $ terraform import huaweicloud_cci_pvc.test <namespace>/<volume_type>/<id>
 ## Timeouts
 
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 5 minute.
 * `delete` - Default is 3 minute.

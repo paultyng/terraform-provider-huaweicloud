@@ -175,6 +175,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Import
 
 Vaults can be imported by their `id`. For example,
+
 ```
 $ terraform import huaweicloud_cbr_vault.test 01c33779-7c83-4182-8b6b-24a671fcedf8
 ```

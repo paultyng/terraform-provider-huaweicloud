@@ -77,7 +77,7 @@ The following arguments are supported:
   such as ~!@#%^*-_=+? You are advised to enter a strong password to improve security, preventing security risks
   such as brute force cracking.
 
-* `vpc_id` -  (Required, String, ForceNew) Specifies the VPC ID.
+* `vpc_id` - (Required, String, ForceNew) Specifies the VPC ID.
   Changing this parameter will create a new resource.
 
 * `subnet_id` - (Required, String, ForceNew) Specifies the network ID of a subnet.
@@ -113,7 +113,6 @@ The `datastore` block supports:
 * `version` - (Optional, String, ForceNew) Specifies the database version. Only "3.11" is supported now.
 
 * `storage_engine` - (Optional, String, ForceNew) Specifies the storage engine. Only "rocksDB" is supported now.
-
 
 The `backup_strategy` block supports:
 
@@ -151,6 +150,7 @@ The `nodes` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 60 minute.
 * `update` - Default is 120 minute.
 * `delete` - Default is 30 minute.

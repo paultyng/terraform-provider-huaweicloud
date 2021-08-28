@@ -83,7 +83,6 @@ The following arguments are supported:
 
     + `value` - (Required, String) Specifies the tag value. A tag value consists of 0 to 43 characters, chosen from letters, digits, hyphens (-), and underscores (_).
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
@@ -94,6 +93,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 5 minute.
 * `delete` - Default is 5 minute.
 

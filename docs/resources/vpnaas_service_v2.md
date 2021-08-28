@@ -21,19 +21,19 @@ resource "huaweicloud_vpnaas_service_v2" "service_1" {
 The following arguments are supported:
 
 * `region` - (Optional) The region in which to create the V2 Networking client.
-    A Networking client is needed to create a VPN service. If omitted, the
-    `region` argument of the provider is used. Changing this creates a new
-    service.
+  A Networking client is needed to create a VPN service. If omitted, the
+  `region` argument of the provider is used. Changing this creates a new
+  service.
 
 * `name` - (Optional) The name of the service. Changing this updates the name of
-    the existing service.
+  the existing service.
 
 * `description` - (Optional) The human-readable description for the service.
-    Changing this updates the description of the existing service.
+  Changing this updates the description of the existing service.
 
 * `admin_state_up` - (Optional) The administrative state of the resource.
-    Can either be up(true) or down (false). Defaults to `true`.
-    Changing this updates the administrative state of the existing service.
+  Can either be up(true) or down (false). Defaults to `true`.
+  Changing this updates the administrative state of the existing service.
 
 * `subnet_id` - (Optional) SubnetID is the ID of the subnet. Default is null.
 
@@ -52,6 +52,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

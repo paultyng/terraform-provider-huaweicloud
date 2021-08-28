@@ -10,7 +10,6 @@ This is an alternative to `huaweicloud_dms_product_v1`
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_dms_product" "product1" {
   engine            = "kafka"
   version           = "1.1.0"
@@ -44,7 +43,6 @@ data "huaweicloud_dms_product" "product1" {
 * `io_type` - (Optional, String) Indicates an I/O type.
 
 * `node_num` - (Optional, String) Indicates the number of nodes in a cluster.
-
 
 ## Attributes Reference
 

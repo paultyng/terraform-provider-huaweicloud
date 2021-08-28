@@ -47,7 +47,7 @@ The following arguments are supported:
 
 * `listener_id` - (Optional, String, ForceNew) The Listener on which the members of the pool
     will be associated with. Changing this creates a new pool.
-	Note:  Exactly one of LoadbalancerID or ListenerID must be provided.
+  Note:  Exactly one of LoadbalancerID or ListenerID must be provided.
 
 * `lb_method` - (Required, String) The load balancing algorithm to
     distribute traffic to the pool's members. Must be one of
@@ -76,6 +76,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

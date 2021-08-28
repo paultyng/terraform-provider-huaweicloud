@@ -25,6 +25,7 @@ resource "huaweicloud_cts_tracker" "tracker_v1" {
 }
 
  ```
+
 ## Argument Reference
 The following arguments are supported:
 
@@ -53,9 +54,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `tracker_name` - The tracker name. Currently, only tracker **system** is available.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

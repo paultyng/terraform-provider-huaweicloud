@@ -11,6 +11,7 @@ centrally manage all your SSL certificates in one place.
 ## Example Usage
 
 ### Load the certificate contents from the local files.
+
 ```hcl
 resource "huaweicloud_scm_certificate" "certificate_1" {
   name              = "certificate_1"
@@ -19,7 +20,9 @@ resource "huaweicloud_scm_certificate" "certificate_1" {
   private_key       = file("/usr/local/data/certificate/cert_xxx/xxx_server.key")
 }
 ```
+
 ### Write the contents of the certificate into the Terrafrom script.
+
 ```hcl
 resource "huaweicloud_scm_certificate" "certificate_2" {
   name              ="certificate_2"
@@ -67,23 +70,25 @@ resource "huaweicloud_scm_certificate" "certificate_3" {
   }
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
 
 * `region` - (Optional, String, ForceNew) The region in which to create the SCM certificate resource.
-    If omitted, the provider-level region will be used.
-    Changing this setting will push a new certificate.
+  If omitted, the provider-level region will be used.
+  Changing this setting will push a new certificate.
 * `name` - (Optional, String, ForceNew) Human-readable name for the Certificate.
-    Does not have to be unique. The value contains a maximum of 63 characters.
+  Does not have to be unique. The value contains a maximum of 63 characters.
 * `certificate` - (Required, String, ForceNew) The public encrypted key of the Certificate, PEM format.
 * `certificate_chain` - (Required, String, ForceNew) The chain of the certificate.
-    It can be extracted from the _server.crt_ file in the Nginx directory,
-    usually after the second paragraph is the certificate chain.
+  It can be extracted from the _server.crt_ file in the Nginx directory,
+  usually after the second paragraph is the certificate chain.
 * `private_key` - (Required, String, ForceNew) The private encrypted key of the Certificate, PEM format.
 * `target` - (Optional, List) The service to which the certificate needs to be pushed.
 
 The `target` block supports:
+
 * `service` - (Required, String) Service to which the certificate is pushed.
   The options include `CDN`,`WAF` and `Enhance_ELB`.
 * `project` - (Optional, String) The project where the service you want to push a certificate to.
@@ -101,23 +106,23 @@ In addition to all arguments above, the following attributes are exported:
 * `not_before` - Time when the certificate takes effect. If no valid value is obtained, this parameter is left blank.
 * `not_after` - Time when the certificate becomes invalid. If no valid value is obtained, this parameter is left blank.
 * `status` - Certificate status. The value can be:
-    + `PAID` - The certificate has been paid, and needs to be applied for from the CA.
-    + `ISSUED` - The certificate has been issued.
-    + `CHECKING` - The certificate application is under review.
-    + `CANCELCHECKING` - The application of certificate cancellation is under review.
-    + `UNPASSED` - The certificate application fails.
-    + `EXPIRED` - The certificate has expired.
-    + `REVOKING` - The application of certificate revocation is under review.
-    + `REVOKED` - The certificate has been revoked.
-    + `UPLOAD` - The certificate is being hosted.
-    + `SUPPLEMENTCHECKING` - The application for the new domain name of the multi-domain certificate is under review.
-    + `CANCELSUPPLEMENTING` - The cancellation on additional domain names to be added is being reviewed.
+  + `PAID` - The certificate has been paid, and needs to be applied for from the CA.
+  + `ISSUED` - The certificate has been issued.
+  + `CHECKING` - The certificate application is under review.
+  + `CANCELCHECKING` - The application of certificate cancellation is under review.
+  + `UNPASSED` - The certificate application fails.
+  + `EXPIRED` - The certificate has expired.
+  + `REVOKING` - The application of certificate revocation is under review.
+  + `REVOKED` - The certificate has been revoked.
+  + `UPLOAD` - The certificate is being hosted.
+  + `SUPPLEMENTCHECKING` - The application for the new domain name of the multi-domain certificate is under review.
+  + `CANCELSUPPLEMENTING` - The cancellation on additional domain names to be added is being reviewed.
 * `authentifications` - (List) Domain ownership verification information.
-    This is a list, each item of data is as follows:
-    + `record_name` - Name of a domain ownership verification value.
-    + `record_type` - Type of the domain name verification value.
-    + `record_value` - Domain verification value.
-    + `domain` - Domain name mapping to the verification value
+  This is a list, each item of data is as follows:
+  + `record_name` - Name of a domain ownership verification value.
+  + `record_type` - Type of the domain name verification value.
+  + `record_value` - Domain verification value.
+  + `domain` - Domain name mapping to the verification value
 
 ## Import
 

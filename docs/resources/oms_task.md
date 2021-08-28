@@ -43,14 +43,13 @@ The following arguments are supported:
 * `enable_kms` - (Required, Bool, ForceNew) Specifies whether to use KMS encryption.
 
 * `thread_num` - (Required, Int, ForceNew) Specifies the number of threads used by the migration
-	task. The value cannot exceed 50.
+  task. The value cannot exceed 50.
 
 * `description` - (Optional, String, ForceNew) Specifies tasks description, which cannot exceed 255
-	characters. The following special characters are not allowed: <>()"&
+  characters. The following special characters are not allowed: <>()"&
 
 * `smn_info` - (Optional, List, ForceNew) Specifies the field used for sending messages using the
-	Simple Message Notification (SMN) service.
-
+  Simple Message Notification (SMN) service.
 
 The `src_node` block supports:
 
@@ -76,12 +75,12 @@ The `dst_node` block supports:
 The `smn_info` block supports:
 
 * `topic_urn` - (Required, String, ForceNew) Specifies the SMN message topic URN bound to a migration
-	task.
+  task.
 * `language` - (Optional, String, ForceNew) Specifies the management console language used by the
-	current users. Users can select en-us.
+  current users. Users can select en-us.
 * `trigger_conditions` - (Required, List, ForceNew) Specifies the trigger conditions of sending messages
-	using SMN. The value depending on the state of a migration task. The migration task
-	status can be SUCCESS or FAIL.
+  using SMN. The value depending on the state of a migration task. The migration task
+  status can be SUCCESS or FAIL.
 
 ## Attributes Reference
 
@@ -90,9 +89,10 @@ In addition to all arguments above, the following attributes are exported:
 * `id` - Specifies a resource ID in UUID format.
 * `name` - Indicates the name for a task.
 * `status` - Indicates the task status as follows: 0: Not started, 1: Waiting to migrate,
-	2: Migrating, 3: Migration paused, 4: Migration failed, 5: Migration succeeded.
+  2: Migrating, 3: Migration paused, 4: Migration failed, 5: Migration succeeded.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 

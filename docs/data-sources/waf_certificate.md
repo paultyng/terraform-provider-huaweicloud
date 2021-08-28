@@ -6,7 +6,6 @@ subcategory: "Web Application Firewall (WAF)"
 
 Get the certificate in the WAF, including the one pushed from SCM.
 
-
 ## Example Usage
 
 ```hcl
@@ -29,6 +28,7 @@ resource "huaweicloud_waf_domain" "domain_1" {
   }
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:

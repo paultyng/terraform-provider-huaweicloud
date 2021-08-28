@@ -109,7 +109,6 @@ The `volume` block supports:
   The SAS disk is used. ULTRAHIGH: Ultra-high I/O. The
   solid-state drive (SSD) is used. Changing this parameter will create a new resource.
 
-
 The `backup_strategy` block supports:
 
 * `start_time` - (Required, String) Specifies the time when a snapshot is automatically
@@ -123,7 +122,6 @@ The `backup_strategy` block supports:
 
 * `prefix` - (Optional, String) Specifies the prefix of the snapshot that is automatically
   created. The default value is "snapshot".
-
 
 ## Attributes Reference
 
@@ -148,6 +146,7 @@ The `nodes` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 60 minute.
 * `update` - Default is 60 minute.
 
