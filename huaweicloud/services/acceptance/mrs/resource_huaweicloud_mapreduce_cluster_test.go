@@ -250,6 +250,10 @@ func TestAccMrsMapReduceCluster_hybrid(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.node_number", "2"),
 					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.node_number", "1"),
 					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.node_number", "1"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_core_nodes.0.host_ips.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.host_ips.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.host_ips.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.host_ips.#", "1"),
 				),
 			},
 			{
@@ -264,6 +268,10 @@ func TestAccMrsMapReduceCluster_hybrid(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.node_number", "3"),
 					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.node_number", "2"),
 					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.node_number", "2"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_core_nodes.0.host_ips.#", "3"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.host_ips.#", "3"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.host_ips.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.host_ips.#", "2"),
 				),
 			},
 			{
@@ -278,6 +286,202 @@ func TestAccMrsMapReduceCluster_hybrid(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.node_number", "2"),
 					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.node_number", "1"),
 					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.node_number", "1"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_core_nodes.0.host_ips.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_core_nodes.0.host_ips.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "analysis_task_nodes.0.host_ips.#", "1"),
+					resource.TestCheckResourceAttr(resourceName, "streaming_task_nodes.0.host_ips.#", "1"),
+				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"manager_admin_pass",
+					"node_admin_pass",
+				},
+			},
+		},
+	})
+}
+
+func TestAccMrsMapReduceCluster_custom_compact(t *testing.T) {
+	var clusterGet cluster.Cluster
+	resourceName := "huaweicloud_mapreduce_cluster.test"
+	rName := acceptance.RandomAccResourceName()
+	password := fmt.Sprintf("TF%s%s%d", acctest.RandString(10), acctest.RandStringFromCharSet(1, "-_"),
+		acctest.RandIntRange(0, 99))
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck: func() {
+			acceptance.TestAccPreCheck(t)
+			acceptance.TestAccPreCheckMrsCustom(t)
+		},
+		Providers:    acceptance.TestAccProviders,
+		CheckDestroy: testAccCheckMRSV2ClusterDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccMrsMapReduceClusterConfig_customCompact(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customCompact(rName, password, 4),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "4"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "4"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customCompact(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
+				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"manager_admin_pass",
+					"node_admin_pass",
+				},
+			},
+		},
+	})
+}
+
+func TestAccMrsMapReduceCluster_custom_seperate(t *testing.T) {
+	var clusterGet cluster.Cluster
+	resourceName := "huaweicloud_mapreduce_cluster.test"
+	rName := acceptance.RandomAccResourceName()
+	password := fmt.Sprintf("TF%s%s%d", acctest.RandString(10), acctest.RandStringFromCharSet(1, "-_"),
+		acctest.RandIntRange(0, 99))
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck: func() {
+			acceptance.TestAccPreCheck(t)
+			acceptance.TestAccPreCheckMrsCustom(t)
+		},
+		Providers:    acceptance.TestAccProviders,
+		CheckDestroy: testAccCheckMRSV2ClusterDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccMrsMapReduceClusterConfig_customSeperate(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customSeperate(rName, password, 4),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "4"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "4"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customSeperate(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
+				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
+				ImportStateVerifyIgnore: []string{
+					"manager_admin_pass",
+					"node_admin_pass",
+				},
+			},
+		},
+	})
+}
+
+func TestAccMrsMapReduceCluster_custom_fullsize(t *testing.T) {
+	var clusterGet cluster.Cluster
+	resourceName := "huaweicloud_mapreduce_cluster.test"
+	rName := acceptance.RandomAccResourceName()
+	password := fmt.Sprintf("TF%s%s%d", acctest.RandString(10), acctest.RandStringFromCharSet(1, "-_"),
+		acctest.RandIntRange(0, 99))
+
+	resource.ParallelTest(t, resource.TestCase{
+		PreCheck: func() {
+			acceptance.TestAccPreCheck(t)
+			acceptance.TestAccPreCheckMrsCustom(t)
+		},
+		Providers:    acceptance.TestAccProviders,
+		CheckDestroy: testAccCheckMRSV2ClusterDestroy,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccMrsMapReduceClusterConfig_customFullsize(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customFullsize(rName, password, 4),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "4"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "4"),
+				),
+			},
+			{
+				Config: testAccMrsMapReduceClusterConfig_customFullsize(rName, password, 3),
+				Check: resource.ComposeTestCheckFunc(
+					testAccCheckMRSV2ClusterExists(resourceName, &clusterGet),
+					resource.TestCheckResourceAttr(resourceName, "name", rName),
+					resource.TestCheckResourceAttr(resourceName, "type", "CUSTOM"),
+					resource.TestCheckResourceAttr(resourceName, "safe_mode", "true"),
+					resource.TestCheckResourceAttr(resourceName, "status", "running"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.node_number", "3"),
+					resource.TestCheckResourceAttr(resourceName, "custom_nodes.0.host_ips.#", "3"),
 				),
 			},
 			{
@@ -669,4 +873,214 @@ resource "huaweicloud_mapreduce_cluster" "test" {
   }
 }`, testAccMrsMapReduceClusterConfig_base(rName), rName, pwd, pwd,
 		nodeNums.AnalysisCoreNum, nodeNums.StreamCoreNum, nodeNums.AnalysisTaskNum, nodeNums.StreamTaskNum)
+}
+
+func testAccMrsMapReduceClusterConfig_customCompact(rName, pwd string, nodeNum1 int) string {
+	return fmt.Sprintf(`
+%s
+
+resource "huaweicloud_mapreduce_cluster" "test" {
+  availability_zone  = data.huaweicloud_availability_zones.test.names[0]
+  name               = "%s"
+  type               = "CUSTOM"
+  version            = "MRS 3.1.0"
+  safe_mode          = true
+  manager_admin_pass = "%s"
+  node_admin_pass    = "%s"
+  subnet_id          = huaweicloud_vpc_subnet.test.id
+  vpc_id             = huaweicloud_vpc.test.id
+  template_id        = "mgmt_control_combined_v4"
+  component_list     = ["Hadoop", "ZooKeeper", "Ranger"]
+
+master_nodes {
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = 3
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "OMSServer:1,2",
+      "SlapdServer:1,2",
+      "KerberosServer:1,2",
+      "KerberosAdmin:1,2",
+      "quorumpeer:1,2,3",
+      "NameNode:2,3",
+      "Zkfc:2,3",
+      "JournalNode:1,2,3",
+      "ResourceManager:2,3",
+      "JobHistoryServer:3",
+      "DBServer:1,3",
+      "HttpFS:1,3",
+      "TimelineServer:3",
+      "RangerAdmin:1,2",
+      "UserSync:2",
+      "TagSync:2",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+  }
+
+  custom_nodes {
+    group_name        = "node_group_1"
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = %d
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "DataNode",
+      "NodeManager",
+      "RegionServer",
+      "Flume",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+
+  }
+  
+}`, testAccMrsMapReduceClusterConfig_base(rName), rName, pwd, pwd, nodeNum1)
+}
+
+func testAccMrsMapReduceClusterConfig_customSeperate(rName, pwd string, nodeNum1 int) string {
+	return fmt.Sprintf(`
+%s
+
+resource "huaweicloud_mapreduce_cluster" "test" {
+  availability_zone  = data.huaweicloud_availability_zones.test.names[0]
+  name               = "%s"
+  type               = "CUSTOM"
+  version            = "MRS 3.1.0"
+  safe_mode          = true
+  manager_admin_pass = "%s"
+  node_admin_pass    = "%s"
+  subnet_id          = huaweicloud_vpc_subnet.test.id
+  vpc_id             = huaweicloud_vpc.test.id
+  template_id        = "mgmt_control_separated_v4"
+  component_list     = ["DBService", "Hadoop", "ZooKeeper", "Ranger"]
+
+master_nodes {
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = 5
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "OMSServer:1,2",
+      "SlapdServer:3,4",
+      "KerberosServer:3,4",
+      "KerberosAdmin:3,4",
+      "quorumpeer:3,4,5",
+      "NameNode:4,5",
+      "Zkfc:4,5",
+      "JournalNode:3,4,5",
+      "ResourceManager:4,5",
+      "JobHistoryServer:5",
+      "DBServer:3,5",
+      "HttpFS:3,5",
+      "TimelineServer:5",
+      "RangerAdmin:3,4",
+      "UserSync:4",
+      "TagSync:4",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+  }
+
+  custom_nodes {
+    group_name        = "node_group_1"
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = %d
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "DataNode",
+      "NodeManager",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+  }
+
+}`, testAccMrsMapReduceClusterConfig_base(rName), rName, pwd, pwd, nodeNum1)
+}
+
+func testAccMrsMapReduceClusterConfig_customFullsize(rName, pwd string, nodeNum1 int) string {
+	return fmt.Sprintf(`
+%s
+
+resource "huaweicloud_mapreduce_cluster" "test" {
+  availability_zone  = data.huaweicloud_availability_zones.test.names[0]
+  name               = "%s"
+  type               = "CUSTOM"
+  version            = "MRS 3.1.0"
+  safe_mode          = true
+  manager_admin_pass = "%s"
+  node_admin_pass    = "%s"
+  subnet_id          = huaweicloud_vpc_subnet.test.id
+  vpc_id             = huaweicloud_vpc.test.id
+  template_id        = "mgmt_control_data_separated_v4"
+  component_list     = ["Hadoop", "Ranger", "ZooKeeper","DBServer"]
+
+  master_nodes {
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = 9
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "OMSServer:1,2",
+      "SlapdServer:5,6",
+      "KerberosServer:5,6",
+      "KerberosAdmin:5,6",
+      "quorumpeer:5,6,7,8,9",
+      "NameNode:3,4",
+      "Zkfc:3,4",
+      "JournalNode:5,6,7",
+      "ResourceManager:8,9",
+      "JobHistoryServer:8",
+      "DBServer:8,9",
+      "HttpFS:8,9",
+      "TimelineServer:5",
+      "RangerAdmin:4,5",
+      "UserSync:5",
+      "TagSync:5",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+  }
+
+  custom_nodes {
+    group_name        = "node_group_1"
+    flavor            = "c6.4xlarge.4.linux.bigdata"
+    node_number       = %d
+    root_volume_type  = "SAS"
+    root_volume_size  = 480
+    data_volume_type  = "SAS"
+    data_volume_size  = 600
+    data_volume_count = 1
+    assigned_roles = [
+      "DataNode",
+      "NodeManager",
+      "KerberosClient",
+      "SlapdClient",
+      "meta"
+    ]
+  }
+
+}`, testAccMrsMapReduceClusterConfig_base(rName), rName, pwd, pwd, nodeNum1)
 }

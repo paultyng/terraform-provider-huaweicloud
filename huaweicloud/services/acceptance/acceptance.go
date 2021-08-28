@@ -28,6 +28,7 @@ var (
 	HW_NETWORK_ID            = os.Getenv("HW_NETWORK_ID")
 	HW_SUBNET_ID             = os.Getenv("HW_SUBNET_ID")
 	HW_ENTERPRISE_PROJECT_ID = os.Getenv("HW_ENTERPRISE_PROJECT_ID")
+	HW_MAPREDUCE_CUSTOM      = os.Getenv("HW_MAPREDUCE_CUSTOM")
 
 	HW_DEPRECATED_ENVIRONMENT = os.Getenv("HW_DEPRECATED_ENVIRONMENT")
 )
@@ -78,6 +79,13 @@ func TestAccPreCheckDeprecated(t *testing.T) {
 func TestAccPreCheckEpsID(t *testing.T) {
 	if HW_ENTERPRISE_PROJECT_ID == "" {
 		t.Skip("This environment does not support Enterprise Project ID tests")
+	}
+}
+
+//lintignore:AT003
+func TestAccPreCheckMrsCustom(t *testing.T) {
+	if HW_MAPREDUCE_CUSTOM == "" {
+		t.Skip("HW_MAPREDUCE_CUSTOM must be set for acceptance tests:custom type cluster of map reduce")
 	}
 }
 
