@@ -18,7 +18,6 @@ data "huaweicloud_compute_availability_zones_v2" "zones" {}
 
 * `state` - (Optional, String) The `state` of the availability zones to match, default ("available").
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

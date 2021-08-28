@@ -52,7 +52,7 @@ The following arguments are supported:
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the VPC.
+* `id` - ID of the VPC.
 
 * `status` - The current status of the desired VPC. Can be either CREATING, OK, DOWN, PENDING_UPDATE, PENDING_DELETE, or ERROR.
 
@@ -66,6 +66,7 @@ The `routes` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 3 minute.
 

@@ -69,21 +69,24 @@ The following arguments are supported:
   + ai: AI-enhanced (Only the SQL x86_64 dedicated queue supports this option.)
 
 * `tags` - (Optional, Map, ForceNew) Label of a queue. Changing this parameter will create a new resource.
+
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
 
-* `create_time` -  Time when a queue is created.
+* `create_time` - Time when a queue is created.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `update` - Default is 45 minute.
 
 ## Import
 
 DLI queue can be imported by  `id`. For example,
+
 ```
 terraform import huaweicloud_dli_queue.example  abc123
 ```

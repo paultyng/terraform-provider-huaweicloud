@@ -4,9 +4,9 @@ resource "huaweicloud_vpc" "myvpc" {
 }
 
 resource "huaweicloud_vpc_subnet" "mysubnet" {
-  name          = var.subnet_name
-  cidr          = var.subnet_cidr
-  gateway_ip    = var.subnet_gateway
+  name       = var.subnet_name
+  cidr       = var.subnet_cidr
+  gateway_ip = var.subnet_gateway
 
   //dns is required for cce node installing
   primary_dns   = var.primary_dns
@@ -29,7 +29,7 @@ resource "huaweicloud_vpc_eip" "myeip" {
 data "huaweicloud_availability_zones" "myaz" {}
 
 resource "huaweicloud_compute_keypair" "mykeypair" {
-  name       = var.key_pair_name
+  name = var.key_pair_name
 }
 resource "huaweicloud_cce_cluster" "mycce" {
   name                   = var.cce_cluster_name
@@ -69,17 +69,17 @@ resource "huaweicloud_compute_instance" "myecs" {
   availability_zone           = data.huaweicloud_availability_zones.myaz.names[0]
   key_pair                    = huaweicloud_compute_keypair.mykeypair.name
   delete_disks_on_termination = true
-  
+
   system_disk_type = var.root_volume_type
   system_disk_size = var.root_volume_size
-  
+
   data_disks {
-	  type = var.data_volume_type
-	  size = var.data_volume_size
+    type = var.data_volume_type
+    size = var.data_volume_size
   }
-  
+
   network {
-	  uuid = huaweicloud_vpc_subnet.mysubnet.id
+    uuid = huaweicloud_vpc_subnet.mysubnet.id
   }
 }
 

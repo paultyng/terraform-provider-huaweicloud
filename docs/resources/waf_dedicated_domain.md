@@ -80,7 +80,7 @@ The `server` block supports:
 
 The following attributes are exported:
 
-* `id` -  ID of the domain.
+* `id` - ID of the domain.
 
 * `certificate_name` - The name of the certificate used by the domain name.
 

@@ -20,10 +20,9 @@ data "huaweicloud_gaussdb_redis_instance" "test" {
 
 * `name` - (Optional, String) Specifies the name of the instance.
 
-* `vpc_id` -  (Optional, String) Specifies the VPC ID.
+* `vpc_id` - (Optional, String) Specifies the VPC ID.
 
 * `subnet_id` - (Optional, String) Specifies the network ID of a subnet.
-
 
 ## Attributes Reference
 

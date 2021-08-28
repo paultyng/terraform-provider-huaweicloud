@@ -9,7 +9,6 @@ Use this data source to get the ID of an available Flexibleengine dcs product.
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_dcs_product" "product1" {
   spec_code = "redis.cluster.xu1.large.r2.4"
 }
@@ -22,7 +21,6 @@ data "huaweicloud_dcs_product" "product1" {
 * `spec_code` - (Optional, String) Specifies the DCS instance specification code. You can query the code as follows:
   + Query the specifications in [DCS Instance Specifications](https://support.huaweicloud.com/intl/en-us/productdesc-dcs/dcs-pd-200713003.html)
   + Log in to the DCS console, click *Buy DCS Instance*, and find the corresponding instance specification.
-
 
 ## Attributes Reference
 

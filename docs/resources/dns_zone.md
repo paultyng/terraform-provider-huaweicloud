@@ -40,6 +40,7 @@ resource "huaweicloud_dns_zone" "my_private_zone" {
 ## Argument Reference
 
 The following arguments are supported:
+
 * `region` - (Optional, String, ForceNew) The region in which to create the DNS zone.
     If omitted, the `region` argument of the provider will be used.
     Changing this creates a new DNS zone.
@@ -81,9 +82,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `masters` - An array of master DNS servers.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

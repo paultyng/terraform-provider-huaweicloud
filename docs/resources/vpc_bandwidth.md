@@ -14,7 +14,6 @@ resource "huaweicloud_vpc_bandwidth" "bandwidth_1" {
   name = "bandwidth_1"
   size = 5
 }
-
 ```
 
 ## Argument Reference
@@ -29,12 +28,11 @@ The following arguments are supported:
 
 * `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project id of the Shared Bandwidth. Changing this creates a new bandwidth.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
-* `id` -  ID of the Shared Bandwidth.
+* `id` - ID of the Shared Bandwidth.
 
 * `share_type` - Indicates whether the bandwidth is shared or dedicated.
 
@@ -46,6 +44,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 10 minute.

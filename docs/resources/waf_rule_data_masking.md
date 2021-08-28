@@ -24,6 +24,7 @@ resource "huaweicloud_waf_rule_data_masking" "rule_1" {
 ## Argument Reference
 
 The following arguments are supported:
+
 * `region` - (Optional, String, ForceNew) The region in which to create the WAF Data Masking rule resource.
   If omitted, the provider-level region will be used. Changing this setting will create a new rule.
 

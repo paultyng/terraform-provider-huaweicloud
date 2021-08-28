@@ -97,7 +97,6 @@ In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
 
-
 ## Import
 
 This resource can be imported by specifying all three arguments, separated

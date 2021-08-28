@@ -17,7 +17,6 @@ variable "eip_id" {}
 data "huaweicloud_antiddos" "antiddos" {
   floating_ip_id = var.eip_id
 }
-
 ```
 
 ## Argument Reference

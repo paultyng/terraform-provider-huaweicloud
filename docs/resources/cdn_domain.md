@@ -40,7 +40,6 @@ The following arguments are supported:
 * `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project id.
     Changing this parameter will create a new resource.
 
-
 The `sources` block supports:
 
 * `origin` - (Required, String) The domain name or IP address of the origin server.
@@ -63,9 +62,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `service_area` - The area covered by the acceleration service.
 
-
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 20 minute.
 * `delete` - Default is 20 minute.
 

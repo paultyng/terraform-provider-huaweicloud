@@ -18,6 +18,7 @@ data "huaweicloud_cce_node" "node" {
   name       = var.node_name
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
@@ -31,7 +32,6 @@ The following arguments are supported:
 * `node_id` - (Optional, String) The id of the node.
 
 * `status` - (Optional, String) The state of the node.
-
 
 ## Attributes Reference
 

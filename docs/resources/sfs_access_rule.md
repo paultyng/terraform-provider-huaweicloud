@@ -10,6 +10,7 @@ This is an alternative to `huaweicloud_sfs_access_rule_v2`
 ## Example Usage
 
 ### Usage in VPC authorization scenarios
+
 ```hcl
 variable "share_name" { }
 variable "vpc_id" { }
@@ -27,6 +28,7 @@ resource "huaweicloud_sfs_access_rule" "rule_1" {
 ```
 
 ### Usage in IP address authorization scenario
+
 ```hcl
 variable "share_name" { }
 variable "vpc_id" { }
@@ -67,7 +69,6 @@ The following arguments are supported:
         For a CIFS shared file system, the value in the format of *VPC_ID#IP_address#priority*.
         For example, 0157b53f-4974-4e80-91c9-098532bcaf00#2.2.2.2/16#0.
 
-
 ## Attributes Reference
 In addition to all arguments above, the following attributes are exported:
 
@@ -77,6 +78,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

@@ -10,11 +10,9 @@ This is an alternative to `huaweicloud_dcs_maintainwindow_v1`
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_dcs_maintainwindow" "maintainwindow1" {
   seq = 1
 }
-
 ```
 
 ## Argument Reference

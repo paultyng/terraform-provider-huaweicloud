@@ -54,7 +54,6 @@ In addition to all arguments above, the following attributes are exported:
 * `expiration_time` - Expiration time.
 * `creation_date` - Creation time (time stamp) of a key.
 
-
 ## Import
 
 KMS Keys can be imported using the `id`, e.g.

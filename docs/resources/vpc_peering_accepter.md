@@ -64,7 +64,6 @@ The following arguments are supported:
 
 * `accept` (Optional, Bool)- Whether or not to accept the peering request. Defaults to `false`.
 
-
 ## Removing huaweicloud_vpc_peering_connection_accepter from your configuration
 
 huaweicloud allows a cross-tenant VPC Peering Connection to be deleted from either the requester's or accepter's side. However, Terraform only allows the VPC Peering Connection to be deleted from the requester's side by removing the corresponding `huaweicloud_vpc_peering_connection` resource from your configuration. Removing a `huaweicloud_vpc_peering_connection_accepter` resource from your configuration will remove it from your state file and management, but will not destroy the VPC Peering Connection.
@@ -73,7 +72,7 @@ huaweicloud allows a cross-tenant VPC Peering Connection to be deleted from eith
 
 In addition to all arguments above, the following attributes are exported:
 
-* `name` - 	The VPC peering connection name.
+* `name` - The VPC peering connection name.
 
 * `id` - The VPC peering connection ID.
 
@@ -87,6 +86,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

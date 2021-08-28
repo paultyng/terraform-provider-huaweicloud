@@ -51,6 +51,7 @@ resource "huaweicloud_dds_instance" "instance" {
 ```
 
 ## Example Usage: Creating a Replica Set
+
 ```hcl
 resource "huaweicloud_dds_instance" "instance" {
   name = "dds-instance"
@@ -81,16 +82,16 @@ resource "huaweicloud_dds_instance" "instance" {
 The following arguments are supported:
 
 * `region` - (Optional, String, ForceNew) Specifies the region of the DDS instance. Changing this creates
-	a new instance.
+  a new instance.
 
 * `name` - (Required, String) Specifies the DB instance name. The DB instance name of the same
-	type is unique in the same tenant.
+  type is unique in the same tenant.
 
 * `datastore` - (Required, List, ForceNew) Specifies database information. The structure is described
-	below. Changing this creates a new instance.
+  below. Changing this creates a new instance.
 
 * `availability_zone` - (Required, String, ForceNew) Specifies the ID of the availability zone. Changing
-	this creates a new instance.
+  this creates a new instance.
 
 * `vpc_id` - (Required, String, ForceNew) Specifies the VPC ID. Changing this creates a new instance.
 
@@ -101,16 +102,16 @@ The following arguments are supported:
 * `password` - (Required, String) Specifies the Administrator password of the database instance.
 
 * `disk_encryption_id` - (Required, String, ForceNew) Specifies the disk encryption ID of the instance.
-	Changing this creates a new instance.
+  Changing this creates a new instance.
 
 * `mode` - (Required, String, ForceNew) Specifies the mode of the database instance. Changing this creates
-	a new instance.
+  a new instance.
 
 * `flavor` - (Required, List, ForceNew) Specifies the flavors information. The structure is described below.
-	Changing this creates a new instance.
+  Changing this creates a new instance.
 
 * `backup_strategy` - (Optional, List) Specifies the advanced backup policy. The structure is
-	described below.
+  described below.
 
 * `enterprise_project_id` - (Optional, String, ForceNew) Specifies the enterprise project id of the dds instance.
   Changing this creates a new instance.
@@ -140,7 +141,7 @@ The `flavor` block supports:
   + For a Community Edition single node instance, the value is single.
 
 * `num` - (Required, Int) Specifies the node quantity. Valid value:
-	+ In a Community Edition cluster instance,the number of mongos ranges from 2 to 16.
+  + In a Community Edition cluster instance,the number of mongos ranges from 2 to 16.
   + In a Community Edition cluster instance,the number of shards ranges from 2 to 16.
   + In an Enhanced Edition cluster instance, the number of shards ranges from 2 to 12.
   + config: the value is 1.
@@ -164,15 +165,15 @@ The `flavor` block supports:
 The `backup_strategy ` block supports:
 
 * `start_time` - (Required, String) Specifies the backup time window. Automated backups will be triggered
-	during the backup time window. The value cannot be empty. It must be a valid value in the
-	"hh:mm-HH:MM" format. The current time is in the UTC format.
-	+ The HH value must be 1 greater than the hh value.
-	+ The values from mm and MM must be the same and must be set to any of the following 00, 15, 30, or 45.
+  during the backup time window. The value cannot be empty. It must be a valid value in the
+  "hh:mm-HH:MM" format. The current time is in the UTC format.
+  + The HH value must be 1 greater than the hh value.
+  + The values from mm and MM must be the same and must be set to any of the following 00, 15, 30, or 45.
 
 * `keep_days` - (Optional, Int) Specifies the number of days to retain the generated backup files. The
-	value range is from 0 to 732.
-	+ If this parameter is set to 0, the automated backup policy is not set.
-	+ If this parameter is not transferred, the automated backup policy is enabled by default.
+  value range is from 0 to 732.
+  + If this parameter is set to 0, the automated backup policy is not set.
+  + If this parameter is not transferred, the automated backup policy is enabled by default.
     Backup files are stored for seven days by default.
 
 ## Attributes Reference
@@ -200,6 +201,7 @@ The `nodes` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 30 minute.
 * `delete` - Default is 30 minute.
 

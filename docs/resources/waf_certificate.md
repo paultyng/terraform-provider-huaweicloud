@@ -34,6 +34,7 @@ EOT
 ## Argument Reference
 
 The following arguments are supported:
+
 * `region` - (Optional, String, ForceNew) The region in which to create the WAF certificate resource.
   If omitted, the provider-level region will be used.
   Changing this setting will push a new certificate.
@@ -63,6 +64,7 @@ terraform import huaweicloud_waf_certificate.certificate_2 3ebd3201238d41f9bfc36
 
 Note that the imported state is not identical to your resource definition, due to security reason.
 The missing attributes include `certificate`, and `private_key`. You can ignore changes as below.
+
 ```
 resource "huaweicloud_waf_certificate" "certificate_2" {
     ...

@@ -11,14 +11,12 @@ This is an alternative to `huaweicloud_csbs_backup_policy_v1`
 
 ## Example Usage
 
-
 ```hcl
 variable "policy_id" {}
 
 data "huaweicloud_csbs_backup_policy" "csbs_policy" {
   id = var.policy_id
 }
-
 ```
 
 ## Argument Reference
@@ -59,13 +57,13 @@ In addition to all arguments above, the following attributes are exported:
 
     + `operation_type` - Specifies Operation type, which can be backup.
 
-    + `id` -  Specifies Scheduling period ID.
+    + `id` - Specifies Scheduling period ID.
 
-    + `trigger_id` -  Specifies Scheduler ID.
+    + `trigger_id` - Specifies Scheduler ID.
 
-    + `trigger_name` -  Specifies Scheduler name.
+    + `trigger_name` - Specifies Scheduler name.
 
-    + `trigger_type` -  Specifies Scheduler type.
+    + `trigger_type` - Specifies Scheduler type.
 
 * `resource` block supports the following arguments:
 

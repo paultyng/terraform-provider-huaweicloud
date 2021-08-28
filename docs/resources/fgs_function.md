@@ -115,6 +115,7 @@ resource "huaweicloud_fgs_function" "test" {
 ```
 
 ### With agency, user_data for environment variables and OBS for code storage
+
 ```hcl
 resource "huaweicloud_identity_agency" "agency" {
   name                   = "fgs_obs_agency"
@@ -162,15 +163,15 @@ The following arguments are supported:
 * `timeout` - (Required, Int) Specifies the timeout interval of the function, ranges from 3s to 900s.
 
 * `code_type` - (Required, String) Specifies the function code type, which can be inline: inline code, zip: ZIP file,
-	jar: JAR file or java functions, obs: function code stored in an OBS bucket.
+  jar: JAR file or java functions, obs: function code stored in an OBS bucket.
 
 * `func_code` - (Optional, String) Specifies the function code. When code_type is set to inline, zip, or jar, this parameter is mandatory,
-	and the code can be encoded using Base64 or just with the text code.
+  and the code can be encoded using Base64 or just with the text code.
 
 * `code_url` - (Optional, String) Specifies the code url. This parameter is mandatory when code_type is set to obs.
 
 * `code_filename` - (Optional, String) Specifies the name of a function file, This field is mandatory only when coe_type is
-	set to jar or zip.
+  set to jar or zip.
 
 * `depend_list` - (Optional, String) Specifies the dependencies of the function.
 
@@ -220,6 +221,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

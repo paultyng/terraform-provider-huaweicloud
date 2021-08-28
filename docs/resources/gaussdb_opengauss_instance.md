@@ -54,11 +54,11 @@ The following arguments are supported:
   such as ~!@#%^*-_=+? You are advised to enter a strong password to improve security, preventing security risks
   such as brute force cracking.
 
-* `availability_zone` -  (Required, String, ForceNew) Specifies the Availability Zone information, can be three same or
+* `availability_zone` - (Required, String, ForceNew) Specifies the Availability Zone information, can be three same or
   different az like "cn-north-4a,cn-north-4a,cn-north-4a".
   Changing this parameter will create a new resource.
 
-* `vpc_id` -  (Required, String, ForceNew) Specifies the VPC ID.
+* `vpc_id` - (Required, String, ForceNew) Specifies the VPC ID.
   Changing this parameter will create a new resource.
 
 * `subnet_id` - (Required, String, ForceNew) Specifies the network ID of a subnet.
@@ -103,13 +103,11 @@ The `datastore` block supports:
 * `version` - (Optional, String, ForceNew) Specifies the database version. Defaults to the latest version.
   Please reference to the API docs for valid options.
 
-
 The `volume` block supports:
 
 * `type` - (Required, String, ForceNew) Specifies the volume type. Only "ULTRAHIGH" is supported now.
 
 * `size` - (Required, Int) Specifies the volume size (in gigabytes) for a Sharding. The value should between 40G ~ 5TB.
-
 
 The `ha` block supports:
 
@@ -118,7 +116,6 @@ The `ha` block supports:
 * `replication_mode` - (Required, String, ForceNew) Specifies the database replication mode. Only "sync" is supported now.
 
 * `consistency` - (Optional, String, ForceNew) Specifies the database consistency mode. Valid options are "strong" and "eventual".
-
 
 The `backup_strategy` block supports:
 
@@ -159,6 +156,7 @@ The `nodes` block contains:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 120 minute.
 * `update` - Default is 60 minute.
 * `delete` - Default is 30 minute.

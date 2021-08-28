@@ -15,6 +15,7 @@ data "huaweicloud_elb_certificate" "test" {
   name = var.certificate_name
 }
 ```
+
 ## Argument Reference
 
 The following arguments are supported:
@@ -27,7 +28,6 @@ The following arguments are supported:
   
   -> **NOTE:** The certificate name is not unique.
   Only returns the last created one when matched multiple certificates.
-
 
 ## Attributes Reference
 

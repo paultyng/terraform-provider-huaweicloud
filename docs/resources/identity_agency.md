@@ -10,6 +10,7 @@ This is an alternative to `huaweicloud_iam_agency_v3`
 ## Example Usage
 
 ### Delegate another HUAWEI CLOUD account to perform operations on your resources
+
 ```hcl
 resource "huaweicloud_identity_agency" "agency" {
   name                  = "test_agency"
@@ -29,6 +30,7 @@ resource "huaweicloud_identity_agency" "agency" {
 ```
 
 ### Delegate a cloud service to access your resources in other cloud services
+
 ```hcl
 resource "huaweicloud_identity_agency" "agency" {
   name                   = "test_agency"
@@ -102,6 +104,7 @@ $ terraform import huaweicloud_identity_agency.agency 0b97661f9900f23f4fc2c00971
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 5 minute.

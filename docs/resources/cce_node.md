@@ -9,7 +9,6 @@ This is an alternative to `huaweicloud_cce_node_v3`
 ## Basic Usage
 
 ```hcl
-
 data "huaweicloud_availability_zones" "myaz" {}
 
 resource "huaweicloud_compute_keypair" "mykp" {
@@ -151,7 +150,6 @@ The following arguments are supported:
 
 * `eip_id` - (Optional, String, ForceNew) The ID of the EIP. Changing this parameter will create a new resource.
 
-
 -> **Note:** If the eip_id parameter is configured, you do not need to configure the bandwidth parameters:
   `iptype`, `bandwidth_charge_mode`, `bandwidth_size` and `share_type`.
 
@@ -224,13 +222,14 @@ The following arguments are supported:
 In addition to all arguments above, the following attributes are exported:
 
 * `id` - Specifies a resource ID in UUID format.
-* `status` -  Node status information.
+* `status` - Node status information.
 * `server_id` - ID of the ECS instance associated with the node.
 * `private_ip` - Private IP of the CCE node.
 * `public_ip` - Public IP of the CCE node.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 20 minute.
 * `delete` - Default is 20 minute.
 
@@ -250,6 +249,7 @@ API response, security or some other reason. The missing attributes include:
 It is generally recommended running `terraform plan` after importing a node.
 You can then decide if changes should be applied to the node, or the resource definition should be updated to align
 with the node. Also you can ignore changes as below.
+
 ```
 resource "huaweicloud_cce_node" "my_node" {
     ...

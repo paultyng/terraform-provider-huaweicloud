@@ -10,6 +10,7 @@ This is an alternative to `huaweicloud_nat_snat_rule_v2`
 ## Example Usage
 
 ### SNAT rule in VPC scenario
+
 ```hcl
 resource "huaweicloud_nat_snat_rule" "snat_1" {
   nat_gateway_id = var.natgw_id
@@ -19,6 +20,7 @@ resource "huaweicloud_nat_snat_rule" "snat_1" {
 ```
 
 ### SNAT rule in Direct Connect scenario
+
 ```hcl
 resource "huaweicloud_nat_snat_rule" "snat_2" {
   nat_gateway_id = var.natgw_id
@@ -61,6 +63,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

@@ -69,7 +69,7 @@ The following arguments are supported:
 
 The following attributes are exported:
 
-* `id` -  The id of the instance.
+* `id` - The id of the instance.
 
 * `server_id` - The id of the instance server.
 

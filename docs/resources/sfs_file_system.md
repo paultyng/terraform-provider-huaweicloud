@@ -106,7 +106,6 @@ The following arguments are supported:
 
 -> **NOTE:** If you want to create more access rules, please using [huaweicloud_sfs_access_rule](https://www.terraform.io/docs/providers/huaweicloud/r/sfs_access_rule.html).
 
-
 ## Attributes Reference
 In addition to all arguments above, the following attributes are exported:
 
@@ -132,6 +131,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

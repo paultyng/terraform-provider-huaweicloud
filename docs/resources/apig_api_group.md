@@ -88,6 +88,7 @@ In addition to all arguments above, the following attributes are exported:
 
 API groups of the APIG can be imported using their `id` and the ID of the APIG instance to which the group belongs,
 separated by a slash, e.g.
+
 ```
 $ terraform import huaweicloud_apig_group.test <instance id>/<id>
 ```

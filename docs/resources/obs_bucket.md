@@ -145,12 +145,12 @@ The following arguments are supported:
 
 * `bucket` - (Required, String, ForceNew) Specifies the name of the bucket. Changing this parameter will create a new resource.
   A bucket must be named according to the globally applied DNS naming regulations as follows:
-	+ The name must be globally unique in OBS.
-	+ The name must contain 3 to 63 characters. Only lowercase letters, digits, hyphens (-), and periods (.) are allowed.
-	+ The name cannot start or end with a period (.) or hyphen (-), and cannot contain two consecutive periods (.) or
+  + The name must be globally unique in OBS.
+  + The name must contain 3 to 63 characters. Only lowercase letters, digits, hyphens (-), and periods (.) are allowed.
+  + The name cannot start or end with a period (.) or hyphen (-), and cannot contain two consecutive periods (.) or
     contain a period (.) and a hyphen (-) adjacent to each other.
-	+ The name cannot be an IP address.
-	+ If the name contains any periods (.), a security certificate verification message may appear when you access
+  + The name cannot be an IP address.
+  + If the name contains any periods (.), a security certificate verification message may appear when you access
     the bucket or its objects by entering a domain name.
 
 * `storage_class` - (Optional, String) Specifies the storage class of the bucket. OBS provides three storage classes:
@@ -281,7 +281,6 @@ The `noncurrent_version_transition` object supports the following
 * `days` - (Required, Int) Specifies the number of days when noncurrent object versions are automatically transitioned to the specified storage class.
 * `storage_class` - (Required, String) The class of storage used to store the object. Only `WARM` and `COLD` are supported.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
@@ -309,6 +308,7 @@ Note that the imported state may not be identical to your resource definition, d
 missing from the API response. The missing attributes include `acl` and `force_destroy`.
 It is generally recommended running `terraform plan` after importing an OBS bucket.
 Also you can ignore changes as below.
+
 ```
 resource "huaweicloud_obs_bucket" "bucket" {
     ...

@@ -39,7 +39,6 @@ resource "huaweicloud_compute_instance" "instance" {
 
 * `memory_size` - (Optional, Int) Specifies the memory size(GB) in the ECS flavor.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

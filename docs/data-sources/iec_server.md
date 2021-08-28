@@ -46,11 +46,13 @@ In addition to all arguments above, the following attributes are exported:
 * `system_disk_id` - The system disk voume ID.
 
 The `coverage_sites` block supports:
+
   * `site_id` - The ID of IEC site.
   * `site_info` - The located information of the IEC site. It contains area, province and city.
   * `operator` - The operator of the IEC site.
 
 The `nics` block supports:
+
   * `port` - The port ID corresponding to the IP address on that network.
   * `mac` - The MAC address of the NIC on that network.
   * `address` - The IPv4 address of the server on that network.

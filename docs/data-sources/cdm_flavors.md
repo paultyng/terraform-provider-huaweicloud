@@ -20,11 +20,9 @@ In addition to all arguments above, the following attributes are exported:
 
 * `region` - The region in which to obtain the CDM flavors. If omitted, the provider-level region will be used.
 
-* `version` -
-  The version of the flavor.
+* `version` - The version of the flavor.
 
-* `flavors` -
-  Indicates the flavors information. Structure is documented below.
+* `flavors` - Indicates the flavors information. Structure is documented below.
 
 The `flavors` block contains:
 

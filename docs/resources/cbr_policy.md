@@ -109,6 +109,7 @@ In addition to all arguments above, the following attributes are exported:
 ## Import
 
 Policies can be imported by their `id`. For example,
+
 ```
 terraform import huaweicloud_cbr_policy.test 4d2c2939-774f-42ef-ab15-e5b126b11ace
 ```

@@ -23,6 +23,7 @@ resource "huaweicloud_waf_rule_blacklist" "rule_1" {
 ## Argument Reference
 
 The following arguments are supported:
+
 * `region` - (Optional, String, ForceNew) The region in which to create the WAF blacklist and whitelist rule resource.
   If omitted, the provider-level region will be used. Changing this setting will push a new certificate.
   

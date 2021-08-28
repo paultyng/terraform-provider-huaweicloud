@@ -28,14 +28,13 @@ The following arguments are supported:
 
 * `status` - (Optional, String) The status of the shared file system.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:
 
 * `availability_zone` - The availability zone name.
 
-* `size` - 	The size (GB) of the shared file system.
+* `size` - The size (GB) of the shared file system.
 
 * `share_type` - The storage service type for the shared file system, such as high-performance storage (composed of SSDs) or large-capacity storage (composed of SATA disks).
 

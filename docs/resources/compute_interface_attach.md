@@ -60,7 +60,6 @@ resource "huaweicloud_compute_interface_attach" "attached" {
   network_id  = data.huaweicloud_vpc_subnet.mynet.id
   fixed_ip    = "10.0.10.10"
 }
-
 ```
 
 ### Attachment Using an Existing Port
@@ -92,7 +91,6 @@ resource "huaweicloud_compute_interface_attach" "attached" {
   instance_id = huaweicloud_compute_instance.myinstance.id
   port_id     = data.huaweicloud_networking_port.myport.id
 }
-
 ```
 
 ## Argument Reference
@@ -120,6 +118,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 10 minute.
 

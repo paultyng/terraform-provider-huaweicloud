@@ -163,7 +163,6 @@ The `eip` block supports:
 
 * `bandwidth` - (Required, List) The bandwidth information. The structure is described below.
 
-
 The `bandwidth` block supports:
 
 * `size` - (Required, Int) The bandwidth (Mbit/s). The value range is 1 to 300.

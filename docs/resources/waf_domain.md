@@ -86,7 +86,7 @@ The `server` block supports:
 
 The following attributes are exported:
 
-* `id` -  ID of the domain.
+* `id` - ID of the domain.
 
 * `protect_status` - The WAF mode. -1: bypassed, 0: disabled, 1: enabled.
 

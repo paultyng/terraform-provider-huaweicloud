@@ -10,7 +10,6 @@ It is recommend to use `huaweicloud_mapreduce_job`, which makes a great improvem
 ## Example Usage
 
 ```hcl
-
 resource "huaweicloud_mrs_job" "job1" {
   job_type   = 1
   job_name   = "test_mapreduce_job1"
@@ -21,7 +20,6 @@ resource "huaweicloud_mrs_job" "job1" {
   job_log    = "s3a://wordcount/log/"
   arguments  = "wordcount"
 }
-
 ```
 
 ## Argument Reference
@@ -87,6 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `update` - Default is 10 minute.
 * `delete` - Default is 5 minute.

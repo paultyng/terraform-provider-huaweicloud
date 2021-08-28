@@ -24,7 +24,6 @@ data "huaweicloud_vpc_eip" "by_address" {
 
 * `enterprise_project_id` - (Optional, String) The enterprise project id of the EIP.
 
-
 ## Attributes Reference
 
 In addition to all arguments above, the following attributes are exported:

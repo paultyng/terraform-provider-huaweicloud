@@ -12,7 +12,6 @@ This is an alternative to `huaweicloud_vbs_backup_v2`
 # Example Usage
 
 ```hcl
-
 resource "huaweicloud_evs_volume" "volume" {
   name              = "volume"
   description       = "my volume"
@@ -89,6 +88,7 @@ VBS Backup can be imported using the `backup id`, e.g.
 
 ## Timeouts
 This resource provides the following timeouts configuration options:
+
 * `create` - Default is 10 minute.
 * `delete` - Default is 3 minute.
 

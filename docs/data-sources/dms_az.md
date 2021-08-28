@@ -10,7 +10,6 @@ This is an alternative to `huaweicloud_dms_az_v1`
 ## Example Usage
 
 ```hcl
-
 data "huaweicloud_dms_az" "az1" {
   code = "cn-north-4a"
 }
