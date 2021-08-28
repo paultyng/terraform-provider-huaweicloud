@@ -350,13 +350,13 @@ The following arguments are supported:
 
 * `template_id` - (Optional, List, ForceNew) Specifies the template used for node deployment when the cluster type is
   CUSTOM.
-  - mgmt_control_combined_v2: template for jointly deploying the management and control nodes. The management and
+  + mgmt_control_combined_v2: template for jointly deploying the management and control nodes. The management and
   control roles are co-deployed on the Master node, and data instances are deployed in the same node group. This
   deployment mode applies to scenarios where the number of control nodes is less than 100, reducing costs.
-  - mgmt_control_separated_v2: The management and control roles are deployed on different master nodes, and data
+  + mgmt_control_separated_v2: The management and control roles are deployed on different master nodes, and data
   instances are deployed in the same node group. This deployment mode is applicable to a cluster with 100 to 500 nodes
   and delivers better performance in high-concurrency load scenarios.
-  - mgmt_control_data_separated_v2: The management role and control role are deployed on different Master nodes,
+  + mgmt_control_data_separated_v2: The management role and control role are deployed on different Master nodes,
   and data instances are deployed in different node groups. This deployment mode is applicable to a cluster with more
   than 500 nodes. Components can be deployed separately, which can be used for a larger cluster scale.
 
@@ -435,7 +435,7 @@ In addition to all arguments above, the following attributes are exported:
 * `charging_start_time` - The charging start time which is the start time of billing, in RFC-3339 format.
 * `node` - all the nodes attributes: master_nodes/analysis_core_nodes/streaming_core_nodes/analysis_task_nodes
 /streaming_task_nodes.
-  - `host_ips` - The host list of this nodes group in the cluster.
+  + `host_ips` - The host list of this nodes group in the cluster.
 
 ## Timeouts
 
