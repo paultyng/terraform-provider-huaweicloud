@@ -80,7 +80,7 @@ The following arguments are supported:
 * `region` - (Required) Specifies the region where the bucket is located. This can also be sourced from the
   *AWS_DEFAULT_REGION* and *AWS_REGION* environment variables.
 
-* `endpoint` - (Required) Specifies the endpoint for HuaweiCloud OBS. The value is https://obs.{{region}}.myhuaweicloud.com.
+* `endpoint` - (Required) Specifies the endpoint for HuaweiCloud OBS. The value is `https://obs.{{region}}.myhuaweicloud.com`.
   This can also be sourced from the *AWS_S3_ENDPOINT* environment variable.
 
 * `skip_credentials_validation` - (Required) Skip credentials validation via the STS API. It's mandatory for HuaweiCloud.
