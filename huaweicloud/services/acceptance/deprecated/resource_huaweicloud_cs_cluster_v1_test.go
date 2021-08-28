@@ -12,29 +12,31 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"fmt"
 	"testing"
 
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/acceptance"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/fmtp"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/huaweicloud/golangsdk"
-	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
 )
 
 func TestAccCsClusterV1_basic(t *testing.T) {
+	rName := fmt.Sprintf("tf_acc_test_%s", acctest.RandString(5))
 	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		PreCheck:     func() { acceptance.TestAccPreCheck(t) },
+		Providers:    acceptance.TestAccProviders,
 		CheckDestroy: testAccCheckCsClusterV1Destroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccCsClusterV1_basic(acctest.RandString(10)),
+				Config: testAccCsClusterV1_basic(rName),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckCsClusterV1Exists(),
 				),
@@ -43,17 +45,17 @@ func TestAccCsClusterV1_basic(t *testing.T) {
 	})
 }
 
-func testAccCsClusterV1_basic(val string) string {
+func testAccCsClusterV1_basic(rName string) string {
 	return fmt.Sprintf(`
 resource "huaweicloud_cs_cluster_v1" "cluster" {
-  name = "terraform_cs_cluster_v1_test%s"
+  name = "%s"
 }
-	`, val)
+	`, rName)
 }
 
 func testAccCheckCsClusterV1Destroy(s *terraform.State) error {
-	config := testAccProvider.Meta().(*config.Config)
-	client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+	config := acceptance.TestAccProvider.Meta().(*config.Config)
+	client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -81,8 +83,8 @@ func testAccCheckCsClusterV1Destroy(s *terraform.State) error {
 
 func testAccCheckCsClusterV1Exists() resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		config := testAccProvider.Meta().(*config.Config)
-		client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+		config := acceptance.TestAccProvider.Meta().(*config.Config)
+		client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 		if err != nil {
 			return fmtp.Errorf("Error creating sdk client, err=%s", err)
 		}

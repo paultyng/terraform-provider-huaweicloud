@@ -99,19 +99,3 @@ func expandDisStreamV2CreateAutoCaleEnable(d interface{}, arrayIndex map[string]
 
 	return (ok1 && max1 > 0) && (ok2 && min1 > 0), nil
 }
-
-func checkCsClusterV1DeleteFinished(data interface{}) bool {
-	c, err := navigateValue(data, []string{"error_id"}, nil)
-	if err != nil {
-		return false
-	}
-	return "CS.20005" == convertToStr(c)
-}
-
-func checkCsPeeringConnectV1DeleteFinished(data interface{}) bool {
-	c, err := navigateValue(data, []string{"error_id"}, nil)
-	if err != nil {
-		return false
-	}
-	return "CS.22103" == convertToStr(c)
-}

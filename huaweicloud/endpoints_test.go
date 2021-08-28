@@ -883,10 +883,6 @@ func TestAccServiceEndpoints_EnterpriseIntelligence(t *testing.T) {
 	}
 	t.Logf("cloudtable endpoint:\t %s", actualURL)
 
-	serviceClient, err = config.CloudStreamV1Client(HW_REGION_NAME)
-	if err != nil {
-		t.Fatalf("Error creating HuaweiCloud cloudStream client: %s", err)
-	}
 	expectedURL = fmt.Sprintf("https://cs.%s.%s/v1.0/%s/", HW_REGION_NAME, config.Cloud, config.TenantID)
 	actualURL = serviceClient.ResourceBaseURL()
 	if actualURL != expectedURL {

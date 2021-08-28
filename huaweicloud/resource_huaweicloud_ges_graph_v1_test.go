@@ -28,13 +28,14 @@ import (
 )
 
 func TestAccGesGraphV1_basic(t *testing.T) {
+	rName := fmt.Sprintf("tf_acc_test_%s", acctest.RandString(5))
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:     func() { testAccPreCheck(t) },
 		Providers:    testAccProviders,
 		CheckDestroy: testAccCheckGesGraphV1Destroy,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccGesGraphV1_basic(acctest.RandString(10)),
+				Config: testAccGesGraphV1_basic(rName),
 				Check: resource.ComposeTestCheckFunc(
 					testAccCheckGesGraphV1Exists(),
 				),
@@ -43,23 +44,37 @@ func TestAccGesGraphV1_basic(t *testing.T) {
 	})
 }
 
-func testAccGesGraphV1_basic(val string) string {
+func testAccGesGraphV1_basic(rName string) string {
 	return fmt.Sprintf(`
+data "huaweicloud_availability_zones" "test" {}
+
+resource "huaweicloud_vpc" "test" {
+  name = "%s"
+  cidr = "192.168.0.0/16"
+}
+
+resource "huaweicloud_vpc_subnet" "test" {
+  name       = "%s"
+  cidr       = "192.168.0.0/20"
+  vpc_id     = huaweicloud_vpc.test.id
+  gateway_ip = "192.168.0.1"
+}
+
 resource "huaweicloud_networking_secgroup_v2" "secgroup" {
-  name = "terraform_test_security_group%s"
+  name = "%s"
   description = "terraform security group acceptance test"
 }
 
 resource "huaweicloud_ges_graph_v1" "graph" {
-  availability_zone = "%s"
+  availability_zone = data.huaweicloud_availability_zones.test.names[0]
   graph_size_type = 0
-  name = "terraform_ges_graph_test%s"
+  name = "%s"
   region = "%s"
   security_group_id = "${huaweicloud_networking_secgroup_v2.secgroup.id}"
-  subnet_id = "%s"
-  vpc_id = "%s"
+  subnet_id = huaweicloud_vpc_subnet.test.id
+  vpc_id = huaweicloud_vpc.test.id
 }
-	`, val, HW_AVAILABILITY_ZONE, val, HW_REGION_NAME, HW_NETWORK_ID, HW_VPC_ID)
+	`, rName, rName, rName, rName, HW_REGION_NAME)
 }
 
 func testAccCheckGesGraphV1Destroy(s *terraform.State) error {

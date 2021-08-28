@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"reflect"
@@ -25,13 +25,13 @@ import (
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/logp"
 )
 
-func resourceCsClusterV1() *schema.Resource {
+func ResourceCsClusterV1() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCsClusterV1Create,
-		Read:   resourceCsClusterV1Read,
-		Update: resourceCsClusterV1Update,
-		Delete: resourceCsClusterV1Delete,
-
+		Create:             resourceCsClusterV1Create,
+		Read:               resourceCsClusterV1Read,
+		Update:             resourceCsClusterV1Update,
+		Delete:             resourceCsClusterV1Delete,
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Timeouts: &schema.ResourceTimeout{
 			Create: schema.DefaultTimeout(30 * time.Minute),
 			Delete: schema.DefaultTimeout(30 * time.Minute),
@@ -114,7 +114,7 @@ func resourceCsClusterV1UserInputParams(d *schema.ResourceData) map[string]inter
 
 func resourceCsClusterV1Create(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -147,7 +147,7 @@ func resourceCsClusterV1Create(d *schema.ResourceData, meta interface{}) error {
 
 func resourceCsClusterV1Read(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -171,7 +171,7 @@ func resourceCsClusterV1Read(d *schema.ResourceData, meta interface{}) error {
 func resourceCsClusterV1Update(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
 
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -194,7 +194,7 @@ func resourceCsClusterV1Update(d *schema.ResourceData, meta interface{}) error {
 
 func resourceCsClusterV1Delete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}

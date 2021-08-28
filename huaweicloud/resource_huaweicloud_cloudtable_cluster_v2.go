@@ -18,6 +18,7 @@ import (
 	"reflect"
 	"time"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/huaweicloud/golangsdk"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
@@ -263,25 +264,35 @@ func resourceCloudtableClusterV2Delete(d *schema.ResourceData, meta interface{})
 		return fmtp.Errorf("Error deleting Cluster %q, err=%s", d.Id(), r.Err)
 	}
 
-	_, err = waitToFinish(
-		[]string{"Done"}, []string{"Pending"},
-		d.Timeout(schema.TimeoutCreate),
-		1*time.Second,
-		func() (interface{}, string, error) {
-			_, err := client.Get(url, nil, &golangsdk.RequestOpts{
+	stateConf := &resource.StateChangeConf{
+		Pending:      []string{"Pending"},
+		Target:       []string{"Done"},
+		Timeout:      d.Timeout(schema.TimeoutCreate),
+		Delay:        10 * time.Second,
+		PollInterval: 10 * time.Second,
+
+		Refresh: func() (interface{}, string, error) {
+			r := golangsdk.Result{}
+			_, r.Err = client.Get(url, &r.Body, &golangsdk.RequestOpts{
 				MoreHeaders: map[string]string{
 					"Content-Type": "application/json",
 					"X-Language":   "en-us",
 				}})
-			if err != nil {
-				if _, ok := err.(golangsdk.ErrDefault404); ok {
+			if r.Err != nil {
+				if _, ok := r.Err.(golangsdk.ErrDefault404); ok {
 					return true, "Done", nil
 				}
-				return nil, "", nil
+				return nil, "Pending", nil
 			}
+
 			return true, "Pending", nil
 		},
-	)
+	}
+
+	_, err = stateConf.WaitForState()
+	if err != nil {
+		return fmtp.Errorf("error waiting for Cluster (%s) to be terminated: %s", d.Id(), err)
+	}
 	return err
 }
 

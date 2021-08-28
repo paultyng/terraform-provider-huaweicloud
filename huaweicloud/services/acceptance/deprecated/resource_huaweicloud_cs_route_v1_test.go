@@ -12,13 +12,14 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"fmt"
 	"strings"
 	"testing"
 
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/acceptance"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/fmtp"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
@@ -26,12 +27,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/huaweicloud/golangsdk"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
+	dep "github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/deprecated"
 )
 
 func TestAccCsRouteV1_basic(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		PreCheck:     func() { acceptance.TestAccPreCheck(t) },
+		Providers:    acceptance.TestAccProviders,
 		CheckDestroy: testAccCheckCsRouteV1Destroy,
 		Steps: []resource.TestStep{
 			{
@@ -79,8 +81,8 @@ resource "huaweicloud_cs_route_v1" "route" {
 }
 
 func testAccCheckCsRouteV1Destroy(s *terraform.State) error {
-	config := testAccProvider.Meta().(*config.Config)
-	client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+	config := acceptance.TestAccProvider.Meta().(*config.Config)
+	client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -101,8 +103,8 @@ func testAccCheckCsRouteV1Destroy(s *terraform.State) error {
 
 func testAccCheckCsRouteV1Exists() resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		config := testAccProvider.Meta().(*config.Config)
-		client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+		config := acceptance.TestAccProvider.Meta().(*config.Config)
+		client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 		if err != nil {
 			return fmtp.Errorf("Error creating sdk client, err=%s", err)
 		}
@@ -131,5 +133,5 @@ func fetchCsRouteV1ByListOnTest(rs *terraform.ResourceState,
 	}
 	link = client.ServiceURL(link)
 
-	return findCsRouteV1ByList(client, link, rs.Primary.ID)
+	return dep.FindCsRouteV1ByList(client, link, rs.Primary.ID)
 }

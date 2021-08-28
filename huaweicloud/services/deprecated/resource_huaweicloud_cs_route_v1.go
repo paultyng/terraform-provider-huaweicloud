@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"reflect"
@@ -24,12 +24,12 @@ import (
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/logp"
 )
 
-func resourceCsRouteV1() *schema.Resource {
+func ResourceCsRouteV1() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCsRouteV1Create,
-		Read:   resourceCsRouteV1Read,
-		Delete: resourceCsRouteV1Delete,
-
+		Create:             resourceCsRouteV1Create,
+		Read:               resourceCsRouteV1Read,
+		Delete:             resourceCsRouteV1Delete,
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Schema: map[string]*schema.Schema{
 			"region": {
 				Type:     schema.TypeString,
@@ -69,7 +69,7 @@ func resourceCsRouteV1UserInputParams(d *schema.ResourceData) map[string]interfa
 
 func resourceCsRouteV1Create(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -96,7 +96,7 @@ func resourceCsRouteV1Create(d *schema.ResourceData, meta interface{}) error {
 
 func resourceCsRouteV1Read(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -119,7 +119,7 @@ func resourceCsRouteV1Read(d *schema.ResourceData, meta interface{}) error {
 
 func resourceCsRouteV1Delete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -186,10 +186,10 @@ func fetchCsRouteV1ByList(d *schema.ResourceData, client *golangsdk.ServiceClien
 	}
 	link = client.ServiceURL(link)
 
-	return findCsRouteV1ByList(client, link, d.Id())
+	return FindCsRouteV1ByList(client, link, d.Id())
 }
 
-func findCsRouteV1ByList(client *golangsdk.ServiceClient, link, resourceID string) (interface{}, error) {
+func FindCsRouteV1ByList(client *golangsdk.ServiceClient, link, resourceID string) (interface{}, error) {
 	r, err := sendCsRouteV1ListRequest(client, link)
 	if err != nil {
 		return nil, err

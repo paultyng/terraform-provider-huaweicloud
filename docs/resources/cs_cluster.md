@@ -7,6 +7,8 @@ subcategory: "Cloud Stream"
 Cloud Stream Service cluster management
 This is an alternative to `huaweicloud_cs_cluster_v1`
 
+!> **WARNING:** It has been deprecated, use `huaweicloud_dli_queue` instead.
+
 ## Example Usage
 
 ### create a cluster

@@ -12,7 +12,7 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"reflect"
@@ -25,12 +25,12 @@ import (
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/logp"
 )
 
-func resourceCsPeeringConnectV1() *schema.Resource {
+func ResourceCsPeeringConnectV1() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCsPeeringConnectV1Create,
-		Read:   resourceCsPeeringConnectV1Read,
-		Delete: resourceCsPeeringConnectV1Delete,
-
+		Create:             resourceCsPeeringConnectV1Create,
+		Read:               resourceCsPeeringConnectV1Read,
+		Delete:             resourceCsPeeringConnectV1Delete,
+		DeprecationMessage: "Cloud Stream has been deprecated. Please use huaweicloud_dli_queue instead",
 		Timeouts: &schema.ResourceTimeout{
 			Create: schema.DefaultTimeout(30 * time.Minute),
 			Delete: schema.DefaultTimeout(30 * time.Minute),
@@ -92,7 +92,7 @@ func resourceCsPeeringConnectV1UserInputParams(d *schema.ResourceData) map[strin
 
 func resourceCsPeeringConnectV1Create(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	csClient, err := config.CloudStreamV1Client(GetRegion(d, config))
+	csClient, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -112,7 +112,7 @@ func resourceCsPeeringConnectV1Create(d *schema.ResourceData, meta interface{}) 
 		return fmtp.Errorf("Error creating CsPeeringConnectV1, err=%s", err)
 	}
 
-	networkClient, err := config.NetworkingV2Client(GetRegion(d, config))
+	networkClient, err := config.NetworkingV2Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -139,7 +139,7 @@ func resourceCsPeeringConnectV1Create(d *schema.ResourceData, meta interface{}) 
 
 func resourceCsPeeringConnectV1Read(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -162,7 +162,7 @@ func resourceCsPeeringConnectV1Read(d *schema.ResourceData, meta interface{}) er
 
 func resourceCsPeeringConnectV1Delete(d *schema.ResourceData, meta interface{}) error {
 	config := meta.(*config.Config)
-	client, err := config.CloudStreamV1Client(GetRegion(d, config))
+	client, err := config.CloudStreamV1Client(config.GetRegion(d))
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}

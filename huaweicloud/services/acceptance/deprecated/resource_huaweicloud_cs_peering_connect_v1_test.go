@@ -12,12 +12,13 @@
 //
 // ----------------------------------------------------------------------------
 
-package huaweicloud
+package deprecated
 
 import (
 	"fmt"
 	"testing"
 
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/acceptance"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils/fmtp"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/acctest"
@@ -29,8 +30,8 @@ import (
 
 func TestAccCsPeeringConnectV1_basic(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
-		PreCheck:     func() { testAccPreCheck(t) },
-		Providers:    testAccProviders,
+		PreCheck:     func() { acceptance.TestAccPreCheck(t) },
+		Providers:    acceptance.TestAccProviders,
 		CheckDestroy: testAccCheckCsPeeringConnectV1Destroy,
 		Steps: []resource.TestStep{
 			{
@@ -72,8 +73,8 @@ resource "huaweicloud_cs_peering_connect_v1" "peering" {
 }
 
 func testAccCheckCsPeeringConnectV1Destroy(s *terraform.State) error {
-	config := testAccProvider.Meta().(*config.Config)
-	client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+	config := acceptance.TestAccProvider.Meta().(*config.Config)
+	client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 	if err != nil {
 		return fmtp.Errorf("Error creating sdk client, err=%s", err)
 	}
@@ -101,8 +102,8 @@ func testAccCheckCsPeeringConnectV1Destroy(s *terraform.State) error {
 
 func testAccCheckCsPeeringConnectV1Exists() resource.TestCheckFunc {
 	return func(s *terraform.State) error {
-		config := testAccProvider.Meta().(*config.Config)
-		client, err := config.CloudStreamV1Client(HW_REGION_NAME)
+		config := acceptance.TestAccProvider.Meta().(*config.Config)
+		client, err := config.CloudStreamV1Client(acceptance.HW_REGION_NAME)
 		if err != nil {
 			return fmtp.Errorf("Error creating sdk client, err=%s", err)
 		}
