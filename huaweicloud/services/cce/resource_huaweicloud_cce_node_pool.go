@@ -509,6 +509,13 @@ func resourceNodePoolRead(_ context.Context, d *schema.ResourceData, meta interf
 		return common.CheckDeletedDiag(d, err, "error retrieving CCE node pool")
 	}
 
+	// Special blacklist of CCE service.
+	sysTagsBL := []string{
+		"CCE-Cluster-ID",
+		// HCS provider used
+		fmt.Sprintf("CCE-Cluster-ID.%s", clusterId),
+		clusterId,
+	}
 	// The following parameters are not returned:
 	// password, subnet_id, preinstall, postinstall, taints, initial_node_count, pod_security_groups
 	mErr := multierror.Append(nil,
@@ -529,7 +536,7 @@ func resourceNodePoolRead(_ context.Context, d *schema.ResourceData, meta interf
 		d.Set("ecs_group_id", s.Spec.NodeManagement.ServerGroupReference),
 		d.Set("storage", flattenStorage(s.Spec.NodeTemplate.Storage)),
 		d.Set("security_groups", s.Spec.CustomSecurityGroups),
-		d.Set("tags", utils.TagsToMap(s.Spec.NodeTemplate.UserTags)),
+		d.Set("tags", utils.TagsToMapWithIndicator(s.Spec.NodeTemplate.UserTags, sysTagsBL, d.Get("tags").(map[string]interface{}))),
 		d.Set("status", s.Status.Phase),
 		d.Set("data_volumes", flattenResourceNodeDataVolume(s.Spec.NodeTemplate.DataVolumes)),
 		d.Set("root_volume", flattenResourceNodeRootVolume(s.Spec.NodeTemplate.RootVolume)),

@@ -84,7 +84,7 @@ func testAccAddon_Base(rName string) string {
 resource "huaweicloud_cce_node" "test" {
   cluster_id        = huaweicloud_cce_cluster.test.id
   name              = "%[2]s"
-  flavor_id         = "c7.large.4"
+  flavor_id         = data.huaweicloud_compute_flavors.test.ids[0]
   availability_zone = data.huaweicloud_availability_zones.test.names[0]
   key_pair          = huaweicloud_kps_keypair.test.name
 
@@ -168,8 +168,8 @@ func testAccAddon_values_base(name string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id         = huaweicloud_cce_cluster.test.id
   name               = "%[2]s"
-  os                 = "EulerOS 2.5"
-  flavor_id          = "c7.large.4"
+  os                 = "EulerOS 2.9"
+  flavor_id          = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count = 4
   availability_zone  = data.huaweicloud_availability_zones.test.names[0]
   key_pair           = huaweicloud_kps_keypair.test.name

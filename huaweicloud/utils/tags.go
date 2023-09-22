@@ -80,17 +80,39 @@ func SetResourceTagsToState(d *schema.ResourceData, client *golangsdk.ServiceCli
 	return nil
 }
 
-// TagsToMap returns the list of tags into a map.
-func TagsToMap(tags []tags.ResourceTag) map[string]string {
+func parseResourceTags(tagList []tags.ResourceTag) map[string]string {
 	result := make(map[string]string)
-	for _, val := range tags {
+	for _, val := range tagList {
 		result[val.Key] = val.Value
 	}
+	return result
+}
 
-	// ignore system tags to keep the tags consistent with what the user set
-	delete(result, "CCE-Cluster-ID")
-	delete(result, "CCE-Dynamic-Provisioning-Node")
+// TagsToMap returns the list of tags into a map.
+func TagsToMap(tagList []tags.ResourceTag) map[string]string {
+	return parseResourceTags(tagList)
+}
 
+// TagsToMapWithIndicator method filters the specific tags list based on the user-specified tags configuration and
+// returns a map.
+func TagsToMapWithIndicator(tagList []tags.ResourceTag, blacklist []string, indicator map[string]interface{}) map[string]string {
+	tagsMap := parseResourceTags(tagList)
+
+	// Filter special key names of cloud services based on blacklist.
+	for _, specKey := range blacklist {
+		delete(tagsMap, specKey)
+	}
+
+	if len(indicator) < 1 {
+		return tagsMap
+	}
+
+	result := make(map[string]string)
+	for key := range indicator {
+		if value, ok := tagsMap[key]; ok {
+			result[key] = value
+		}
+	}
 	return result
 }
 

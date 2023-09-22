@@ -622,11 +622,19 @@ func resourceClusterRead(_ context.Context, d *schema.ResourceData, meta interfa
 		return diag.Errorf("error creating CCE v3 client: %s", err)
 	}
 
-	n, err := clusters.Get(cceClient, d.Id()).Extract()
+	clusterId := d.Id()
+	n, err := clusters.Get(cceClient, clusterId).Extract()
 	if err != nil {
 		return common.CheckDeletedDiag(d, err, "CCE cluster")
 	}
 
+	// Special blacklist of CCE service.
+	sysTagsBL := []string{
+		"CCE-Cluster-ID",
+		// HCS provider used
+		fmt.Sprintf("CCE-Cluster-ID.%s", clusterId),
+		clusterId,
+	}
 	mErr := multierror.Append(nil,
 		d.Set("region", config.GetRegion(d)),
 		d.Set("name", n.Metadata.Name),
@@ -647,7 +655,7 @@ func resourceClusterRead(_ context.Context, d *schema.ResourceData, meta interfa
 		d.Set("enterprise_project_id", n.Spec.ExtendParam["enterpriseProjectId"]),
 		d.Set("service_network_cidr", n.Spec.KubernetesSvcIPRange),
 		d.Set("billing_mode", n.Spec.BillingMode),
-		d.Set("tags", utils.TagsToMap(n.Spec.ClusterTags)),
+		d.Set("tags", utils.TagsToMapWithIndicator(n.Spec.ClusterTags, sysTagsBL, d.Get("tags").(map[string]interface{}))),
 	)
 
 	if n.Spec.BillingMode != 0 {

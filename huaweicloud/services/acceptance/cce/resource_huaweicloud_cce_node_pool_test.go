@@ -94,6 +94,13 @@ func testAccNodePool_base(rName string) string {
 
 data "huaweicloud_availability_zones" "test" {}
 
+data "huaweicloud_compute_flavors" "test" {
+  availability_zone = data.huaweicloud_availability_zones.test.names[0]
+  performance_type  = "normal"
+  cpu_core_count    = 2
+  memory_size       = 4
+}
+
 resource "huaweicloud_kps_keypair" "test" {
   name = "%[2]s"
 }
@@ -116,8 +123,8 @@ func testAccNodePool_basic_step1(name, baseConfig string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -155,8 +162,8 @@ func testAccNodePool_basic_step2(name, baseConfig string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 2
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -200,8 +207,8 @@ func testAccNodePool_basic_step3(name, baseConfig string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -330,8 +337,8 @@ func testAccNodePool_tagsLabelsTaints_step1(name string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -378,8 +385,8 @@ func testAccNodePool_tagsLabelsTaints_step2(name string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -471,8 +478,8 @@ resource "huaweicloud_kms_key" "test" {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -538,8 +545,8 @@ func testAccNodePool_prePaid(rName string) string {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -607,6 +614,13 @@ func testAccNodePool_SecurityGroups(name string) string {
 %[1]s
 
 data "huaweicloud_availability_zones" "test" {}
+
+data "huaweicloud_compute_flavors" "test" {
+  availability_zone = data.huaweicloud_availability_zones.test.names[0]
+  performance_type  = "computingv3"
+  cpu_core_count    = 2
+  memory_size       = 4
+}
 
 resource "huaweicloud_kps_keypair" "test" {
   name = "%[2]s"
@@ -685,8 +699,8 @@ resource "huaweicloud_networking_secgroup_rule" "rule7" {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -765,8 +779,8 @@ resource "huaweicloud_compute_servergroup" "test" {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
@@ -836,8 +850,8 @@ resource "huaweicloud_kms_key" "test" {
 resource "huaweicloud_cce_node_pool" "test" {
   cluster_id               = huaweicloud_cce_cluster.test.id
   name                     = "%[2]s"
-  os                       = "EulerOS 2.5"
-  flavor_id                = "s6.large.2"
+  os                       = "EulerOS 2.9"
+  flavor_id                = data.huaweicloud_compute_flavors.test.ids[0]
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
