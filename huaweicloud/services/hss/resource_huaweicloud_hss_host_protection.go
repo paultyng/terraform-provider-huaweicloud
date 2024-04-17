@@ -145,6 +145,17 @@ func checkHostAvailable(client *hssv5.HssClient, region, epsId, hostId string) e
 	return nil
 }
 
+func convertChargingModeRequest(chargingMode string) string {
+	switch chargingMode {
+	case chargingModePrePaid:
+		return chargingModePacketCycle
+	case chargingModePostPaid:
+		return chargingModeOnDemand
+	default:
+		return chargingMode
+	}
+}
+
 func switchHostsProtectStatus(client *hssv5.HssClient, region, epsId, hostId string, d *schema.ResourceData) error {
 	var (
 		version      = d.Get("version").(string)
@@ -152,19 +163,12 @@ func switchHostsProtectStatus(client *hssv5.HssClient, region, epsId, hostId str
 		quotaId      = d.Get("quota_id").(string)
 	)
 
-	if chargingMode == chargingModePrePaid {
-		chargingMode = chargingModePacketCycle
-	}
-	if chargingMode == chargingModePostPaid {
-		chargingMode = chargingModeOnDemand
-	}
-
 	switchOpts := hssv5model.SwitchHostsProtectStatusRequest{
 		Region:              region,
 		EnterpriseProjectId: utils.StringIgnoreEmpty(epsId),
 		Body: &hssv5model.SwitchHostsProtectStatusRequestInfo{
 			Version:      version,
-			ChargingMode: utils.String(chargingMode),
+			ChargingMode: utils.String(convertChargingModeRequest(chargingMode)),
 			ResourceId:   utils.StringIgnoreEmpty(quotaId),
 			HostIdList:   []string{hostId},
 		},
