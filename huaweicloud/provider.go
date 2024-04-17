@@ -729,6 +729,7 @@ func Provider() *schema.Provider {
 
 			"huaweicloud_vpc":                    vpc.DataSourceVpcV1(),
 			"huaweicloud_vpcs":                   vpc.DataSourceVpcs(),
+			"huaweicloud_vpc_address_groups":     vpc.DataSourceVpcAddressGroups(),
 			"huaweicloud_vpc_ids":                vpc.DataSourceVpcIdsV1(),
 			"huaweicloud_vpc_peering_connection": vpc.DataSourceVpcPeeringConnectionV2(),
 			"huaweicloud_vpc_route_table":        vpc.DataSourceVPCRouteTable(),
