@@ -14,6 +14,7 @@ import (
 
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/common"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/eps"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils"
 )
 
@@ -83,11 +84,6 @@ func resourceStreamCreate(ctx context.Context, d *schema.ResourceData, meta inte
 		httpUrl = "v2/{project_id}/groups/{log_group_id}/streams"
 	)
 
-	jsonBody, err := buildCreateStreamBodyParams(cfg, d)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
 	client, err := cfg.NewServiceClient("lts", region)
 	if err != nil {
 		return diag.Errorf("error creating LTS client: %s", err)
@@ -99,7 +95,7 @@ func resourceStreamCreate(ctx context.Context, d *schema.ResourceData, meta inte
 	createOpts := golangsdk.RequestOpts{
 		KeepResponseBody: true,
 		MoreHeaders:      map[string]string{"Content-Type": "application/json"},
-		JSONBody:         utils.RemoveNil(jsonBody),
+		JSONBody:         utils.RemoveNil(buildCreateStreamBodyParams(cfg, d)),
 	}
 
 	requestResp, err := client.Request("POST", createPath, &createOpts)
@@ -122,23 +118,26 @@ func resourceStreamCreate(ctx context.Context, d *schema.ResourceData, meta inte
 	return resourceStreamRead(ctx, d, meta)
 }
 
-func buildCreateStreamBodyParams(cfg *config.Config, d *schema.ResourceData) (map[string]interface{}, error) {
+func buildCreateStreamBodyParams(cfg *config.Config, d *schema.ResourceData) map[string]interface{} {
+	bodyParams := map[string]interface{}{
+		"log_stream_name": d.Get("stream_name"),
+		"ttl_in_days":     utils.ValueIngoreEmpty(d.Get("ttl_in_days")),
+	}
+
+	userNoPermission := []string{"EPS.0004"}
 	epsId := cfg.GetEnterpriseProjectID(d)
 	if epsId == "" {
 		epsId = "0"
 	}
 	epsInfo, err := getEnterpriseProjectById(cfg, cfg.GetRegion(d), epsId)
-	if err != nil {
-		return nil, fmt.Errorf("unable to find enterprise project using its ID (%s): %s", epsId, err)
-	}
-	bodyParams := map[string]interface{}{
-		"log_stream_name": d.Get("stream_name"),
-		"ttl_in_days":     utils.ValueIngoreEmpty(d.Get("ttl_in_days")),
+	// If we catch error 403, it means that the user does not have EPS permissions, return immediately.
+	if parsedErr := eps.ParseQueryError403(err, userNoPermission, "No permission, skip the enterprise project query"); parsedErr == nil {
 		// Unable to set enterprise project ID for log stream via parameter 'enterprise_project_id' and
 		// 'tags._sys_enterprise_project_id'. Currently, only parameter 'enterprise_project_name' is available.
-		"enterprise_project_name": utils.PathSearch("enterprise_project.name", epsInfo, nil),
+		bodyParams["enterprise_project_name"] = utils.PathSearch("enterprise_project.name", epsInfo, nil)
 	}
-	return bodyParams, nil
+	// If not, insert enterprise project name into bodyParams.
+	return bodyParams
 }
 
 func getEnterpriseProjectById(cfg *config.Config, region, epsId string) (interface{}, error) {
