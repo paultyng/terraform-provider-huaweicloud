@@ -993,6 +993,20 @@ func TestAccPreCheckCCRegionName(t *testing.T) {
 }
 
 // lintignore:AT003
+func TestAccPreCheckCCConnectionRouteProjectID(t *testing.T) {
+	if HW_PROJECT_ID_1 == "" || HW_PROJECT_ID_2 == "" {
+		t.Skip("HW_PROJECT_ID_1, HW_PROJECT_ID_2 must be set for this acceptance test")
+	}
+}
+
+// lintignore:AT003
+func TestAccPreCheckCCConnectionRouteRegionName(t *testing.T) {
+	if HW_REGION_NAME_1 == "" || HW_REGION_NAME_2 == "" {
+		t.Skip("HW_REGION_NAME_1, HW_REGION_NAME_2 must be set for this acceptance test")
+	}
+}
+
+// lintignore:AT003
 func TestAccPreCheckWorkspaceAD(t *testing.T) {
 	if HW_WORKSPACE_AD_DOMAIN_NAME == "" || HW_WORKSPACE_AD_SERVER_PWD == "" || HW_WORKSPACE_AD_DOMAIN_IP == "" ||
 		HW_WORKSPACE_AD_VPC_ID == "" || HW_WORKSPACE_AD_NETWORK_ID == "" {
