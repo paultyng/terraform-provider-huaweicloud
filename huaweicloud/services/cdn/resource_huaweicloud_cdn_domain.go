@@ -136,10 +136,60 @@ var authOpts = schema.Schema{
 					"type_a", "type_b", "type_c1", "type_c2",
 				}, false),
 			},
-			"key": {
+			"sign_method": {
 				Type:     schema.TypeString,
 				Optional: true,
 				Computed: true,
+			},
+			"match_type": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"inherit_config": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Computed: true,
+				MaxItems: 1,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"enabled": {
+							Type:     schema.TypeBool,
+							Required: true,
+						},
+						"inherit_type": {
+							Type:     schema.TypeString,
+							Optional: true,
+							Computed: true,
+						},
+						"inherit_time_type": {
+							Type:     schema.TypeString,
+							Optional: true,
+							Computed: true,
+						},
+						"status": {
+							Type:     schema.TypeString,
+							Computed: true,
+						},
+					},
+				},
+			},
+			"sign_arg": {
+				Type:     schema.TypeString,
+				Optional: true,
+				Computed: true,
+			},
+			"key": {
+				Type:      schema.TypeString,
+				Optional:  true,
+				Sensitive: true,
+				Computed:  true,
+			},
+			"backup_key": {
+				Type:      schema.TypeString,
+				Optional:  true,
+				Sensitive: true,
+				Computed:  true,
 			},
 			"time_format": {
 				Type:     schema.TypeString,
@@ -798,14 +848,34 @@ func buildUrlAuthOpts(rawUrlAuth []interface{}) *model.UrlAuth {
 
 	urlAuth := rawUrlAuth[0].(map[string]interface{})
 	urlAuthOpts := model.UrlAuth{
-		Status:     parseFunctionEnabledStatus(urlAuth["enabled"].(bool)),
-		Type:       utils.StringIgnoreEmpty(urlAuth["type"].(string)),
-		Key:        utils.StringIgnoreEmpty(urlAuth["key"].(string)),
-		TimeFormat: utils.StringIgnoreEmpty(urlAuth["time_format"].(string)),
-		ExpireTime: utils.Int32(int32(urlAuth["expire_time"].(int))),
+		Status:        parseFunctionEnabledStatus(urlAuth["enabled"].(bool)),
+		Type:          utils.StringIgnoreEmpty(urlAuth["type"].(string)),
+		SignMethod:    utils.StringIgnoreEmpty(urlAuth["sign_method"].(string)),
+		MatchType:     utils.StringIgnoreEmpty(urlAuth["match_type"].(string)),
+		InheritConfig: buildInheritConfigOpts(urlAuth["inherit_config"].([]interface{})),
+		SignArg:       utils.StringIgnoreEmpty(urlAuth["sign_arg"].(string)),
+		Key:           utils.StringIgnoreEmpty(urlAuth["key"].(string)),
+		BackupKey:     utils.StringIgnoreEmpty(urlAuth["backup_key"].(string)),
+		TimeFormat:    utils.StringIgnoreEmpty(urlAuth["time_format"].(string)),
+		ExpireTime:    utils.Int32(int32(urlAuth["expire_time"].(int))),
 	}
 
 	return &urlAuthOpts
+}
+
+func buildInheritConfigOpts(rwaInheritConfig []interface{}) *model.InheritConfig {
+	if len(rwaInheritConfig) != 1 {
+		return nil
+	}
+
+	inheritConfig := rwaInheritConfig[0].(map[string]interface{})
+	inheritConfigOpts := model.InheritConfig{
+		Status:          parseFunctionEnabledStatus(inheritConfig["enabled"].(bool)),
+		InheritType:     utils.StringIgnoreEmpty(inheritConfig["inherit_type"].(string)),
+		InheritTimeType: utils.StringIgnoreEmpty(inheritConfig["inherit_time_type"].(string)),
+	}
+
+	return &inheritConfigOpts
 }
 
 func buildForceRedirectOpts(rawForceRedirect []interface{}) *model.ForceRedirectConfig {
@@ -1350,21 +1420,41 @@ func flattenHttpResponseHeaderAttrs(httpResponseHeader *[]model.HttpResponseHead
 	return httpResponseHeaderAttrs
 }
 
-func flattenUrlAuthAttrs(urlAuth *model.UrlAuthGetBody, urlAuthKey string) []map[string]interface{} {
+func flattenUrlAuthAttrs(urlAuth *model.UrlAuthGetBody, urlAuthKey, urlAuthBackupKey string) []map[string]interface{} {
 	if urlAuth == nil {
 		return nil
 	}
 
 	urlAuthAttrs := map[string]interface{}{
-		"enabled":     analyseFunctionEnabledStatus(urlAuth.Status),
-		"status":      urlAuth.Status,
-		"type":        urlAuth.Type,
-		"key":         urlAuthKey,
-		"time_format": urlAuth.TimeFormat,
-		"expire_time": urlAuth.ExpireTime,
+		"enabled":        analyseFunctionEnabledStatus(urlAuth.Status),
+		"status":         urlAuth.Status,
+		"type":           urlAuth.Type,
+		"sign_method":    urlAuth.SignMethod,
+		"match_type":     urlAuth.MatchType,
+		"inherit_config": flattenInheritConfigAttrs(urlAuth.InheritConfig),
+		"sign_arg":       urlAuth.SignArg,
+		"key":            urlAuthKey,
+		"backup_key":     urlAuthBackupKey,
+		"time_format":    urlAuth.TimeFormat,
+		"expire_time":    urlAuth.ExpireTime,
 	}
 
 	return []map[string]interface{}{urlAuthAttrs}
+}
+
+func flattenInheritConfigAttrs(inheritConfig *model.InheritConfigQuery) []map[string]interface{} {
+	if inheritConfig == nil {
+		return nil
+	}
+
+	inheritConfigAttrs := map[string]interface{}{
+		"enabled":           analyseFunctionEnabledStatus(inheritConfig.Status),
+		"status":            inheritConfig.Status,
+		"inherit_type":      inheritConfig.InheritType,
+		"inherit_time_type": inheritConfig.InheritTimeType,
+	}
+
+	return []map[string]interface{}{inheritConfigAttrs}
 }
 
 func flattenForceRedirectAttrs(forceRedirect *model.ForceRedirectConfig) []map[string]interface{} {
@@ -1578,12 +1668,13 @@ func flattenConfigAttrs(configsResp *model.ConfigsGetBody, d *schema.ResourceDat
 	privateKey := d.Get("configs.0.https_settings.0.private_key").(string)
 	certificateBody := d.Get("configs.0.https_settings.0.certificate_body").(string)
 	urlAuthKey := d.Get("configs.0.url_signing.0.key").(string)
+	urlAuthBackupKey := d.Get("configs.0.url_signing.0.backup_key").(string)
 
 	configsAttrs := map[string]interface{}{
 		"https_settings":                flattenHTTPSAttrs(configsResp.Https, privateKey, certificateBody),
 		"retrieval_request_header":      flattenOriginRequestHeaderAttrs(configsResp.OriginRequestHeader),
 		"http_response_header":          flattenHttpResponseHeaderAttrs(configsResp.HttpResponseHeader),
-		"url_signing":                   flattenUrlAuthAttrs(configsResp.UrlAuth, urlAuthKey),
+		"url_signing":                   flattenUrlAuthAttrs(configsResp.UrlAuth, urlAuthKey, urlAuthBackupKey),
 		"origin_protocol":               configsResp.OriginProtocol,
 		"force_redirect":                flattenForceRedirectAttrs(configsResp.ForceRedirect),
 		"compress":                      flattenCompressAttrs(configsResp.Compress),
