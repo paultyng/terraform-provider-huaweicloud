@@ -29,6 +29,7 @@ import (
 // @API CPH GET /v1/{project_id}/cloud-phone/servers/{server_id}
 // @API CPH PUT /v1/{project_id}/cloud-phone/servers/open-access
 // @API CPH POST /v2/{project_id}/cloud-phone/servers
+// @API CPH POST /v2/{project_id}/cloud-phone/servers/{server_id}/change
 // @API BSS POST /v2/orders/subscriptions/resources/unsubscribe
 func ResourceCphServer() *schema.Resource {
 	return &schema.Resource{
@@ -69,38 +70,32 @@ func ResourceCphServer() *schema.Resource {
 			"phone_flavor": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
 				Description: `The cloud phone flavor.`,
 			},
 			"image_id": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
 				Description: `The cloud phone image ID.`,
 			},
 			"vpc_id": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
 				Description: `The ID of VPC which the cloud server belongs to`,
 			},
 			"subnet_id": {
 				Type:        schema.TypeString,
 				Required:    true,
-				ForceNew:    true,
 				Description: `The ID of subnet which the cloud server belongs to`,
 			},
 			"eip_id": {
 				Type:          schema.TypeString,
 				Optional:      true,
-				ForceNew:      true,
 				ConflictsWith: []string{"eip_type", "bandwidth"},
 				Description:   `The ID of an **existing** EIP assigned to the server.`,
 			},
 			"eip_type": {
 				Type:          schema.TypeString,
 				Optional:      true,
-				ForceNew:      true,
 				ConflictsWith: []string{"eip_id"},
 				RequiredWith:  []string{"bandwidth"},
 				Description:   `The type of an EIP that will be automatically assigned to the cloud server.`,
@@ -112,7 +107,6 @@ func ResourceCphServer() *schema.Resource {
 				RequiredWith:  []string{"eip_type"},
 				Elem:          cphServerBandWidthSchema(),
 				Optional:      true,
-				ForceNew:      true,
 				Description:   `The bandwidth used by the cloud phone.`,
 			},
 			"period_unit": {
@@ -153,7 +147,6 @@ func ResourceCphServer() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
 				Description: `the enterprise project ID.`,
 			},
 			"ports": {
@@ -161,7 +154,6 @@ func ResourceCphServer() *schema.Resource {
 				Elem:        cphServerApplicationPortSchema(),
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
 				Description: `The application port enabled by the cloud phone.`,
 			},
 			"phone_data_volume": {
@@ -772,6 +764,26 @@ func resourceCphServerUpdate(ctx context.Context, d *schema.ResourceData, meta i
 			return diag.FromErr(err)
 		}
 	}
+
+	updateServerSwitchChanges := []string{
+		"phone_flavor",
+		"keypair_name",
+		"ports",
+		"tenant_vpc_id",
+		"nics",
+		"public_ip",
+		"band_width",
+		"image_id",
+		"extend_param",
+		"phone_data_volume",
+		"server_share_data_volume",
+	}
+	if d.HasChanges(updateServerSwitchChanges...) {
+		err := updateServerChange(ctx, client, d, cfg)
+		if err != nil {
+			return diag.FromErr(err)
+		}
+	}
 	return resourceCphServerRead(ctx, d, meta)
 }
 
@@ -925,6 +937,99 @@ func checkCphJobStatus(ctx context.Context, client *golangsdk.ServiceClient, id 
 	_, err := stateConf.WaitForStateContext(ctx)
 	if err != nil {
 		return err
+	}
+	return nil
+}
+
+func updateServerChange(ctx context.Context, client *golangsdk.ServiceClient, d *schema.ResourceData, cfg *config.Config) error {
+	// updateCphServerName: update CPH server change
+	updateServerChangeHttpUrl := "v2/{project_id}/cloud-phone/servers/{server_id}/change"
+	updateServerChangePath := client.Endpoint + updateServerChangeHttpUrl
+	updateServerChangePath = strings.ReplaceAll(updateServerChangePath, "{project_id}", client.ProjectID)
+	updateServerChangePath = strings.ReplaceAll(updateServerChangePath, "{server_id}", d.Id())
+
+	updateCphServerChangeOpt := golangsdk.RequestOpts{
+		KeepResponseBody: true,
+	}
+	updateCphServerChangeOpt.JSONBody = utils.RemoveNil(buildUpdateCphServerChangeBodyParams(d, cfg))
+	_, err := client.Request("POST", updateServerChangePath, &updateCphServerChangeOpt)
+	if err != nil {
+		return fmt.Errorf("error updating CPH server change: %s", err)
+	}
+
+	err = checkServerSwitchStatus(ctx, client, d.Id(), d.Timeout(schema.TimeoutCreate))
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func buildUpdateCphServerChangeBodyParams(d *schema.ResourceData, cfg *config.Config) map[string]interface{} {
+	bodyParams := map[string]interface{}{
+		"phone_model_name": utils.ValueIgnoreEmpty(d.Get("phone_flavor")),
+		"keypair_name":     utils.ValueIgnoreEmpty(d.Get("keypair_name")),
+		"ports":            buildCreateCphServerRequestBodyApplicationPort(d.Get("ports")),
+		"tenant_vpc_id":    utils.ValueIgnoreEmpty(d.Get("vpc_id")),
+		"nics": []map[string]interface{}{
+			{
+				"subnet_id": utils.ValueIgnoreEmpty(d.Get("subnet_id")),
+			},
+		},
+		"public_ip":  buildCreateCphServerRequestBodyPublicIp(d),
+		"band_width": buildUpdateServerRequestBodyBandWidth(d.Get("bandwidth")),
+		"image_id":   utils.ValueIgnoreEmpty(d.Get("image_id")),
+		"extend_param": map[string]interface{}{
+			"enterprise_project_id": utils.ValueIgnoreEmpty(cfg.GetEnterpriseProjectID(d)),
+		},
+		"phone_data_volume":        buildCreateCphServerRequestBodyPhoneDataVolume(d.Get("phone_data_volume")),
+		"server_share_data_volume": buildCreateCphServerRequestBodyShareDataVolume(d.Get("server_share_data_volume")),
+		"image_type":               "gold",
+	}
+
+	return bodyParams
+}
+
+func buildUpdateServerRequestBodyBandWidth(rawParams interface{}) map[string]interface{} {
+	if rawArray, ok := rawParams.([]interface{}); ok {
+		if len(rawArray) == 0 {
+			return nil
+		}
+		raw := rawArray[0].(map[string]interface{})
+
+		shareType, _ := strconv.Atoi(utils.ValueIgnoreEmpty(raw["share_type"]).(string))
+		chargeModeInteger, _ := strconv.Atoi(utils.ValueIgnoreEmpty(raw["charge_mode"]).(string))
+
+		params := map[string]interface{}{
+			"band_width_charge_mode": chargeModeInteger,
+			"band_width_share_type":  shareType,
+		}
+
+		if chargeModeInteger == 0 {
+			params["band_width_id"] = utils.ValueIgnoreEmpty(raw["id"])
+		}
+
+		if chargeModeInteger == 1 {
+			params["band_width_size"] = utils.ValueIgnoreEmpty(raw["size"])
+		}
+
+		return params
+	}
+
+	return nil
+}
+
+func checkServerSwitchStatus(ctx context.Context, client *golangsdk.ServiceClient, id string, timeout time.Duration) error {
+	stateConf := &resource.StateChangeConf{
+		Pending:      []string{"PENDING"},
+		Target:       []string{"COMPLETED"},
+		Refresh:      serverStateRefreshFunc(client, id),
+		Timeout:      timeout,
+		PollInterval: 10 * timeout,
+		Delay:        10 * time.Second,
+	}
+	_, err := stateConf.WaitForStateContext(ctx)
+	if err != nil {
+		return fmt.Errorf("error waiting for CPH server switch to be completed: %s", err)
 	}
 	return nil
 }

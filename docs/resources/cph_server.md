@@ -59,21 +59,13 @@ The following arguments are supported:
 
   Changing this parameter will create a new resource.
 
-* `phone_flavor` - (Required, String, ForceNew) The cloud phone flavor.
-
-  Changing this parameter will create a new resource.
+* `phone_flavor` - (Required, String) The cloud phone flavor.
   
-* `image_id` - (Required, String, ForceNew) The cloud phone image ID.
+* `image_id` - (Required, String) The cloud phone image ID.
 
-  Changing this parameter will create a new resource.
+* `vpc_id` - (Required, String) The ID of VPC which the cloud server belongs to.
 
-* `vpc_id` - (Required, String, ForceNew) The ID of VPC which the cloud server belongs to.
-
-  Changing this parameter will create a new resource.
-
-* `subnet_id` - (Required, String, ForceNew) The ID of subnet which the cloud server belongs to.
-
-  Changing this parameter will create a new resource.
+* `subnet_id` - (Required, String) The ID of subnet which the cloud server belongs to.
 
 * `availability_zone` - (Optional, String, ForceNew) The name of the AZ where the cloud server is located.
 
@@ -81,7 +73,6 @@ The following arguments are supported:
 
 * `eip_id` - (Optional, String, ForceNew) The ID of an **existing** EIP assigned to the cloud server.
   This parameter and `eip_type`, `bandwidth` are alternative.
-  Changing this parameter will create a new resource.
 
 * `eip_type` - (Optional, String, ForceNew) The type of an EIP that will be automatically assigned to the cloud server.
   The options are as follows:
@@ -94,8 +85,6 @@ The following arguments are supported:
 
 * `bandwidth` - (Optional, List, ForceNew) The bandwidth of an EIP that will be automatically assigned to
   the cloud server.
-
-  Changing this parameter will create a new resource.
   The [BandWidth](#cphServer_BandWidth) structure is documented below.
 
 * `period_unit` - (Required, String, ForceNew) The charging period unit.  
@@ -117,13 +106,9 @@ The following arguments are supported:
 * `keypair_name` - (Optional, String) Specifies the key pair name, which is used for logging in to
   the cloud phone through ADB.
 
-* `enterprise_project_id` - (Optional, String, ForceNew) The enterprise project ID.
+* `enterprise_project_id` - (Optional, String) The enterprise project ID.
 
-  Changing this parameter will create a new resource.
-
-* `ports` - (Optional, List, ForceNew) The application port enabled by the cloud phone.
-
-  Changing this parameter will create a new resource.
+* `ports` - (Optional, List) The application port enabled by the cloud phone.
   The [ApplicationPort](#cphServer_ApplicationPort) structure is documented below.
 
 * `phone_data_volume` - (Optional, List) The phone data volume.
