@@ -97,6 +97,7 @@ func ResourceDNSZone() *schema.Resource {
 						"router_region": {
 							Type:     schema.TypeString,
 							Optional: true,
+							Computed: true,
 						},
 					},
 				},
@@ -304,12 +305,13 @@ func resourceDNSZoneRead(_ context.Context, d *schema.ResourceData, meta interfa
 		d.Set("email", zoneInfo.Email),
 		d.Set("description", zoneInfo.Description),
 		d.Set("ttl", zoneInfo.TTL),
-		d.Set("masters", zoneInfo.Masters),
 		d.Set("region", region),
 		d.Set("zone_type", zoneInfo.ZoneType),
+		d.Set("router", flattenPrivateZoneRouters(zoneInfo.Routers)),
 		d.Set("enterprise_project_id", zoneInfo.EnterpriseProjectID),
 		// The private zone also returns the "status" attribute.
 		d.Set("status", parseZoneStatus(zoneInfo.Status)),
+		d.Set("masters", zoneInfo.Masters),
 	)
 
 	// save tags
@@ -328,6 +330,21 @@ func resourceDNSZoneRead(_ context.Context, d *schema.ResourceData, meta interfa
 	}
 
 	return nil
+}
+
+func flattenPrivateZoneRouters(routers []zones.RouterResult) []map[string]interface{} {
+	if len(routers) == 0 {
+		return nil
+	}
+
+	result := make([]map[string]interface{}, len(routers))
+	for i, router := range routers {
+		result[i] = map[string]interface{}{
+			"router_id":     router.RouterID,
+			"router_region": router.RouterRegion,
+		}
+	}
+	return result
 }
 
 func parseZoneStatus(status string) string {
