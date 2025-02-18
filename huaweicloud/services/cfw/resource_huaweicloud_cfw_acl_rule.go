@@ -153,10 +153,9 @@ func ResourceAclRule() *schema.Resource {
 				ConflictsWith: []string{"source_addresses", "source_region_list"},
 			},
 			"source_address_type": {
-				Type:         schema.TypeInt,
-				Optional:     true,
-				Description:  `The source address type.`,
-				AtLeastOneOf: []string{"source_addresses", "source_region_list", "source_address_groups", "source_predefined_groups"},
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Description: `The source address type.`,
 			},
 			"destination_addresses": {
 				Type:        schema.TypeList,
@@ -226,10 +225,6 @@ func ResourceAclRule() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Description: `The destination address type.`,
-				AtLeastOneOf: []string{
-					"destination_addresses", "destination_region_list", "destination_domain_address_name",
-					"destination_domain_group_id", "destination_domain_group_name", "destination_address_groups",
-				},
 			},
 			"long_connect_time_hour": {
 				Type:        schema.TypeInt,
@@ -463,15 +458,30 @@ func buildACLRulesOpts(d *schema.ResourceData, isUpdate bool) map[string]interfa
 	}
 
 	customServices, customServicesOk := d.GetOk("custom_services")
+	rawCustomServiceGroups, customServiceGroupsOk := d.GetOk("custom_service_groups")
+	rawPredefinedServiceGroups, predefinedServiceGroupsOk := d.GetOk("predefined_service_groups")
 
-	if customServicesOk {
+	switch {
+	case customServicesOk:
 		params["service"] = buildACLRuleRequestBodyRuleCustomServices(customServices)
-	} else {
-		params["service"] = buildACLRuleRequestBodyRuleServiceGroups(d)
+	case customServiceGroupsOk, predefinedServiceGroupsOk:
+		customServiceGroups := rawCustomServiceGroups.([]interface{})
+		predefinedServiceGroups := rawPredefinedServiceGroups.([]interface{})
+		params["service"] = buildACLRuleRequestBodyRuleServiceGroups(customServiceGroups, predefinedServiceGroups)
+	default:
+		// Indicates setting any service.
+		params["service"] = map[string]interface{}{
+			"type":        0,
+			"protocol":    -1,
+			"source_port": "1-65535",
+			"dest_port":   "1-65535",
+		}
 	}
 
 	sourceAddresses, sourceAddressesOk := d.GetOk("source_addresses")
 	sourceRegionList, sourceRegionListOk := d.GetOk("source_region_list")
+	rawSourceAddressGroups, sourceAddressGroupOk := d.GetOk("source_address_groups")
+	rawSourcePredefinedGroups, sourcePredefinedGroupsOk := d.GetOk("source_predefined_groups")
 	sourceAddressType := d.Get("source_address_type").(int)
 
 	switch {
@@ -479,14 +489,17 @@ func buildACLRulesOpts(d *schema.ResourceData, isUpdate bool) map[string]interfa
 		params["source"] = buildACLRuleRequestBodyRuleAddresses(utils.ExpandToStringList(sourceAddresses.([]interface{})), sourceAddressType)
 	case sourceRegionListOk:
 		params["source"] = buildACLRuleRequestBodyIpRegionDto(sourceRegionList, sourceAddressType)
-	default:
-		sourceAddressGroups := d.Get("source_address_groups").([]interface{})
-		sourcePredefinedGroups := d.Get("source_predefined_groups").([]interface{})
+	case sourceAddressGroupOk, sourcePredefinedGroupsOk:
+		sourceAddressGroups := rawSourceAddressGroups.([]interface{})
+		sourcePredefinedGroups := rawSourcePredefinedGroups.([]interface{})
 		params["source"] = buildACLRuleRequestBodyRuleAddressGroups(sourceAddressGroups, sourcePredefinedGroups, sourceAddressType)
+	default:
+		params["source"] = buildACLRuleRequestBodyRuleAnyAddress()
 	}
 
 	destinationAddresses, destinationAddressesOk := d.GetOk("destination_addresses")
 	destinationRegionList, destinationRegionListOk := d.GetOk("destination_region_list")
+	rawDestinationAddressGroups, destinationAddressGroupsOk := d.GetOk("destination_address_groups")
 	destinationDomainAddressName, destinationDomainAddressNameOk := d.GetOk("destination_domain_address_name")
 	destinationDomainGroupId, destinationDomainGroupIdOk := d.GetOk("destination_domain_group_id")
 	destinationDomainGroupName := d.Get("destination_domain_group_name").(string)
@@ -508,9 +521,11 @@ func buildACLRulesOpts(d *schema.ResourceData, isUpdate bool) map[string]interfa
 			destinationDomainGroupId, destinationDomainGroupName,
 			destinationDomainGroupType, destinationAddressType,
 		)
-	default:
-		destinationAddressGroups := d.Get("destination_address_groups").([]interface{})
+	case destinationAddressGroupsOk:
+		destinationAddressGroups := rawDestinationAddressGroups.([]interface{})
 		params["destination"] = buildACLRuleRequestBodyRuleAddressGroups(destinationAddressGroups, make([]interface{}, 0), destinationAddressType)
+	default:
+		params["destination"] = buildACLRuleRequestBodyRuleAnyAddress()
 	}
 	return params
 }
@@ -568,27 +583,23 @@ func buildACLRuleRequestBodyRuleCustomService(rawParams interface{}) []map[strin
 	return nil
 }
 
-func buildACLRuleRequestBodyRuleServiceGroups(d *schema.ResourceData) map[string]interface{} {
-	rawCustomServiceGroups, customOk := d.GetOk("custom_service_groups")
-	rawPredefinedServiceGroups, predefinedOk := d.GetOk("predefined_service_groups")
+func buildACLRuleRequestBodyRuleServiceGroups(customServiceGroups, predefinedServiceGroups []interface{}) map[string]interface{} {
 	var customServiceGroupsProtocols []interface{}
 	var predefinedServiceGroupsProtocols []interface{}
 
-	if !customOk && !predefinedOk {
+	if len(customServiceGroups) == 0 && len(predefinedServiceGroups) == 0 {
 		return nil
 	}
 
 	param := map[string]interface{}{
 		"type": 2,
 	}
-	if customOk {
-		customServiceGroups := rawCustomServiceGroups.([]interface{})
+	if len(customServiceGroups) > 0 {
 		v := customServiceGroups[0].(map[string]interface{})
 		param["service_group"] = utils.ExpandToStringList(v["group_ids"].([]interface{}))
 		customServiceGroupsProtocols = v["protocols"].(*schema.Set).List()
 	}
-	if predefinedOk {
-		predefinedServiceGroups := rawPredefinedServiceGroups.([]interface{})
+	if len(predefinedServiceGroups) > 0 {
 		v := predefinedServiceGroups[0].(map[string]interface{})
 		param["predefined_group"] = utils.ExpandToStringList(v["group_ids"].([]interface{}))
 		predefinedServiceGroupsProtocols = v["protocols"].(*schema.Set).List()
@@ -682,6 +693,13 @@ func buildACLRuleRequestBodyDomainAddressGroup(domainGroupId, domainGroupName in
 		"domain_set_name": domainGroupName,
 		"type":            domainGroupType,
 		"address_type":    addressType,
+	}
+}
+
+func buildACLRuleRequestBodyRuleAnyAddress() map[string]interface{} {
+	return map[string]interface{}{
+		"type":    0,
+		"address": "0.0.0.0/0",
 	}
 }
 
