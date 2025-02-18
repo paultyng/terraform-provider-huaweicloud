@@ -142,7 +142,7 @@
                 "type": "number",
                 "optional": true
               },
-              "scall_enable": {
+              "scale_enable": {
                 "type": "bool",
                 "optional": true
               },

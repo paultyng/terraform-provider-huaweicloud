@@ -26,7 +26,7 @@ resource "huaweicloud_cce_node_pool" "node_pool" {
   flavor_id                = "s3.large.4"
   availability_zone        = var.availability_zone
   key_pair                 = var.keypair
-  scall_enable             = true
+  scale_enable             = true
   min_node_count           = 1
   max_node_count           = 10
   scale_down_cooldown_time = 100
@@ -60,7 +60,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = var.availability_zone
   key_pair                 = var.key_pair
-  scall_enable             = false
+  scale_enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -148,7 +148,7 @@ resource "huaweicloud_cce_node_pool" "node_pool" {
   flavor_id                = "s3.large.4"
   availability_zone        = var.availability_zone
   key_pair                 = var.keypair
-  scall_enable             = true
+  scale_enable             = true
   min_node_count           = 1
   max_node_count           = 10
   scale_down_cooldown_time = 100
@@ -301,7 +301,7 @@ The following arguments are supported:
   The [object](#extend_params) structure is documented below.
   Changing this parameter will create a new resource.
 
-* `scall_enable` - (Optional, Bool) Specifies whether to enable auto scaling.
+* `scale_enable` - (Optional, Bool) Specifies whether to enable auto scaling.
   If Autoscaler is enabled, install the autoscaler add-on to use the auto scaling feature.
 
 * `min_node_count` - (Optional, Int) Specifies the minimum number of nodes allowed if auto scaling is enabled.

@@ -60,7 +60,7 @@ func TestAccNodePool_basic(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "name", updateName),
 					resource.TestCheckResourceAttr(resourceName, "os", "EulerOS 2.9"),
 					resource.TestCheckResourceAttr(resourceName, "current_node_count", "2"),
-					resource.TestCheckResourceAttr(resourceName, "scall_enable", "true"),
+					resource.TestCheckResourceAttr(resourceName, "enable", "true"),
 					resource.TestCheckResourceAttr(resourceName, "min_node_count", "2"),
 					resource.TestCheckResourceAttr(resourceName, "max_node_count", "9"),
 					resource.TestCheckResourceAttr(resourceName, "scale_down_cooldown_time", "100"),
@@ -131,7 +131,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -170,7 +170,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 2
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = true
+  enable             = true
   min_node_count           = 2
   max_node_count           = 9
   scale_down_cooldown_time = 100
@@ -215,7 +215,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -351,7 +351,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -403,7 +403,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -500,7 +500,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -567,7 +567,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -721,7 +721,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -801,7 +801,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0
@@ -872,7 +872,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0

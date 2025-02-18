@@ -62,7 +62,7 @@ In addition to all arguments above, the following attributes are exported:
 
 * `extend_param` - Extended parameter.
 
-* `scall_enable` - Whether auto scaling is enabled.
+* `scale_enable` - Whether auto scaling is enabled.
 
 * `min_node_count` - Minimum number of nodes allowed if auto scaling is enabled.
 

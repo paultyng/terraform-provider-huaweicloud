@@ -58,7 +58,7 @@ resource "huaweicloud_cce_node_pool" "test" {
   initial_node_count       = 1
   availability_zone        = data.huaweicloud_availability_zones.test.names[0]
   key_pair                 = huaweicloud_kps_keypair.test.name
-  scall_enable             = false
+  scale_enable             = false
   min_node_count           = 0
   max_node_count           = 0
   scale_down_cooldown_time = 0

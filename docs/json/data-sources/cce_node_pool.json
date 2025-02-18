@@ -135,7 +135,7 @@
                 "type": "number",
                 "computed": true
               },
-              "scall_enable": {
+              "scale_enable": {
                 "type": "bool",
                 "computed": true
               },

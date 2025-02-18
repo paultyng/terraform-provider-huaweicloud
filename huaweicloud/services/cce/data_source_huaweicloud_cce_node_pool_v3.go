@@ -135,7 +135,7 @@ func DataSourceCCENodePoolV3() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"scall_enable": {
+			"scale_enable": {
 				Type:     schema.TypeBool,
 				Computed: true,
 			},
@@ -216,7 +216,7 @@ func dataSourceCceNodePoolsV3Read(_ context.Context, d *schema.ResourceData, met
 		d.Set("availability_zone", NodePool.Spec.NodeTemplate.Az),
 		d.Set("os", NodePool.Spec.NodeTemplate.Os),
 		d.Set("key_pair", NodePool.Spec.NodeTemplate.Login.SshKey),
-		d.Set("scall_enable", NodePool.Spec.Autoscaling.Enable),
+		d.Set("scale_enable", NodePool.Spec.Autoscaling.Enable),
 		d.Set("initial_node_count", NodePool.Spec.InitialNodeCount),
 		d.Set("current_node_count", NodePool.Status.CurrentNode),
 		d.Set("min_node_count", NodePool.Spec.Autoscaling.MinNodeCount),
