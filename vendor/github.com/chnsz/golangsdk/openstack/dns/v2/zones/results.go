@@ -114,9 +114,13 @@ type Zone struct {
 
 	// Routers associate with the Zone
 	Routers []RouterResult `json:"routers"`
-
 	// Enterprise project id
 	EnterpriseProjectID string `json:"enterprise_project_id"`
+
+	// Recursive resolution proxy mode for subdomains of the private zone.
+	// + AUTHORITY: The recursive resolution proxy is disabled for the private zone.
+	// + RECURSIVE: The recursive resolution proxy is enabled for the private zone.
+	ProxyPattern string `json:"proxy_pattern"`
 
 	// Deprecated
 	// Action is the current action in progress on the resource.

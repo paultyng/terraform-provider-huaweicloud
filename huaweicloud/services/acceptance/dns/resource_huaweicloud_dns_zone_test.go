@@ -107,6 +107,8 @@ func TestAccDNSZone_private(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "router.#", "2"),
 					resource.TestCheckResourceAttr(resourceName, "tags.zone_type", "private"),
 					resource.TestCheckResourceAttr(resourceName, "tags.owner", "terraform"),
+					resource.TestCheckResourceAttr(resourceName, "status", "DISABLE"),
+					resource.TestCheckResourceAttr(resourceName, "proxy_pattern", "RECURSIVE"),
 				),
 			},
 			{
@@ -116,6 +118,7 @@ func TestAccDNSZone_private(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "name", nameWithDotSuffix),
 					resource.TestCheckOutput("valid_route_id", "true"),
 					resource.TestCheckResourceAttr(resourceName, "router.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "status", "ENABLE"),
 				),
 			},
 		},
@@ -171,6 +174,7 @@ func TestAccDNSZone_withEpsId(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "name", nameWithDotSuffix),
 					resource.TestCheckResourceAttr(resourceName, "zone_type", "private"),
 					resource.TestCheckResourceAttr(resourceName, "enterprise_project_id", acceptance.HW_ENTERPRISE_PROJECT_ID_TEST),
+					resource.TestCheckResourceAttr(resourceName, "proxy_pattern", "AUTHORITY"),
 				),
 			},
 		},
@@ -237,6 +241,7 @@ resource "huaweicloud_dns_zone" "test" {
   email       = "email@example.com"
   description = "a private zone"
   zone_type   = "private"
+  status      = "DISABLE"
 
   dynamic "router" {
     for_each = slice(huaweicloud_vpc.test[*].id, 0, 2)
@@ -245,6 +250,8 @@ resource "huaweicloud_dns_zone" "test" {
       router_id = router.value
     }
   }
+
+  proxy_pattern = "RECURSIVE"
 
   tags = {
     zone_type = "private"
@@ -263,6 +270,7 @@ resource "huaweicloud_dns_zone" "test" {
   email       = "email@example.com"
   description = "a private zone"
   zone_type   = "private"
+  status      = "ENABLE"
 
   dynamic "router" {
     for_each = slice(huaweicloud_vpc.test[*].id, 1, 3)
@@ -271,6 +279,8 @@ resource "huaweicloud_dns_zone" "test" {
       router_id = router.value
     }
   }
+
+  proxy_pattern = "RECURSIVE"
 
   tags = {
     zone_type = "private"

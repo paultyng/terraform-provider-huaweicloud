@@ -111,7 +111,14 @@ func ResourceDNSZone() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				Description: `Specifies the status of the public zone.`,
+				Description: `The status of the zone.`,
+			},
+			"proxy_pattern": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ForceNew:    true,
+				Description: `The .`,
 			},
 			"masters": {
 				Type:     schema.TypeSet,
@@ -175,6 +182,7 @@ func resourceDNSZoneCreate(ctx context.Context, d *schema.ResourceData, meta int
 		ZoneType:            zoneType,
 		EnterpriseProjectID: cfg.GetEnterpriseProjectID(d),
 		Router:              resourceDNSRouter(d, region),
+		ProxyPattern:        d.Get("proxy_pattern").(string),
 	}
 
 	log.Printf("[DEBUG] Create options: %#v", createOpts)
@@ -241,11 +249,7 @@ func resourceDNSZoneCreate(ctx context.Context, d *schema.ResourceData, meta int
 	// After zone is created, the status is ACTIVE (ENABLE).
 	// This action cannot be called repeatedly.
 	if v, ok := d.GetOk("status"); ok && v != "ENABLE" {
-		if zoneType == "private" {
-			return diag.Errorf("The private zone do not support updating status.")
-		}
-
-		if err := updatePublicZoneStatus(ctx, d, dnsClient, d.Timeout(schema.TimeoutCreate)); err != nil {
+		if err := updateZoneStatus(ctx, d, dnsClient, d.Timeout(schema.TimeoutCreate)); err != nil {
 			return diag.FromErr(err)
 		}
 	}
@@ -310,6 +314,7 @@ func resourceDNSZoneRead(_ context.Context, d *schema.ResourceData, meta interfa
 		d.Set("enterprise_project_id", zoneInfo.EnterpriseProjectID),
 		// The private zone also returns the "status" attribute.
 		d.Set("status", parseZoneStatus(zoneInfo.Status)),
+		d.Set("proxy_pattern", zoneInfo.ProxyPattern),
 	)
 
 	// save tags
@@ -368,31 +373,31 @@ func resourceDNSZoneUpdate(ctx context.Context, d *schema.ResourceData, meta int
 		}
 	}
 
+	if d.HasChange("status") {
+		if err := updateZoneStatus(ctx, d, dnsClient, d.Timeout(schema.TimeoutUpdate)); err != nil {
+			return diag.FromErr(err)
+		}
+	}
+
+	// This operation is supported only when the zone status is enabled.
 	if d.HasChange("router") && zoneType == "private" {
 		if err := updateDNSZoneRouters(ctx, d, dnsClient, region); err != nil {
 			return diag.FromErr(err)
 		}
 	}
 
-	if d.HasChange("status") {
-		if zoneType == "private" {
-			return diag.Errorf("The private zone do not support updating status.")
-		}
-
-		if err := updatePublicZoneStatus(ctx, d, dnsClient, d.Timeout(schema.TimeoutUpdate)); err != nil {
-			return diag.FromErr(err)
-		}
-	}
-
 	// update tags
-	resourceType, err := utils.GetDNSZoneTagType(zoneType)
-	if err != nil {
-		return diag.Errorf("error getting resource type of DNS zone %s: %s", d.Id(), err)
-	}
+	if d.HasChange("tags") {
+		resourceType, err := utils.GetDNSZoneTagType(zoneType)
+		if err != nil {
+			return diag.Errorf("error getting resource type of DNS zone %s: %s", d.Id(), err)
+		}
 
-	tagErr := utils.UpdateResourceTags(dnsClient, d, resourceType, d.Id())
-	if tagErr != nil {
-		return diag.Errorf("error updating tags of DNS zone %s: %s", d.Id(), tagErr)
+		tagErr := utils.UpdateResourceTags(dnsClient, d, resourceType, d.Id())
+		if tagErr != nil {
+			return diag.Errorf("error updating tags of DNS zone %s: %s", d.Id(), tagErr)
+		}
+
 	}
 
 	return resourceDNSZoneRead(ctx, d, meta)
@@ -496,14 +501,14 @@ func updateDNSZoneRouters(ctx context.Context, d *schema.ResourceData, client *g
 	return nil
 }
 
-func updatePublicZoneStatus(ctx context.Context, d *schema.ResourceData, client *golangsdk.ServiceClient, timeout time.Duration) error {
+func updateZoneStatus(ctx context.Context, d *schema.ResourceData, client *golangsdk.ServiceClient, timeout time.Duration) error {
 	opts := zones.UpdateStatusOpts{
 		ZoneId: d.Id(),
 		Status: d.Get("status").(string),
 	}
 	err := zones.UpdateZoneStatus(client, opts)
 	if err != nil {
-		return fmt.Errorf("error updating public zone status: %s", err)
+		return fmt.Errorf("error updating the status of the zone: %s", err)
 	}
 
 	stateConf := &resource.StateChangeConf{
@@ -516,7 +521,7 @@ func updatePublicZoneStatus(ctx context.Context, d *schema.ResourceData, client 
 
 	_, err = stateConf.WaitForStateContext(ctx)
 	if err != nil {
-		return fmt.Errorf("error waiting for updating public zone status completed: %s", err)
+		return fmt.Errorf("error waiting for updating the zone status completed: %s", err)
 	}
 
 	return nil
