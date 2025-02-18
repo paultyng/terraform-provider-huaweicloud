@@ -12,7 +12,7 @@ data "huaweicloud_vpc_subnet" "mynet" {
 }
 
 data "huaweicloud_images_image" "myimage" {
-  name        = "Ubuntu 18.04 server 64bit"
+  name        = "Ubuntu 22.04 server 64bit"
   most_recent = true
 }
 
