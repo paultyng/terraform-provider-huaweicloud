@@ -392,6 +392,7 @@ var (
 
 	HW_CODEARTS_ENABLE_FLAG       = os.Getenv("HW_CODEARTS_ENABLE_FLAG")
 	HW_CODEARTS_PUBLIC_IP_ADDRESS = os.Getenv("HW_CODEARTS_PUBLIC_IP_ADDRESS")
+	HW_CODEARTS_SSH_CREDENTIAL_ID = os.Getenv("HW_CODEARTS_SSH_CREDENTIAL_ID")
 
 	HW_EG_TEST_ON     = os.Getenv("HW_EG_TEST_ON") // Whether to run the EG related tests.
 	HW_EG_CHANNEL_ID  = os.Getenv("HW_EG_CHANNEL_ID")
@@ -1952,6 +1953,13 @@ func TestAccPreCheckCodeArtsEnableFlag(t *testing.T) {
 func TestAccPreCheckCodeArtsPublicIPAddress(t *testing.T) {
 	if HW_CODEARTS_PUBLIC_IP_ADDRESS == "" {
 		t.Skip("HW_CODEARTS_PUBLIC_IP_ADDRESS must be set for this acceptance test")
+	}
+}
+
+// lintignore:AT003
+func TestAccPreCheckCodeArtsSshCredentialID(t *testing.T) {
+	if HW_CODEARTS_SSH_CREDENTIAL_ID == "" {
+		t.Skip("HW_CODEARTS_SSH_CREDENTIAL_ID must be set for this acceptance test")
 	}
 }
 

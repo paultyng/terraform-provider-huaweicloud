@@ -610,6 +610,7 @@ func Provider() *schema.Provider {
 			"huaweicloud_codearts_deploy_environments":                   codeartsdeploy.DataSourceCodeartsDeployEnvironments(),
 
 			"huaweicloud_codearts_inspector_host_groups": codeartsinspector.DataSourceCodeartsInspectorHostGroups(),
+			"huaweicloud_codearts_inspector_hosts":       codeartsinspector.DataSourceCodeartsInspectorHosts(),
 
 			"huaweicloud_cts_notifications": cts.DataSourceNotifications(),
 			"huaweicloud_cts_traces":        cts.DataSourceCtsTraces(),
@@ -2346,6 +2347,7 @@ func Provider() *schema.Provider {
 			"huaweicloud_codearts_inspector_website":      codeartsinspector.ResourceInspectorWebsite(),
 			"huaweicloud_codearts_inspector_website_scan": codeartsinspector.ResourceInspectorWebsiteScan(),
 			"huaweicloud_codearts_inspector_host_group":   codeartsinspector.ResourceInspectorHostGroup(),
+			"huaweicloud_codearts_inspector_host":         codeartsinspector.ResourceInspectorHost(),
 
 			"huaweicloud_dsc_instance":           dsc.ResourceDscInstance(),
 			"huaweicloud_dsc_asset_obs":          dsc.ResourceAssetObs(),
