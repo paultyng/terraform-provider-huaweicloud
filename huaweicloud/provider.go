@@ -2317,11 +2317,12 @@ func Provider() *schema.Provider {
 			"huaweicloud_workspace_access_policy":           workspace.ResourceAccessPolicy(),
 			"huaweicloud_workspace_desktop_name_rule":       workspace.ResourceDesktopNameRule(),
 			"huaweicloud_workspace_desktop":                 workspace.ResourceDesktop(),
+			"huaweicloud_workspace_eip_associate":           workspace.ResourceEipAssociate(),
+			"huaweicloud_workspace_ou":                      workspace.ResourceOu(),
 			"huaweicloud_workspace_policy_group":            workspace.ResourcePolicyGroup(),
 			"huaweicloud_workspace_service":                 workspace.ResourceService(),
 			"huaweicloud_workspace_terminal_binding":        workspace.ResourceTerminalBinding(),
 			"huaweicloud_workspace_user":                    workspace.ResourceUser(),
-			"huaweicloud_workspace_eip_associate":           workspace.ResourceEipAssociate(),
 
 			"huaweicloud_cpts_project": cpts.ResourceProject(),
 			"huaweicloud_cpts_task":    cpts.ResourceTask(),
