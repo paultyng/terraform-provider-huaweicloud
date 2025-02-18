@@ -129,6 +129,75 @@ resource "huaweicloud_cfw_acl_rule" "test" {
 }
 ```
 
+### Create a rule with any service
+
+```hcl
+variable "name" {}
+variable "description" {}
+variable "object_id" {}
+variable "service_group_id" {}
+variable "protocol" {}
+
+resource "huaweicloud_cfw_acl_rule" "test" {
+  name                = var.name
+  object_id           = var.object_id
+  description         = var.description
+  type                = 0
+  address_type        = 0
+  action_type         = 0
+  long_connect_enable = 0
+  status              = 1
+
+  source_addresses      = ["1.1.1.1"] 
+  destination_addresses = ["1.1.1.2"]
+
+  sequence {
+    top = 1
+  }
+
+  tags = {
+    key = "value"
+  }
+}
+```
+
+### Create a rule with any source address
+
+```hcl
+variable "name" {}
+variable "description" {}
+variable "object_id" {}
+variable "service_group_id" {}
+variable "protocol" {}
+
+resource "huaweicloud_cfw_acl_rule" "test" {
+  name                = var.name
+  object_id           = var.object_id
+  description         = var.description
+  type                = 0
+  address_type        = 0
+  action_type         = 0
+  long_connect_enable = 0
+  status              = 1
+
+  destination_addresses = ["1.1.1.2"]
+
+  custom_services {
+    protocol    = 6
+    source_port = 81
+    dest_port   = 82
+  }
+  
+  sequence {
+    top = 1
+  }
+
+  tags = {
+    key = "value"
+  }
+}
+```
+
 ## Argument Reference
 
 The following arguments are supported:
