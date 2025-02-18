@@ -50,7 +50,7 @@ func TestAccResourceDisasterRecoveryTask_basic(t *testing.T) {
 		obj          interface{}
 		resourceName = "huaweicloud_dws_disaster_recovery_task.test"
 		name         = acceptance.RandomAccResourceName()
-		password     = acceptance.RandomPassword() + "a"
+		password     = acceptance.RandomPassword()
 	)
 	rc := acceptance.InitResourceCheck(
 		resourceName,

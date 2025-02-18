@@ -13,8 +13,8 @@ func TestAccDisasterRecoveryTasksDataSource_basic(t *testing.T) {
 	resourceName := "data.huaweicloud_dws_disaster_recovery_tasks.name_filter"
 	dc := acceptance.InitDataSourceCheck(resourceName)
 	name := acceptance.RandomAccResourceName()
-	// The cluster password requires a minimum length of 12 characters, and the string 'gap' is used to fill in the gap.
-	password := acceptance.RandomPassword() + "gap"
+	password := acceptance.RandomPassword()
+
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck:          func() { acceptance.TestAccPreCheck(t) },
 		ProviderFactories: acceptance.TestAccProviderFactories,

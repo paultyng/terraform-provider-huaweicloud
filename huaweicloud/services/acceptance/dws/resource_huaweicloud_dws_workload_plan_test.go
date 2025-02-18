@@ -114,7 +114,6 @@ resource "huaweicloud_dws_cluster" "test" {
 
 func testAccWorkLoadPlan_basic(name string) string {
 	password := acceptance.RandomPassword("@#%&_=!")
-	password += "123"
 
 	return fmt.Sprintf(`
 %s
