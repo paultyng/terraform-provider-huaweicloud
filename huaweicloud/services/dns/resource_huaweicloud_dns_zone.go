@@ -113,6 +113,13 @@ func ResourceDNSZone() *schema.Resource {
 				Computed:    true,
 				Description: `The status of the zone.`,
 			},
+			"proxy_pattern": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+				ForceNew:    true,
+				Description: `The .`,
+			},
 			"masters": {
 				Type:     schema.TypeSet,
 				Computed: true,
@@ -175,6 +182,7 @@ func resourceDNSZoneCreate(ctx context.Context, d *schema.ResourceData, meta int
 		ZoneType:            zoneType,
 		EnterpriseProjectID: cfg.GetEnterpriseProjectID(d),
 		Router:              resourceDNSRouter(d, region),
+		ProxyPattern:        d.Get("proxy_pattern").(string),
 	}
 
 	log.Printf("[DEBUG] Create options: %#v", createOpts)
@@ -306,6 +314,7 @@ func resourceDNSZoneRead(_ context.Context, d *schema.ResourceData, meta interfa
 		d.Set("enterprise_project_id", zoneInfo.EnterpriseProjectID),
 		// The private zone also returns the "status" attribute.
 		d.Set("status", parseZoneStatus(zoneInfo.Status)),
+		d.Set("proxy_pattern", zoneInfo.ProxyPattern),
 	)
 
 	// save tags
@@ -378,14 +387,17 @@ func resourceDNSZoneUpdate(ctx context.Context, d *schema.ResourceData, meta int
 	}
 
 	// update tags
-	resourceType, err := utils.GetDNSZoneTagType(zoneType)
-	if err != nil {
-		return diag.Errorf("error getting resource type of DNS zone %s: %s", d.Id(), err)
-	}
+	if d.HasChange("tags") {
+		resourceType, err := utils.GetDNSZoneTagType(zoneType)
+		if err != nil {
+			return diag.Errorf("error getting resource type of DNS zone %s: %s", d.Id(), err)
+		}
 
-	tagErr := utils.UpdateResourceTags(dnsClient, d, resourceType, d.Id())
-	if tagErr != nil {
-		return diag.Errorf("error updating tags of DNS zone %s: %s", d.Id(), tagErr)
+		tagErr := utils.UpdateResourceTags(dnsClient, d, resourceType, d.Id())
+		if tagErr != nil {
+			return diag.Errorf("error updating tags of DNS zone %s: %s", d.Id(), tagErr)
+		}
+
 	}
 
 	return resourceDNSZoneRead(ctx, d, meta)
