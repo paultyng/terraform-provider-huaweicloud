@@ -4,7 +4,7 @@ Terraform HuaweiCloud Provider
 <!-- markdownlint-disable-next-line MD034 -->
 * Website: https://www.terraform.io
 * [![Documentation](https://img.shields.io/badge/documentation-blue)](https://registry.terraform.io/providers/huaweicloud/huaweicloud/latest/docs)
-* [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
+  
 * Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
 
 <a href="https://www.huaweicloud.com/">
