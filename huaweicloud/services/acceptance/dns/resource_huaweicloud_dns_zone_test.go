@@ -114,9 +114,15 @@ func TestAccDNSZone_private(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					rc.CheckResourceExists(),
 					resource.TestCheckResourceAttr(resourceName, "name", nameWithDotSuffix),
-					resource.TestCheckOutput("valid_route_id", "true"),
 					resource.TestCheckResourceAttr(resourceName, "router.#", "2"),
+					resource.TestCheckResourceAttrSet(resourceName, "router.0.router_id"),
+					resource.TestCheckResourceAttrSet(resourceName, "router.0.router_region"),
 				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
@@ -143,6 +149,11 @@ func TestAccDNSZone_readTTL(t *testing.T) {
 					rc.CheckResourceExists(),
 					resource.TestMatchResourceAttr(resourceName, "ttl", regexp.MustCompile("^[0-9]+$")),
 				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
@@ -172,6 +183,11 @@ func TestAccDNSZone_withEpsId(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "zone_type", "private"),
 					resource.TestCheckResourceAttr(resourceName, "enterprise_project_id", acceptance.HW_ENTERPRISE_PROJECT_ID_TEST),
 				),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportState:       true,
+				ImportStateVerify: true,
 			},
 		},
 	})
@@ -276,14 +292,6 @@ resource "huaweicloud_dns_zone" "test" {
     zone_type = "private"
     owner     = "terraform"
   }
-}
-
-locals {
-  router_ids = huaweicloud_dns_zone.test.router[*].router_id
-}
-
-output "valid_route_id" {
-  value = contains(local.router_ids, huaweicloud_vpc.test[1].id) && contains(local.router_ids, huaweicloud_vpc.test[2].id)
 }
 `, baseConfig, name)
 }
