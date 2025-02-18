@@ -2,33 +2,49 @@ package cce
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
-	cce "github.com/huaweicloud/huaweicloud-sdk-go-v3/services/cce/v3/model"
+	"github.com/chnsz/golangsdk"
 
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/config"
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/services/acceptance"
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils"
 )
 
 func getChartFunc(cfg *config.Config, state *terraform.ResourceState) (interface{}, error) {
-	client, err := cfg.HcCceV3Client(acceptance.HW_REGION_NAME)
+	region := acceptance.HW_REGION_NAME
+
+	var (
+		getChartHttpUrl = "v2/charts/{chart_id}"
+		getChartProduct = "cce"
+	)
+	getChartClient, err := cfg.NewServiceClient(getChartProduct, region)
 	if err != nil {
-		return nil, fmt.Errorf("error creating CCE v3 client: %s", err)
+		return nil, fmt.Errorf("error creating CCE client: %s", err)
 	}
 
-	req := cce.ShowChartRequest{
-		ChartId: state.Primary.ID,
+	getChartHttpPath := getChartClient.Endpoint + getChartHttpUrl
+	getChartHttpPath = strings.ReplaceAll(getChartHttpPath, "{chart_id}", state.Primary.ID)
+
+	getChartOpt := golangsdk.RequestOpts{
+		KeepResponseBody: true,
 	}
 
-	return client.ShowChart(&req)
+	getChartResp, err := getChartClient.Request("GET", getChartHttpPath, &getChartOpt)
+	if err != nil {
+		return nil, fmt.Errorf("error retrieving CCE chart: %s", err)
+	}
+
+	return utils.FlattenResponse(getChartResp)
 }
 
 func TestAccChart_basic(t *testing.T) {
 	var (
-		chart        cce.ShowChartResponse
+		chart        interface{}
 		resourceName = "huaweicloud_cce_chart.test"
 
 		rc = acceptance.InitResourceCheck(
