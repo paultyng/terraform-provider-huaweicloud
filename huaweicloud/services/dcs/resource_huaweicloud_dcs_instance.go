@@ -137,6 +137,12 @@ func ResourceDcsInstance() *schema.Resource {
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
+				DiffSuppressFunc: func(k, old string, new string, d *schema.ResourceData) bool {
+					if strings.ToLower(old) == strings.ToLower(new) {
+						return true
+					}
+					return false
+				},
 				ValidateFunc: validation.StringInSlice([]string{
 					"Redis", "Memcached",
 				}, true),
