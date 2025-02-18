@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"net/url"
 	"reflect"
 	"strconv"
 	"strings"
 
+	"github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/go-uuid"
 	"github.com/tidwall/gjson"
 
@@ -17,6 +19,7 @@ import (
 	"github.com/chnsz/golangsdk/pagination"
 
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/helper/filters"
+	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils"
 )
 
 type HttpHelper struct {
@@ -280,6 +283,60 @@ func (c *HttpHelper) ExtractInto(to any) error {
 	}
 
 	return json.Unmarshal(c.responseBody, to)
+}
+
+func (c *HttpHelper) ToFile(dataPath, filePath string) error {
+	err := utils.WriteToFile(filePath, "", false)
+	if err != nil {
+		return err
+	}
+
+	var fileErr error
+	count := 0
+	err = c.EachPage(func(jsonData *gjson.Result, err error) bool {
+		if err != nil {
+			fileErr = err
+			return true
+		}
+
+		arr := jsonData.Get(dataPath).Array()
+		for _, v := range arr {
+			if err := utils.WriteToFile(filePath, fmt.Sprintf("%s\n", v.Raw), true); err != nil {
+				log.Printf("[ERROR] unable to write file: %s, error: %s", filePath, err)
+				count++
+				fileErr = fmt.Errorf("%v items that failed to be written to the file %s", count, err)
+			}
+		}
+		return true
+	})
+
+	mErr := multierror.Append(nil, err, fileErr)
+	return mErr.ErrorOrNil()
+}
+
+func (c *HttpHelper) EachPage(handler func(*gjson.Result, error) bool) error {
+	if c.method == "" {
+		c.result.Err = fmt.Errorf("`method` is empty, please specify the client through Client(method string)")
+	}
+	if c.result.Err != nil {
+		return c.result.Err
+	}
+
+	if c.pager == nil {
+		return fmt.Errorf("`EachPage` only supports paginated query data")
+	}
+
+	c.buildURL()
+	c.appendQueryParams()
+
+	pager := pagination.NewPager(c.client, c.url, c.pager)
+	pager.Headers = c.requestOpts.MoreHeaders
+
+	return pager.EachPage(func(page pagination.Page) (bool, error) {
+		jsonData, err := bodyToGJson(page.GetBody())
+		b := handler(jsonData, err)
+		return b, nil
+	})
 }
 
 func (c *HttpHelper) requestWithPage() {

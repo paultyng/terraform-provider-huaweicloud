@@ -567,3 +567,61 @@ func IsUUID(uuid string) bool {
 	match, _ := regexp.MatchString(pattern, uuid)
 	return match
 }
+
+func mkdirParentDir(filePath string) error {
+	filePath = strings.ReplaceAll(filePath, "\\", "/")
+	pos := strings.LastIndexByte(filePath, '/')
+	if pos == -1 {
+		return nil
+	}
+	directory := filePath[:pos]
+
+	if err := os.MkdirAll(directory, os.ModePerm); err != nil && !os.IsExist(err) {
+		return fmt.Errorf("failed to create directory: %s, error: %s", directory, err)
+	}
+	return nil
+}
+
+func WriteToFile(path, content string, append bool) error {
+	if err := mkdirParentDir(path); err != nil {
+		return err
+	}
+
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		file, err := os.Create(path)
+		if err != nil {
+			return fmt.Errorf("failed to create file: %s, error: %s", path, err)
+		}
+		defer file.Close()
+
+		_, err = file.WriteString(content)
+		if err != nil {
+			return fmt.Errorf("failed to write data to %s, error: %s", path, err)
+		}
+		return nil
+	}
+	if err != nil {
+		return fmt.Errorf("failed to stat file: %s, error: %s", path, err)
+	}
+
+	var file *os.File
+	if append {
+		file, err = os.OpenFile(path, os.O_APPEND|os.O_WRONLY, 0644)
+		if err != nil {
+			return fmt.Errorf("failed to open file for appending: %s, error: %s", path, err)
+		}
+	} else {
+		file, err = os.OpenFile(path, os.O_TRUNC|os.O_WRONLY, 0644)
+		if err != nil {
+			return fmt.Errorf("failed to open file for overwriting: %s, error: %s", path, err)
+		}
+	}
+	defer file.Close()
+
+	_, err = file.WriteString(content)
+	if err != nil {
+		return fmt.Errorf("failed to write data to %s, error: %s", path, err)
+	}
+	return nil
+}
