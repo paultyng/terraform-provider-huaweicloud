@@ -165,10 +165,6 @@ func createInspectorWebsite(client *golangsdk.ServiceClient, d *schema.ResourceD
 		return err
 	}
 
-	if err = checkInspectorWebsiteResponse(createRespBody); err != nil {
-		return err
-	}
-
 	domainId := utils.PathSearch("domain_id", createRespBody, "").(string)
 	if domainId == "" {
 		return fmt.Errorf("unable to find the CodeArts website domain ID from the API response")
@@ -193,16 +189,8 @@ func authorizeInspectorWebsite(client *golangsdk.ServiceClient, d *schema.Resour
 		JSONBody:         buildAuthenticateInspectorWebsiteBodyParams(d),
 	}
 
-	authorizeResp, err := client.Request("POST", authorizePath, &authorizeOpt)
-	if err != nil {
-		return err
-	}
-
-	authorizeRespBody, err := utils.FlattenResponse(authorizeResp)
-	if err != nil {
-		return err
-	}
-	return checkInspectorWebsiteResponse(authorizeRespBody)
+	_, err := client.Request("POST", authorizePath, &authorizeOpt)
+	return err
 }
 
 func buildAuthenticateInspectorWebsiteBodyParams(d *schema.ResourceData) map[string]interface{} {
@@ -230,16 +218,8 @@ func updateInspectorWebsiteSettings(client *golangsdk.ServiceClient, d *schema.R
 			JSONBody:         utils.RemoveNil(buildUpdateInspectorWebsiteBodyParams(d)),
 		}
 
-		updateResp, err := client.Request("POST", updatePath, &updateOpt)
-		if err != nil {
-			return err
-		}
-
-		updateRespBody, err := utils.FlattenResponse(updateResp)
-		if err != nil {
-			return err
-		}
-		return checkInspectorWebsiteResponse(updateRespBody)
+		_, err := client.Request("POST", updatePath, &updateOpt)
+		return err
 	}
 	return nil
 }
@@ -387,35 +367,18 @@ func resourceInspectorWebsiteDelete(_ context.Context, d *schema.ResourceData, m
 		KeepResponseBody: true,
 	}
 
-	deleteResp, err := client.Request("DELETE", deletePath, &deleteOpt)
+	_, err = client.Request("DELETE", deletePath, &deleteOpt)
 	if err != nil {
-		return diag.Errorf("error deleting CodeArts inspector website: %s", err)
+		// CodeArtsInspector.00006022: The domain name does not exist.
+		return common.CheckDeletedDiag(d,
+			common.ConvertUndefinedErrInto404Err(err, 418, "error_code", "CodeArtsInspector.00006022"),
+			"error deleting CodeArts inspector website",
+		)
 	}
 
-	deleteRespBody, err := utils.FlattenResponse(deleteResp)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := checkInspectorWebsiteResponse(deleteRespBody); err != nil {
-		return diag.Errorf("error deleting CodeArts inspector website: %s", err)
-	}
 	return nil
 }
 
 func buildDeleteInspectorWebsiteQueryParams(d *schema.ResourceData) string {
 	return fmt.Sprintf("?domain_name=%s", d.Get("website_address").(string))
-}
-
-// checkInspectorWebsiteResponse use to check whether the CodeArts inspector API response body contains error code.
-// An example of response body is: {"info_code": "XXX", "info_description": "XXX"}.
-// The valid values for `info_code` is "success" and "failure".
-func checkInspectorWebsiteResponse(respBody interface{}) error {
-	code := utils.PathSearch("info_code", respBody, "")
-	if code == "success" {
-		return nil
-	}
-
-	return fmt.Errorf("error code: %s, error message: %s", code,
-		utils.PathSearch("info_description", respBody, ""))
 }

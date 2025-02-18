@@ -17,6 +17,11 @@ import (
 	"github.com/huaweicloud/terraform-provider-huaweicloud/huaweicloud/utils"
 )
 
+const (
+	taskNotExistCode = "CodeArtsInspector.00002008" // The task does not exist.
+	taskEndedCode    = "CodeArtsInspector.00002023" // The task has ended, the task cannot be canceled.
+)
+
 // @API VSS POST /v3/{project_id}/webscan/tasks
 // @API VSS PUT /v3/{project_id}/webscan/tasks
 // @API VSS GET /v3/{project_id}/webscan/tasks
@@ -219,10 +224,6 @@ func resourceInspectorWebsiteScanCreate(ctx context.Context, d *schema.ResourceD
 		return diag.FromErr(err)
 	}
 
-	if err = checkInspectorWebsiteResponse(createRespBody); err != nil {
-		return diag.Errorf("error creating CodeArts inspector website scan: %s", err)
-	}
-
 	taskId := utils.PathSearch("task_id", createRespBody, "").(string)
 	if taskId == "" {
 		return diag.Errorf("unable find the CodeArts inspector website scan ID from the API response")
@@ -279,7 +280,10 @@ func resourceInspectorWebsiteScanRead(_ context.Context, d *schema.ResourceData,
 
 	getResp, err := client.Request("GET", getPath, &getOpt)
 	if err != nil {
-		return diag.Errorf("error retrieving CodeArts inspector website scan: %s", err)
+		return common.CheckDeletedDiag(d,
+			common.ConvertUndefinedErrInto404Err(err, 418, "error_code", taskNotExistCode),
+			"error retrieving CodeArts inspector website scan",
+		)
 	}
 
 	getRespBody, err := utils.FlattenResponse(getResp)
@@ -362,19 +366,14 @@ func resourceInspectorWebsiteScanDelete(_ context.Context, d *schema.ResourceDat
 		JSONBody:         buildDeleteInspectorWebsiteScanBodyParams(d),
 	}
 
-	cancelResp, err := client.Request("PUT", cancelPath, &cancelOpt)
+	_, err = client.Request("PUT", cancelPath, &cancelOpt)
 	if err != nil {
-		return diag.Errorf("error canceling CodeArts inspector website scan: %s", err)
+		return common.CheckDeletedDiag(d,
+			common.ConvertUndefinedErrInto404Err(err, 418, "error_code", []string{taskNotExistCode, taskEndedCode}...),
+			"error canceling CodeArts inspector website scan",
+		)
 	}
 
-	cancelRespBody, err := utils.FlattenResponse(cancelResp)
-	if err != nil {
-		return diag.FromErr(err)
-	}
-
-	if err := checkInspectorWebsiteResponse(cancelRespBody); err != nil {
-		return diag.Errorf("error canceling CodeArts inspector website scan: %s", err)
-	}
 	return nil
 }
 
