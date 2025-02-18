@@ -2447,6 +2447,7 @@ func Provider() *schema.Provider {
 
 			"huaweicloud_cdm_cluster_v1": cdm.ResourceCdmCluster(),
 			"huaweicloud_css_cluster_v1": css.ResourceCssCluster(),
+			"huaweicloud_css_restore":    css.ResourceCssRestore(),
 			"huaweicloud_dis_stream_v2":  dis.ResourceDisStream(),
 
 			"huaweicloud_organizations_organization":            organizations.ResourceOrganization(),
