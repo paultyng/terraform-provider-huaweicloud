@@ -57,6 +57,8 @@ The following arguments are supported:
 * `router` - (Optional, List) Router configuration block which is required if zone_type is private. The router
   structure is documented below.
 
+  -> Before changing this parameter, make sure the zone status is enabled.
+
 * `ttl` - (Optional, Int) The time to live (TTL) of the zone.  
   The valid value is range from `1` to `2,147,483,647`.
 
@@ -73,7 +75,7 @@ The following arguments are supported:
   + **ENABLE**
   + **DISABLE**
 
-  -> This parameter is only supported by the public zone, and it is a one-time action.
+  -> This is a one-time action.
 
 The `router` block supports:
 

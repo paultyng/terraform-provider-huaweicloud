@@ -107,6 +107,7 @@ func TestAccDNSZone_private(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "router.#", "2"),
 					resource.TestCheckResourceAttr(resourceName, "tags.zone_type", "private"),
 					resource.TestCheckResourceAttr(resourceName, "tags.owner", "terraform"),
+					resource.TestCheckResourceAttr(resourceName, "status", "DISABLE"),
 				),
 			},
 			{
@@ -116,6 +117,7 @@ func TestAccDNSZone_private(t *testing.T) {
 					resource.TestCheckResourceAttr(resourceName, "name", nameWithDotSuffix),
 					resource.TestCheckOutput("valid_route_id", "true"),
 					resource.TestCheckResourceAttr(resourceName, "router.#", "2"),
+					resource.TestCheckResourceAttr(resourceName, "status", "ENABLE"),
 				),
 			},
 		},
@@ -237,6 +239,7 @@ resource "huaweicloud_dns_zone" "test" {
   email       = "email@example.com"
   description = "a private zone"
   zone_type   = "private"
+  status      = "DISABLE"
 
   dynamic "router" {
     for_each = slice(huaweicloud_vpc.test[*].id, 0, 2)
@@ -263,6 +266,7 @@ resource "huaweicloud_dns_zone" "test" {
   email       = "email@example.com"
   description = "a private zone"
   zone_type   = "private"
+  status      = "ENABLE"
 
   dynamic "router" {
     for_each = slice(huaweicloud_vpc.test[*].id, 1, 3)
