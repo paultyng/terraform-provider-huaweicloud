@@ -30,7 +30,7 @@ The following arguments are supported:
 
 * `cluster_id` - (Required, String) Specifies the ID of CCE cluster.
 
-* `name` - (Optional, String) Specifies the of the node.
+* `name` - (Optional, String) Specifies the name of the node.
 
 * `node_id` - (Optional, String) Specifies the ID of the node.
 
