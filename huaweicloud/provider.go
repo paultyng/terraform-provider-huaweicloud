@@ -607,6 +607,7 @@ func Provider() *schema.Provider {
 			"huaweicloud_codearts_deploy_application_deployment_records": codeartsdeploy.DataSourceCodeartsDeployApplicationDeploymentRecords(),
 			"huaweicloud_codearts_deploy_environments":                   codeartsdeploy.DataSourceCodeartsDeployEnvironments(),
 
+			"huaweicloud_codearts_inspector_websites":    codeartsinspector.DataSourceCodeartsInspectorWebsites(),
 			"huaweicloud_codearts_inspector_host_groups": codeartsinspector.DataSourceCodeartsInspectorHostGroups(),
 
 			"huaweicloud_cts_notifications": cts.DataSourceNotifications(),
