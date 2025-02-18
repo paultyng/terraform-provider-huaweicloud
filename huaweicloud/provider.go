@@ -2040,6 +2040,7 @@ func Provider() *schema.Provider {
 			"huaweicloud_modelarts_authorization":          modelarts.ResourceModelArtsAuthorization(),
 			"huaweicloud_modelarts_network":                modelarts.ResourceModelartsNetwork(),
 			"huaweicloud_modelarts_resource_pool":          modelarts.ResourceModelartsResourcePool(),
+			"huaweicloud_modelarts_workflow":               modelarts.ResourceModelartsWorkflow(),
 
 			// DataArts Studio - Management Center
 			"huaweicloud_dataarts_studio_data_connection": dataarts.ResourceDataConnection(),
